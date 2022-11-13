@@ -12,7 +12,7 @@ set(CMAKE_C_COMPILER ${AVR_CC})
 project(pendant LANGUAGES C)
 
 add_compile_definitions(F_CPU=16000000L)
-add_compile_options(-mmcu=atmega328p -Os)
-add_link_options(-mmcu=atmega328p)
+add_compile_options(-mmcu=atmega2560 -Os)
+add_link_options(-mmcu=atmega2560)
 
 add_subdirectory(src)

@@ -8,7 +8,7 @@ add_executable(
 add_custom_command(
   TARGET main.elf
   POST_BUILD
-  COMMAND ${AVR_SIZE} --mcu=atmega328p main.elf
+  COMMAND ${AVR_SIZE} --mcu=atmega2560 main.elf
 )
 
 add_custom_command(
@@ -21,5 +21,5 @@ add_custom_command(
 add_custom_target(
   flash
   DEPENDS main.hex
-  COMMAND ${AVR_FLASH} -v -p atmega328p -c arduino -P /dev/ttyUSB0 -b 115200 -D -U flash:w:main.hex
+  COMMAND ${AVR_FLASH} -v -p atmega2560 -c wiring -P /dev/ttyUSB0 -b 115200 -D -U flash:w:main.hex
 )

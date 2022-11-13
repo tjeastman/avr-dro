@@ -4,12 +4,12 @@
 
 int main(void)
 {
-  DDRB = 0xff;
+  DDRB |= _BV(7);
 
   while (true) {
-    PORTB = 0xff;
+    PORTB |= _BV(7);
     _delay_ms(1000);
-    PORTB = 0x00;
+    PORTB &= ~_BV(7);
     _delay_ms(1000);
   }
 
