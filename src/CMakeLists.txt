@@ -2,8 +2,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 add_executable(
   main.elf
-  main.c
+  main.cpp
 )
+
+set_property(TARGET main.elf PROPERTY CXX_STANDARD 17)
 
 add_custom_command(
   TARGET main.elf
