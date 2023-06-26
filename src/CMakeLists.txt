@@ -3,6 +3,9 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 add_executable(
   main.elf
   main.cpp
+  color.cpp
+  display.cpp
+  palette.cpp
 )
 
 set_property(TARGET main.elf PROPERTY CXX_STANDARD 17)
