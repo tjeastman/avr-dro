@@ -1,11 +1,15 @@
-#include <avr/io.h>
 #include <stdbool.h>
-#include <stdint.h>
+
+#include <avr/io.h>
 #include <util/delay.h>
 
+#include "canvas.h"
 #include "color.h"
 #include "common.h"
 #include "display.h"
+#include "font.h"
+#include "integer.h"
+#include "label.h"
 #include "palette.h"
 
 int main(void)
@@ -37,17 +41,30 @@ int main(void)
     PORTG &= ~_BV(1); // CS=LOW
     _delay_ms(50);
 
-    auto palette = Palette(Color(25, 30, 5), Color(2, 4, 28));
     auto display = Display();
-
     display.initialize();
-    display.blank();
-    display.fill(Position{0, 0}, Shape{200, 480}, palette.color(0));
-    display.fill(Position{200, 0}, Shape{200, 480}, palette.color(1));
-    display.fill(Position{400, 0}, Shape{200, 480}, palette.color(2));
-    display.fill(Position{600, 0}, Shape{200, 480}, palette.color(3));
+    display.clear(0);
 
-    while (true);
+    auto palette = Palette(Color(3, 4, 5), Color(2, 28, 4));
+
+    auto canvas = Canvas(display, palette);
+    canvas.dimension(Shape{800, 480});
+    canvas.fill(Shape{800, 480}, 0);
+    canvas.move(Position{25, 25});
+    Label("0123456789", Font::small).draw(canvas);
+    canvas.adjust(Direction::DOWN, Shape{0, 62}, 10);
+    Label("abcdefghiJKLMNOPQRST", Font::small).draw(canvas);
+    canvas.adjust(Direction::DOWN, Shape{0, 62}, 10);
+    Label("\x01~!@#$%^&*()[]{}<>_+", Font::small).draw(canvas);
+    canvas.adjust(Direction::DOWN, Shape{0, 62}, 10);
+
+    int value = 0;
+    auto integer = Integer(value, Font::small);
+    while (true) {
+        integer.draw(canvas);
+        integer.update(++value);
+        _delay_ms(10);
+    }
 
     return 0;
 }

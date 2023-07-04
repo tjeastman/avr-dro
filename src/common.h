@@ -1,16 +1,23 @@
 #ifndef COMMON_H_
 #define COMMON_H_
 
-#include <stdint.h>
-
-struct Position {
-    uint16_t x;
-    uint16_t y;
+enum class Direction {
+    NONE = 0,
+    LEFT = 1,
+    UP = 2,
+    RIGHT = 3,
+    DOWN = 4,
 };
 
 struct Shape {
-    uint16_t width;
-    uint16_t height;
+    int width;
+    int height;
+};
+
+struct Position {
+    int x;
+    int y;
+    void adjust(Direction, Shape, signed char);
 };
 
 #endif

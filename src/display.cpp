@@ -1,36 +1,35 @@
 #include <avr/io.h>
-#include <stdint.h>
 #include <util/delay.h>
 
 #include "display.h"
 
-void Display::transmit(uint16_t value)
+void Display::transmit(unsigned int v)
 {
-    PORTA = value >> 8;
-    PORTC = value;
+    PORTA = v >> 8;
+    PORTC = v;
     PORTG &= ~_BV(2); // WR=LOW
     PORTG |= _BV(2); // WR=HIGH
 }
 
-void Display::command(uint16_t value)
+void Display::command(unsigned int id)
 {
     PORTD &= ~_BV(7); // RS=LOW
-    transmit(value);
+    transmit(id);
 }
 
-void Display::command(uint16_t value, uint16_t d)
+void Display::command(unsigned int id, unsigned int d)
 {
-    command(value);
+    command(id);
     data(d);
 }
 
-void Display::data(uint16_t value)
+void Display::data(unsigned int d)
 {
     PORTD |= _BV(7); // RS=HIGH
-    transmit(value);
+    transmit(d);
 }
 
-void Display::address(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
+void Display::address(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2)
 {
     // CASET: Column Address Set
     command(0x2A00);
@@ -54,7 +53,8 @@ void Display::address(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
 	command(0x2C00);
 }
 
-void Display::initialize() {
+void Display::initialize()
+{
     // MAUCCTR: Manufacture Command Set
     command(0xF000, 0x55);
     command(0xF001, 0xAA);
@@ -488,21 +488,12 @@ void Display::initialize() {
     command(0x2C00);
 }
 
-void Display::blank() {
-    address(0, 0, 799, 479);
-    for (uint16_t i = 0; i < 800; ++i) {
-        for (uint16_t j = 0; j < 480; ++j) {
-            data(0);
-        }
-    }
-}
-
-void Display::fill(Position p, Shape s, uint16_t v)
+void Display::clear(unsigned int color)
 {
-    address(p.x, p.y, p.x + s.width - 1, p.y + s.height - 1);
-    for (uint16_t i = 0; i < s.width; ++i) {
-        for (uint16_t j = 0; j < s.height; ++j) {
-            data(v);
+    address(0, 0, 799, 479);
+    for (int i = 0; i < 800; ++i) {
+        for (int j = 0; j < 480; ++j) {
+            data(color);
         }
     }
 }
