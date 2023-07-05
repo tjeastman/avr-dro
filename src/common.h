@@ -12,6 +12,7 @@ enum class Direction {
 struct Shape {
     int width;
     int height;
+    void expand(Direction, Shape, signed char);
 };
 
 struct Position {

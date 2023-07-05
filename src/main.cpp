@@ -8,6 +8,7 @@
 #include "common.h"
 #include "display.h"
 #include "font.h"
+#include "grid.h"
 #include "integer.h"
 #include "label.h"
 #include "palette.h"
@@ -51,18 +52,23 @@ int main(void)
     canvas.dimension(Shape{800, 480});
     canvas.fill(Shape{800, 480}, 0);
     canvas.move(Position{25, 25});
-    Label("0123456789", Font::small).draw(canvas);
-    canvas.adjust(Direction::DOWN, Shape{0, 62}, 10);
-    Label("abcdefghiJKLMNOPQRST", Font::small).draw(canvas);
-    canvas.adjust(Direction::DOWN, Shape{0, 62}, 10);
-    Label("\x01~!@#$%^&*()[]{}<>_+", Font::small).draw(canvas);
-    canvas.adjust(Direction::DOWN, Shape{0, 62}, 10);
+
+    Label label1 = Label("0123456789", Font::small);
+    Label label2 = Label("abcdefghiJKLMNOPQRST", Font::small);
+    Label label3 = Label("\x01~!@#$%^&*()[]{}<>_+", Font::small);
+    Integer integer = Integer(0, Font::small);
+
+    Grid grid = Grid(Direction::DOWN);
+    grid.add(&label1);
+    grid.add(&label2);
+    grid.add(&label3);
+    grid.add(&integer);
+    grid.draw(canvas);
 
     int value = 0;
-    auto integer = Integer(value, Font::small);
     while (true) {
-        integer.draw(canvas);
         integer.update(++value);
+        grid.draw(canvas);
         _delay_ms(10);
     }
 

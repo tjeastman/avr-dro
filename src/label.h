@@ -2,14 +2,15 @@
 #define LABEL_H_
 
 #include "canvas.h"
+#include "control.h"
 #include "font.h"
 
-class Label {
+class Label : public Control {
 private:
     const char *value_;
     Font &font_;
 public:
-    Label(const char *value, Font &font): value_{value}, font_{font} {};
+    Label(const char *, Font &);
     void draw(Canvas &) const;
 };
 

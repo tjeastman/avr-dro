@@ -1,5 +1,13 @@
 #include "integer.h"
 
+Integer::Integer(int value, Font &font): value_{value}, font_{font}
+{
+    shape_.expand(Direction::RIGHT, font_.character('-')->shape, 1);
+    for (unsigned int divisor = 10000; divisor > 0; divisor /= 10) {
+        shape_.expand(Direction::RIGHT, font_.digit(value_.magnitude / divisor)->shape, 1);
+    }
+};
+
 Integer::Value::Value(int v)
 {
     negative = v < 0 ? true : false;

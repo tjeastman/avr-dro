@@ -11,6 +11,7 @@ add_executable(
   integer.cpp
   label.cpp
   palette.cpp
+  grid.cpp
 )
 
 set_property(TARGET main.elf PROPERTY CXX_STANDARD 17)

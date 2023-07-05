@@ -2,9 +2,10 @@
 #define INTEGER_H_
 
 #include "canvas.h"
+#include "control.h"
 #include "font.h"
 
-class Integer {
+class Integer : public Control {
 private:
     struct Value {
         bool negative;
@@ -19,7 +20,7 @@ private:
     void draw_sign(Canvas &) const;
     void draw_magnitude(Canvas &) const;
 public:
-    Integer(int value, Font &font): value_{value}, font_{font} {};
+    Integer(int, Font &);
     void draw(Canvas &) const;
     void update(int);
 };

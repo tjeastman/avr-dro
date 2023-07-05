@@ -1,5 +1,12 @@
 #include "label.h"
 
+Label::Label(const char *value, Font &font): value_{value}, font_{font}
+{
+    for (signed char i = 0; i < 32 && value_[i] != '\0'; ++i) {
+        shape_.expand(Direction::RIGHT, font_.character(value_[i])->shape, 1);
+    }
+};
+
 void Label::draw(Canvas &canvas) const
 {
     canvas.save();
