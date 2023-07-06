@@ -53,6 +53,17 @@ void Display::address(unsigned int x1, unsigned int y1, unsigned int x2, unsigne
 	command(0x2C00);
 }
 
+Display::Display(Orientation orientation): orientation_{orientation}
+{
+    if (orientation_ == Orientation::PORTRAIT) {
+        width_ = 480;
+        height_ = 800;
+    } else {
+        width_ = 800;
+        height_ = 480;
+    }
+}
+
 void Display::initialize()
 {
     // MAUCCTR: Manufacture Command Set
@@ -476,7 +487,7 @@ void Display::initialize()
     // TEON: Tearing Effect Line ON
     command(0x3500, 0x00);
     // MADCTL: Memory Data Access Control
-    command(0x3600, 0x60);
+    command(0x3600, orientation_ == Orientation::PORTRAIT ? 0x00 : 0x60);
     // COLMOD: Interface Pixel Format
     command(0x3A00, 0x55); // 16-bit/pixel
     // SLPOUT: Sleep Out
@@ -490,9 +501,9 @@ void Display::initialize()
 
 void Display::clear(unsigned int color)
 {
-    address(0, 0, 799, 479);
-    for (int i = 0; i < 800; ++i) {
-        for (int j = 0; j < 480; ++j) {
+    address(0, 0, width_ - 1, height_ - 1);
+    for (int i = 0; i < height_; ++i) {
+        for (int j = 0; j < width_; ++j) {
             data(color);
         }
     }

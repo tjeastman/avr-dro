@@ -40,26 +40,33 @@ int main(void)
     PORTG &= ~_BV(1); // CS=LOW
     _delay_ms(50);
 
-    auto display = Display();
+    auto display = Display(Display::Orientation::PORTRAIT);
     display.initialize();
     display.clear(0);
 
     auto palette = Palette(Color(3, 4, 5), Color(2, 28, 4));
 
+    auto shape = Shape{display.width(), display.height()};
     auto canvas = Canvas(display, palette);
-    canvas.dimension(Shape{800, 480});
-    canvas.fill(Shape{800, 480}, 0);
+    canvas.dimension(shape);
+    canvas.fill(shape, 0);
     canvas.move(Position{25, 25});
 
     Label label1 = Label("0123456789", Font::small);
-    Label label2 = Label("abcdefghiJKLMNOPQRST", Font::small);
-    Label label3 = Label("\x01~!@#$%^&*()[]{}<>_+", Font::small);
+    Label label2 = Label("abcdefghijklm", Font::small);
+    Label label3 = Label("nopqrstuvwxyz", Font::small);
+    Label label4 = Label("ABCDEFGHIJKLM", Font::small);
+    Label label5 = Label("NOPQRSTUVWXYZ", Font::small);
+    Label label6 = Label("\x01~!@#$%^&*()", Font::small);
     Integer integer = Integer(0, Font::small);
 
     Grid grid = Grid(Direction::DOWN);
     grid.add(&label1);
     grid.add(&label2);
     grid.add(&label3);
+    grid.add(&label4);
+    grid.add(&label5);
+    grid.add(&label6);
     grid.add(&integer);
     grid.draw(canvas);
 
