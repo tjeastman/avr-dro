@@ -1,6 +1,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
+#include "box.h"
 #include "canvas.h"
 #include "color.h"
 #include "common.h"
@@ -59,6 +60,7 @@ int main(void)
     Label label5 = Label("NOPQRSTUVWXYZ", Font::small);
     Label label6 = Label("\x01~!@#$%^&*()", Font::small);
     Integer integer = Integer(0, Font::small);
+    Box box(&integer);
 
     Grid grid = Grid(Direction::DOWN);
     grid.add(&label1);
@@ -67,7 +69,7 @@ int main(void)
     grid.add(&label4);
     grid.add(&label5);
     grid.add(&label6);
-    grid.add(&integer);
+    grid.add(&box);
     grid.draw(canvas);
 
     int value = 0;

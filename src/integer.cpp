@@ -6,7 +6,6 @@ Integer::Integer(int value, Font &font): value_{value}, font_{font}
     for (unsigned int divisor = 10000; divisor > 0; divisor /= 10) {
         shape_.expand(Direction::RIGHT, font_.digit(value_.magnitude / divisor)->shape, 1);
     }
-    shape_.width -= 1;
 };
 
 Integer::Value::Value(int v)

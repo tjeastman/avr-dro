@@ -3,6 +3,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 add_executable(
   main.elf
   main.cpp
+  box.cpp
   canvas.cpp
   color.cpp
   common.cpp
