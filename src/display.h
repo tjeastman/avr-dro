@@ -1,8 +1,6 @@
 #ifndef DISPLAY_H_
 #define DISPLAY_H_
 
-#include "common.h"
-
 class Display {
 private:
     void transmit(unsigned int);
