@@ -12,7 +12,9 @@ add_executable(
   integer.cpp
   label.cpp
   grid.cpp
-  panel.cpp
+  touch.cpp
+  target.cpp
+  calibration.cpp
 )
 
 set_property(TARGET main.elf PROPERTY CXX_STANDARD 17)

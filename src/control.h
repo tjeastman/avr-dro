@@ -10,6 +10,8 @@ protected:
 public:
     const Shape &shape() const { return shape_; }
     virtual void draw(Canvas) = 0;
+    virtual void press(const Position &) {}
+    virtual void release(const Position &) {}
 };
 
 #endif
