@@ -19,11 +19,12 @@ private:
     Value value_;
     const Font &font_;
     const Color &color_;
-    void draw_sign(Canvas &) const;
-    void draw_magnitude(Canvas &) const;
+    bool changed_;
+    void draw_sign(Canvas &);
+    void draw_magnitude(Canvas &);
 public:
     Integer(int, const Font &, const Color &);
-    void draw(Canvas) const override;
+    void draw(Canvas) override;
     void update(int);
 };
 

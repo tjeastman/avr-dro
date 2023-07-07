@@ -11,9 +11,10 @@ private:
     const char *value_;
     const Font &font_;
     const Color &color_;
+    bool changed_;
 public:
     Label(const char *, const Font &, const Color &);
-    void draw(Canvas) const override;
+    void draw(Canvas) override;
 };
 
 #endif

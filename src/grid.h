@@ -12,7 +12,7 @@ private:
     Direction direction_;
 public:
     Grid(Direction);
-    void draw(Canvas) const override;
+    void draw(Canvas) override;
     void add(Control *);
 };
 

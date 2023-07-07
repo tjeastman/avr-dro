@@ -1,7 +1,7 @@
 #include "box.h"
 #include "color.h"
 
-Box::Box(Control *control, Color color, bool hidden): control_{control}, color_{color}, hidden_{hidden}
+Box::Box(Control *control, Color color, bool hidden): control_{control}, color_{color}, hidden_{hidden}, changed_{true}
 {
     shape_.width = 4;
     shape_.height = 4;
@@ -15,11 +15,29 @@ Box::Box(Control *control): Box{control, Color{0, 0, 0}, true}
 {
 }
 
-void Box::draw(Canvas canvas) const
+void Box::hide()
+{
+    if (!hidden_) {
+        hidden_ = true;
+        changed_ = true;
+    }
+}
+
+void Box::show()
+{
+    if (hidden_) {
+        hidden_ = false;
+        changed_ = true;
+    }
+}
+
+void Box::draw(Canvas canvas)
 {
     Shape shape{0, 0};
 
-    if (hidden_) {
+    if (!changed_) {
+
+    } else if (hidden_) {
         // left side
         shape.width = 2;
         shape.height = shape_.height + 4;
@@ -43,6 +61,8 @@ void Box::draw(Canvas canvas) const
         canvas.dimension(shape);
         canvas.dot(color_, 0, 2 * shape_.width + 8);
         canvas.adjust(Direction::UP, shape_, -2);
+
+        changed_ = false;
     } else {
         // left side
         shape.width = 2;
@@ -78,6 +98,8 @@ void Box::draw(Canvas canvas) const
         canvas.dimension(shape);
         canvas.dot(color_, 1, shape_.height + 4);
         canvas.adjust(Direction::LEFT, shape_, -3);
+
+        changed_ = false;
     }
 
     if (control_ != nullptr) {

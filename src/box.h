@@ -11,12 +11,13 @@ protected:
 private:
     Color color_;
     bool hidden_;
+    bool changed_;
 public:
     Box(Control *, Color, bool = false);
     Box(Control *);
-    void draw(Canvas) const override;
-    void hide() { hidden_ = true; };
-    void show() { hidden_ = false; };
+    void draw(Canvas) override;
+    void hide();
+    void show();
 };
 
 #endif

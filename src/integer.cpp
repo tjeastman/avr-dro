@@ -18,7 +18,7 @@ Integer::Value::Value(int v)
     }
 }
 
-void Integer::draw_sign(Canvas &canvas) const
+void Integer::draw_sign(Canvas &canvas)
 {
     const Character *character = font_.character('-');
     if (value_.negative) {
@@ -30,7 +30,7 @@ void Integer::draw_sign(Canvas &canvas) const
     canvas.adjust(Direction::RIGHT, character->shape, 1);
 }
 
-void Integer::draw_magnitude(Canvas &canvas) const
+void Integer::draw_magnitude(Canvas &canvas)
 {
     for (unsigned int divisor = 10000; divisor > 0; divisor /= 10) {
         const Character *character = font_.digit(value_.magnitude / divisor);
@@ -39,13 +39,17 @@ void Integer::draw_magnitude(Canvas &canvas) const
     }
 }
 
-void Integer::draw(Canvas canvas) const
+void Integer::draw(Canvas canvas)
 {
-    draw_sign(canvas);
-    draw_magnitude(canvas);
+    if (changed_) {
+        changed_ = false;
+        draw_sign(canvas);
+        draw_magnitude(canvas);
+    }
 }
 
 void Integer::update(int v)
 {
     value_ = Value(v);
+    changed_ = true;
 }

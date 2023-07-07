@@ -9,7 +9,7 @@ protected:
     Shape shape_{0, 0};
 public:
     const Shape &shape() const { return shape_; }
-    virtual void draw(Canvas) const = 0;
+    virtual void draw(Canvas) = 0;
 };
 
 #endif

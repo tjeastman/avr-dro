@@ -7,7 +7,7 @@ Grid::Grid(Direction direction): count_{0}, direction_{direction}
     }
 }
 
-void Grid::draw(Canvas canvas) const
+void Grid::draw(Canvas canvas)
 {
     for (signed char i = 0; i < count_; ++i) {
         Control *control = controls_[i];
