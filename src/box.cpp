@@ -70,3 +70,15 @@ void Box::draw(Canvas &canvas) const
         canvas.restore();
     }
 }
+
+void InvisibleBox::draw(Canvas &canvas) const
+{
+    Shape shape{0, 0};
+    if (control_ != nullptr) {
+        canvas.save();
+        canvas.adjust(Direction::RIGHT, shape, 2);
+        canvas.adjust(Direction::DOWN, shape, 2);
+        control_->draw(canvas);
+        canvas.restore();
+    }
+}

@@ -60,7 +60,9 @@ int main(void)
     Label label5 = Label("NOPQRSTUVWXYZ", Font::small);
     Label label6 = Label("\x01~!@#$%^&*()", Font::small);
     Integer integer = Integer(0, Font::small);
+    Integer integer0 = Integer(0, Font::small);
     Box box(&integer);
+    InvisibleBox box0(&integer0);
 
     Grid grid = Grid(Direction::DOWN);
     grid.add(&label1);
@@ -69,12 +71,19 @@ int main(void)
     grid.add(&label4);
     grid.add(&label5);
     grid.add(&label6);
+    grid.add(&box0);
     grid.add(&box);
     grid.draw(canvas);
 
     int value = 0;
     while (true) {
         integer.update(++value);
+        integer0.update(value);
+        if (value % 20 == 5) {
+            box.hide();
+        } else {
+            box.show();
+        }
         grid.draw(canvas);
         _delay_ms(10);
     }
