@@ -11,12 +11,12 @@ Character::Character(const unsigned char *data)
     shape.height = pgm_read_word(&data[4]);
 }
 
-void Character::draw(Canvas &canvas) const
+void Character::draw(const Canvas &canvas, const Color &color) const
 {
     canvas.dimension(shape);
     for (int i = 0; i < length_; ++i) {
         unsigned char b = pgm_read_byte(&data_[i]);
-        canvas.dot(b & 0x03, b >> 2);
+        canvas.dot(color, b & 0x03, b >> 2);
     }
 }
 

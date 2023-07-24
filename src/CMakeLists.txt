@@ -11,7 +11,6 @@ add_executable(
   font.cpp
   integer.cpp
   label.cpp
-  palette.cpp
   grid.cpp
 )
 

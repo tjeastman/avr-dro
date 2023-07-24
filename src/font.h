@@ -11,7 +11,7 @@ private:
 public:
     Shape shape;
     Character(const unsigned char *);
-    void draw(Canvas &) const;
+    void draw(const Canvas &, const Color &) const;
 };
 
 class Font {

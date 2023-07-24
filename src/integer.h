@@ -1,6 +1,7 @@
 #ifndef INTEGER_H_
 #define INTEGER_H_
 
+#include "color.h"
 #include "canvas.h"
 #include "control.h"
 #include "font.h"
@@ -16,11 +17,12 @@ private:
         Value(int);
     };
     Value value_;
-    Font &font_;
+    const Font &font_;
+    const Color &color_;
     void draw_sign(Canvas &) const;
     void draw_magnitude(Canvas &) const;
 public:
-    Integer(int, Font &);
+    Integer(int, const Font &, const Color &);
     void draw(Canvas &) const;
     void update(int);
 };

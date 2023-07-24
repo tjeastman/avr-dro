@@ -1,6 +1,6 @@
 #include "integer.h"
 
-Integer::Integer(int value, Font &font): value_{value}, font_{font}
+Integer::Integer(int value, const Font &font, const Color &color): value_{value}, font_{font}, color_{color}
 {
     shape_.expand(Direction::RIGHT, font_.character('-')->shape, 1);
     for (unsigned int divisor = 10000; divisor > 0; divisor /= 10) {
@@ -22,10 +22,10 @@ void Integer::draw_sign(Canvas &canvas) const
 {
     const Character *character = font_.character('-');
     if (value_.negative) {
-        character->draw(canvas);
+        character->draw(canvas, color_);
     } else {
         canvas.dimension(character->shape);
-        canvas.fill(character->shape, 0);
+        canvas.fill(character->shape);
     }
     canvas.adjust(Direction::RIGHT, character->shape, 1);
 }
@@ -34,7 +34,7 @@ void Integer::draw_magnitude(Canvas &canvas) const
 {
     for (unsigned int divisor = 10000; divisor > 0; divisor /= 10) {
         const Character *character = font_.digit(value_.magnitude / divisor);
-        character->draw(canvas);
+        character->draw(canvas, color_);
         canvas.adjust(Direction::RIGHT, character->shape, 1);
     }
 }

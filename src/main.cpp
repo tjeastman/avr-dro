@@ -10,7 +10,6 @@
 #include "grid.h"
 #include "integer.h"
 #include "label.h"
-#include "palette.h"
 
 int main(void)
 {
@@ -45,23 +44,39 @@ int main(void)
     display.initialize();
     display.clear(0);
 
-    auto palette = Palette(Color(3, 4, 5), Color(2, 28, 4));
-
     auto shape = Shape{display.width(), display.height()};
-    auto canvas = Canvas(display, palette);
+    auto canvas = Canvas(display);
     canvas.dimension(shape);
-    canvas.fill(shape, 0);
+    canvas.fill(shape, Color(0, 0, 0), 0);
+
+    canvas.select(Color(30, 0, 0));
+    canvas.dimension(shape);
+    canvas.fill(shape);
+
+    canvas.select(Color(0, 30, 0));
+    canvas.dimension(shape);
+    canvas.fill(shape);
+
+    canvas.select(Color(0, 0, 30));
+    canvas.dimension(shape);
+    canvas.fill(shape);
+
+    canvas.select(Color(3, 4, 5));
+    canvas.dimension(shape);
+    canvas.fill(shape);
+
     canvas.move(Position{25, 25});
 
-    Label label1 = Label("0123456789", Font::small);
-    Label label2 = Label("abcdefghijklm", Font::small);
-    Label label3 = Label("nopqrstuvwxyz", Font::small);
-    Label label4 = Label("ABCDEFGHIJKLM", Font::small);
-    Label label5 = Label("NOPQRSTUVWXYZ", Font::small);
-    Label label6 = Label("\x01~!@#$%^&*()", Font::small);
-    Integer integer = Integer(0, Font::small);
-    Integer integer0 = Integer(0, Font::small);
-    Box box(&integer);
+    Color fg = Color(2, 28, 4);
+    Label label1 = Label("0123456789", Font::small, fg);
+    Label label2 = Label("abcdefghijklm", Font::small, fg);
+    Label label3 = Label("nopqrstuvwxyz", Font::small, fg);
+    Label label4 = Label("ABCDEFGHIJKLM", Font::small, fg);
+    Label label5 = Label("NOPQRSTUVWXYZ", Font::small, fg);
+    Label label6 = Label("\x01~!@#$%^&*()", Font::small, fg);
+    Integer integer = Integer(0, Font::small, fg);
+    Integer integer0 = Integer(0, Font::small, fg);
+    Box box(&integer, fg);
     InvisibleBox box0(&integer0);
 
     Grid grid = Grid(Direction::DOWN);
