@@ -13,7 +13,7 @@ private:
     const Color &color_;
 public:
     Label(const char *, const Font &, const Color &);
-    void draw(Canvas &) const;
+    void draw(Canvas &) const override;
 };
 
 #endif
