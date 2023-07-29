@@ -7,13 +7,11 @@ Label::Label(const char *value, const Font &font, const Color &color): value_{va
     }
 };
 
-void Label::draw(Canvas &canvas) const
+void Label::draw(Canvas canvas) const
 {
-    canvas.save();
     for (signed char i = 0; i < 32 && value_[i] != '\0'; ++i) {
         const Character *character = font_.character(value_[i]);
         character->draw(canvas, color_);
         canvas.adjust(Direction::RIGHT, character->shape, 1);
     }
-    canvas.restore();
 }

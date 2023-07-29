@@ -13,7 +13,7 @@ private:
     Color &color_;
 public:
     Box(Control *, Color &);
-    void draw(Canvas &) const override;
+    void draw(Canvas) const override;
     void hide() { hidden_ = true; };
     void show() { hidden_ = false; };
 };
@@ -23,7 +23,7 @@ private:
     Control *control_;
 public:
     InvisibleBox(Control *);
-    void draw(Canvas &) const override;
+    void draw(Canvas) const override;
 };
 
 #endif

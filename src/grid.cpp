@@ -7,15 +7,13 @@ Grid::Grid(Direction direction): count_{0}, direction_{direction}
     }
 };
 
-void Grid::draw(Canvas &canvas) const
+void Grid::draw(Canvas canvas) const
 {
-    canvas.save();
     for (signed char i = 0; i < count_; ++i) {
         Control *control = controls_[i];
         control->draw(canvas);
         canvas.adjust(direction_, control->shape(), 4);
     }
-    canvas.restore();
 }
 
 void Grid::add(Control *control)

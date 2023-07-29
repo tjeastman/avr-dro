@@ -11,7 +11,7 @@ Box::Box(Control *control, Color &color): control_{control}, hidden_{false}, col
     }
 };
 
-void Box::draw(Canvas &canvas) const
+void Box::draw(Canvas canvas) const
 {
     Shape shape{0, 0};
     unsigned char alpha = hidden_ ? 0: 3;
@@ -35,39 +35,34 @@ void Box::draw(Canvas &canvas) const
     canvas.fill(shape, color_, alpha);
 
     // bottom side
-    canvas.save();
     canvas.adjust(Direction::DOWN, shape_, 2);
     canvas.dimension(shape);
     canvas.dot(color_, alpha, 1);
     canvas.dot(color_, alpha1, shape_.width + 3);
     canvas.dot(color_, alpha2, shape_.width + 4);
-    canvas.restore();
+    canvas.adjust(Direction::UP, shape_, -2);
 
     // right side
     shape.width = 1;
     shape.height = shape_.height + 4;
-    canvas.save();
     canvas.adjust(Direction::RIGHT, shape_, 2);
     canvas.dimension(shape);
     canvas.dot(color_, alpha, 1);
     canvas.dot(color_, alpha1, shape_.height + 2);
     canvas.dot(color_, alpha2, 1);
-    canvas.restore();
+    canvas.adjust(Direction::LEFT, shape_, -2);
 
-    canvas.save();
     canvas.adjust(Direction::RIGHT, shape_, 3);
     canvas.dimension(shape);
     canvas.dot(color_, alpha2, shape_.height + 4);
-    canvas.restore();
+    canvas.adjust(Direction::LEFT, shape_, -3);
 
     if (control_ != nullptr) {
         shape.width = 0;
         shape.height = 0;
-        canvas.save();
         canvas.adjust(Direction::RIGHT, shape, 2);
         canvas.adjust(Direction::DOWN, shape, 2);
         control_->draw(canvas);
-        canvas.restore();
     }
 }
 
@@ -81,14 +76,12 @@ InvisibleBox::InvisibleBox(Control *control): control_{control}
     }
 };
 
-void InvisibleBox::draw(Canvas &canvas) const
+void InvisibleBox::draw(Canvas canvas) const
 {
     Shape shape{0, 0};
     if (control_ != nullptr) {
-        canvas.save();
         canvas.adjust(Direction::RIGHT, shape, 2);
         canvas.adjust(Direction::DOWN, shape, 2);
         control_->draw(canvas);
-        canvas.restore();
     }
 }

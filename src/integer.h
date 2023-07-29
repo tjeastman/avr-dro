@@ -23,7 +23,7 @@ private:
     void draw_magnitude(Canvas &) const;
 public:
     Integer(int, const Font &, const Color &);
-    void draw(Canvas &) const override;
+    void draw(Canvas) const override;
     void update(int);
 };
 

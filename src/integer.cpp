@@ -39,12 +39,10 @@ void Integer::draw_magnitude(Canvas &canvas) const
     }
 }
 
-void Integer::draw(Canvas &canvas) const
+void Integer::draw(Canvas canvas) const
 {
-    canvas.save();
     draw_sign(canvas);
     draw_magnitude(canvas);
-    canvas.restore();
 }
 
 void Integer::update(int v)
