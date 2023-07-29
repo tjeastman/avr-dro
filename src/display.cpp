@@ -3,7 +3,7 @@
 
 #include "display.h"
 
-void Display::transmit(unsigned int v)
+void Display::transmit(unsigned int v) const
 {
     PORTA = v >> 8;
     PORTC = v;
@@ -11,25 +11,25 @@ void Display::transmit(unsigned int v)
     PORTG |= _BV(2); // WR=HIGH
 }
 
-void Display::command(unsigned int id)
+void Display::command(unsigned int id) const
 {
     PORTD &= ~_BV(7); // RS=LOW
     transmit(id);
 }
 
-void Display::command(unsigned int id, unsigned int d)
+void Display::command(unsigned int id, unsigned int d) const
 {
     command(id);
     data(d);
 }
 
-void Display::data(unsigned int d)
+void Display::data(unsigned int d) const
 {
     PORTD |= _BV(7); // RS=HIGH
     transmit(d);
 }
 
-void Display::address(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2)
+void Display::address(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2) const
 {
     // CASET: Column Address Set
     command(0x2A00);
@@ -64,7 +64,7 @@ Display::Display(Orientation orientation): orientation_{orientation}
     }
 }
 
-void Display::initialize()
+void Display::initialize() const
 {
     // MAUCCTR: Manufacture Command Set
     command(0xF000, 0x55);

@@ -8,17 +8,17 @@ public:
         LANDSCAPE = 1,
     };
 private:
-    void transmit(unsigned int);
-    void command(unsigned int);
-    void command(unsigned int, unsigned int);
+    void transmit(unsigned int) const;
+    void command(unsigned int) const;
+    void command(unsigned int, unsigned int) const;
     Orientation orientation_;
     int width_;
     int height_;
 public:
     Display(Orientation);
-    void initialize();
-    void data(unsigned int);
-    void address(unsigned int, unsigned int, unsigned int, unsigned int);
+    void initialize() const;
+    void data(unsigned int) const;
+    void address(unsigned int, unsigned int, unsigned int, unsigned int) const;
     int width() const { return width_; };
     int height() const { return height_; };
 };
