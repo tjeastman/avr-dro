@@ -17,7 +17,6 @@ private:
 public:
     Display(Orientation);
     void initialize();
-    void clear(unsigned int);
     void data(unsigned int);
     void address(unsigned int, unsigned int, unsigned int, unsigned int);
     int width() const { return width_; };

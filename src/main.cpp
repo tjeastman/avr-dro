@@ -42,7 +42,6 @@ int main(void)
 
     auto display = Display(Display::Orientation::PORTRAIT);
     display.initialize();
-    display.clear(0);
 
     auto shape = Shape{display.width(), display.height()};
     auto canvas = Canvas(display);

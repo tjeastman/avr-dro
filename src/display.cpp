@@ -498,13 +498,3 @@ void Display::initialize()
     // RAMWR: Memory Write
     command(0x2C00);
 }
-
-void Display::clear(unsigned int color)
-{
-    address(0, 0, width_ - 1, height_ - 1);
-    for (int i = 0; i < height_; ++i) {
-        for (int j = 0; j < width_; ++j) {
-            data(color);
-        }
-    }
-}
