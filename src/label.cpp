@@ -5,7 +5,7 @@ Label::Label(const char *value, const Font &font, const Color &color): value_{va
     for (signed char i = 0; i < 32 && value_[i] != '\0'; ++i) {
         shape_.expand(Direction::RIGHT, font_.character(value_[i])->shape, 1);
     }
-};
+}
 
 void Label::draw(Canvas canvas) const
 {

@@ -5,7 +5,7 @@ Grid::Grid(Direction direction): count_{0}, direction_{direction}
     for (signed char i = 0; i < 8; ++i) {
         controls_[i] = nullptr;
     }
-};
+}
 
 void Grid::draw(Canvas canvas) const
 {

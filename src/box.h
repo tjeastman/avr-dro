@@ -9,21 +9,14 @@ class Box : public Control {
 protected:
     Control *control_;
 private:
+    Color color_;
     bool hidden_;
-    Color &color_;
 public:
-    Box(Control *, Color &);
+    Box(Control *, Color, bool = false);
+    Box(Control *);
     void draw(Canvas) const override;
     void hide() { hidden_ = true; };
     void show() { hidden_ = false; };
-};
-
-class InvisibleBox : public Control {
-private:
-    Control *control_;
-public:
-    InvisibleBox(Control *);
-    void draw(Canvas) const override;
 };
 
 #endif

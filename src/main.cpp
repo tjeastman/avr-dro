@@ -76,7 +76,7 @@ int main(void)
     Integer integer = Integer(0, Font::small, fg);
     Integer integer0 = Integer(0, Font::small, fg);
     Box box(&integer, fg);
-    InvisibleBox box0(&integer0);
+    Box box0(&integer0);
 
     Grid grid = Grid(Direction::DOWN);
     grid.add(&label1);
