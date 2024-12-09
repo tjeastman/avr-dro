@@ -19,9 +19,9 @@ private:
     Label labelX_;
     Label labelY_;
     Label labelZ_;
-    Integer integerX_;
-    Integer integerY_;
-    Integer integerZ_;
+    SignedInteger integerX_;
+    SignedInteger integerY_;
+    SignedInteger integerZ_;
     Label labelX_unit_;
     Label labelY_unit_;
     Label labelZ_unit_;
@@ -39,9 +39,9 @@ MainPanel::MainPanel(Color &color):
     labelX_{"X:", Font::medium, color},
     labelY_{"Y:", Font::medium, color},
     labelZ_{"Z:", Font::medium, color},
-    integerX_{-1, Font::medium, color},
-    integerY_{-1, Font::medium, color},
-    integerZ_{-1, Font::medium, color},
+    integerX_{5, Font::medium, color},
+    integerY_{5, Font::medium, color},
+    integerZ_{5, Font::medium, color},
     labelX_unit_{"mm", Font::medium, color},
     labelY_unit_{"mm", Font::medium, color},
     labelZ_unit_{"mm", Font::medium, color},

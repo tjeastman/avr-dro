@@ -8,22 +8,30 @@
 
 class Integer : public Control {
 private:
-    struct Value {
-        bool negative;
-        union {
-            int value;
-            unsigned int magnitude;
-        };
-        Value(int);
-    };
-    Value value_;
+    static unsigned int divisors_[5];
+protected:
     const Font &font_;
     const Color &color_;
-    bool changed_;
-    void draw_sign(Canvas &);
-    void draw_magnitude(Canvas &);
+    unsigned char digits_;
+    unsigned int magnitude_;
 public:
-    Integer(int, const Font &, const Color &);
+    Integer(unsigned char, const Font &, const Color &);
+    void draw(Canvas) override;
+};
+
+class UnsignedInteger : public Integer
+{
+public:
+    UnsignedInteger(unsigned char, const Font &, const Color &);
+    void update(unsigned int);
+};
+
+class SignedInteger : public Integer
+{
+private:
+    bool negative_;
+public:
+    SignedInteger(unsigned char, const Font &, const Color &);
     void draw(Canvas) override;
     void update(int);
 };

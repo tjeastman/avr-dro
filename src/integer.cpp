@@ -1,59 +1,71 @@
+#include <stdint.h>
+
 #include "integer.h"
 
-Integer::Integer(int value, const Font &font, const Color &color):
-    value_{value},
+unsigned int Integer::divisors_[5] = {10000, 1000, 100, 10, 1};
+
+Integer::Integer(unsigned char digits, const Font &font, const Color &color):
+    digits_{digits},
+    magnitude_{0},
     font_{font},
-    color_{color},
-    changed_{true}
+    color_{color}
+{
+    for (int i = 0; i < digits_; ++i) {
+        shape_.expand(Direction::RIGHT, font_.digit(0)->shape, 1);
+    }
+}
+
+void Integer::draw(Canvas canvas)
+{
+    for (int i = 5 - digits_; i < 5; ++i) {
+        const Character *character = font_.digit(magnitude_ / divisors_[i]);
+        character->draw(canvas, color_);
+        canvas.adjust(Direction::RIGHT, character->shape, 1);
+    }
+}
+
+UnsignedInteger::UnsignedInteger(unsigned char digits, const Font &font, const Color &color):
+  Integer(digits, font, color)
+{
+}
+
+void UnsignedInteger::update(unsigned int value)
+{
+    magnitude_ = value;
+}
+
+SignedInteger::SignedInteger(unsigned char digits, const Font &font, const Color &color):
+  Integer(digits, font, color),
+  negative_{false}
 {
     shape_.expand(Direction::RIGHT, font_.character('-')->shape, 1);
-    for (unsigned int divisor = 10000; divisor > 0; divisor /= 10) {
-        shape_.expand(Direction::RIGHT, font_.digit(value_.magnitude / divisor)->shape, 1);
-    }
 }
 
-Integer::Value::Value(int v)
-{
-    negative = v < 0 ? true : false;
-    value = v;
-    if (magnitude != 0x8000 && negative) {
-        magnitude = ~magnitude;
-        magnitude += 1;
-    }
-}
-
-void Integer::draw_sign(Canvas &canvas)
+void SignedInteger::draw(Canvas canvas)
 {
     const Character *character = font_.character('-');
-    if (value_.negative) {
+    if (negative_) {
         character->draw(canvas, color_);
     } else {
         canvas.dimension(character->shape);
         canvas.fill(character->shape);
     }
     canvas.adjust(Direction::RIGHT, character->shape, 1);
+
+    Integer::draw(canvas);
 }
 
-void Integer::draw_magnitude(Canvas &canvas)
+void SignedInteger::update(int value)
 {
-    for (unsigned int divisor = 10000; divisor > 0; divisor /= 10) {
-        const Character *character = font_.digit(value_.magnitude / divisor);
-        character->draw(canvas, color_);
-        canvas.adjust(Direction::RIGHT, character->shape, 1);
+    if (value >= 0) {
+        magnitude_ = value;
+        negative_ = false;
+    } else if (value > INT16_MIN) {
+        magnitude_ = -value;
+        negative_ = true;
+    } else {
+        magnitude_ = INT16_MAX;
+        magnitude_++;
+        negative_ = true;
     }
-}
-
-void Integer::draw(Canvas canvas)
-{
-    if (changed_) {
-        changed_ = false;
-        draw_sign(canvas);
-        draw_magnitude(canvas);
-    }
-}
-
-void Integer::update(int v)
-{
-    value_ = Value(v);
-    changed_ = true;
 }
