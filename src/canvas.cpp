@@ -1,25 +1,25 @@
 #include "canvas.h"
 
-Canvas::Canvas(Display &display): display_{display}, position_{0, 0}, color_{0, 0, 0}
+Canvas::Canvas(const Display &display): display_{display}, position_{0, 0}, color_{0, 0, 0}
 {
 }
 
-void Canvas::move(Position position)
+void Canvas::move(const Position &position)
 {
     position_ = position;
 }
 
-void Canvas::adjust(Direction direction, Shape shape, signed char buffer)
+void Canvas::adjust(Direction direction, const Shape &shape, signed char buffer)
 {
     position_.adjust(direction, shape, buffer);
 }
 
-void Canvas::select(Color color)
+void Canvas::select(const Color &color)
 {
     color_ = color;
 }
 
-void Canvas::dimension(Shape shape) const
+void Canvas::dimension(const Shape &shape) const
 {
     display_.address(position_.x,
                      position_.y,
@@ -27,7 +27,7 @@ void Canvas::dimension(Shape shape) const
                      position_.y + shape.height - 1);
 }
 
-void Canvas::fill(Shape shape) const
+void Canvas::fill(const Shape &shape) const
 {
     unsigned int value = color_.value();
     for (int i = 0; i < shape.height; ++i) {
@@ -37,7 +37,7 @@ void Canvas::fill(Shape shape) const
     }
 }
 
-void Canvas::fill(Shape shape, Color color, unsigned char alpha) const
+void Canvas::fill(const Shape &shape, const Color &color, unsigned char alpha) const
 {
     unsigned int value = color_.blend(color, alpha).value();
     for (int i = 0; i < shape.height; ++i) {
@@ -47,7 +47,7 @@ void Canvas::fill(Shape shape, Color color, unsigned char alpha) const
     }
 }
 
-void Canvas::dot(Color color, unsigned char alpha, int n) const
+void Canvas::dot(const Color &color, unsigned char alpha, int n) const
 {
     unsigned int value = color_.blend(color, alpha).value();
     for (int i = 0; i < n; ++i) {
