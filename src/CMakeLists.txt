@@ -12,6 +12,7 @@ add_executable(
   integer.cpp
   label.cpp
   grid.cpp
+  panel.cpp
 )
 
 set_property(TARGET main.elf PROPERTY CXX_STANDARD 17)

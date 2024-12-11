@@ -1,15 +1,11 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-#include "box.h"
 #include "canvas.h"
 #include "color.h"
 #include "common.h"
 #include "display.h"
-#include "font.h"
-#include "grid.h"
-#include "integer.h"
-#include "label.h"
+#include "panel.h"
 
 int main(void)
 {
@@ -66,39 +62,14 @@ int main(void)
 
     canvas.move(Position{25, 25});
 
-    Color fg = Color(2, 28, 4);
-    Label label1 = Label("0123456789", Font::small, fg);
-    Label label2 = Label("abcdefghijklm", Font::small, fg);
-    Label label3 = Label("nopqrstuvwxyz", Font::small, fg);
-    Label label4 = Label("ABCDEFGHIJKLM", Font::small, fg);
-    Label label5 = Label("NOPQRSTUVWXYZ", Font::small, fg);
-    Label label6 = Label("\x01~!@#$%^&*()", Font::small, fg);
-    Integer integer = Integer(0, Font::small, fg);
-    Integer integer0 = Integer(0, Font::small, fg);
-    Box box(&integer, fg);
-    Box box0(&integer0);
-
-    Grid grid = Grid(Direction::DOWN);
-    grid.add(&label1);
-    grid.add(&label2);
-    grid.add(&label3);
-    grid.add(&label4);
-    grid.add(&label5);
-    grid.add(&label6);
-    grid.add(&box0);
-    grid.add(&box);
-    grid.draw(canvas);
+    auto color = Color(2, 28, 4);
+    auto panel = Panel(color);
+    panel.draw(canvas);
 
     int value = 0;
     while (true) {
-        integer.update(++value);
-        integer0.update(value);
-        if (value % 20 == 5) {
-            box.hide();
-        } else {
-            box.show();
-        }
-        grid.draw(canvas);
+        panel.update(++value);
+        panel.draw(canvas);
         _delay_ms(10);
     }
 
