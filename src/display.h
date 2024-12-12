@@ -11,12 +11,11 @@ private:
     void transmit(unsigned int) const;
     void command(unsigned int) const;
     void command(unsigned int, unsigned int) const;
-    Orientation orientation_;
     int width_;
     int height_;
 public:
-    Display(Orientation);
-    void initialize() const;
+    Display(): width_{0}, height_{0} {};
+    void initialize(Orientation);
     void data(unsigned int) const;
     void address(unsigned int, unsigned int, unsigned int, unsigned int) const;
     int width() const { return width_; };

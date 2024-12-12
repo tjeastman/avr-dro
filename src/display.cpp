@@ -53,19 +53,16 @@ void Display::address(unsigned int x1, unsigned int y1, unsigned int x2, unsigne
 	command(0x2C00);
 }
 
-Display::Display(Orientation orientation): orientation_{orientation}
+void Display::initialize(Orientation orientation)
 {
-    if (orientation_ == Orientation::PORTRAIT) {
+    if (orientation == Orientation::PORTRAIT) {
         width_ = 480;
         height_ = 800;
     } else {
         width_ = 800;
         height_ = 480;
     }
-}
 
-void Display::initialize() const
-{
     // MAUCCTR: Manufacture Command Set
     command(0xF000, 0x55);
     command(0xF001, 0xAA);
@@ -487,7 +484,7 @@ void Display::initialize() const
     // TEON: Tearing Effect Line ON
     command(0x3500, 0x00);
     // MADCTL: Memory Data Access Control
-    command(0x3600, orientation_ == Orientation::PORTRAIT ? 0x00 : 0x60);
+    command(0x3600, orientation == Orientation::PORTRAIT ? 0x00 : 0x60);
     // COLMOD: Interface Pixel Format
     command(0x3A00, 0x55); // 16-bit/pixel
     // SLPOUT: Sleep Out
