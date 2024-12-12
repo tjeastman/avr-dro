@@ -1,6 +1,8 @@
 #ifndef DISPLAY_H_
 #define DISPLAY_H_
 
+#include "common.h"
+
 class Display {
 public:
     enum class Orientation {
@@ -11,15 +13,13 @@ private:
     void transmit(unsigned int) const;
     void command(unsigned int) const;
     void command(unsigned int, unsigned int) const;
-    int width_;
-    int height_;
+    Shape shape_;
 public:
-    Display(): width_{0}, height_{0} {};
+    Display(): shape_{0, 0} {}
     void initialize(Orientation);
     void data(unsigned int) const;
     void address(unsigned int, unsigned int, unsigned int, unsigned int) const;
-    int width() const { return width_; };
-    int height() const { return height_; };
+    Shape shape() const { return shape_; };
 };
 
 #endif

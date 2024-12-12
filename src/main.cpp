@@ -106,7 +106,8 @@ int main(void)
     Display display = Display();
     display.initialize(Display::Orientation::PORTRAIT);
 
-    Shape shape = Shape{display.width(), display.height()};
+    // Shape shape = Shape{display.width(), display.height()};
+    Shape shape = display.shape();
     Canvas canvas = Canvas(display);
 
     canvas.select(Color(0, 0, 0));

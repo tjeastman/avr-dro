@@ -56,11 +56,11 @@ void Display::address(unsigned int x1, unsigned int y1, unsigned int x2, unsigne
 void Display::initialize(Orientation orientation)
 {
     if (orientation == Orientation::PORTRAIT) {
-        width_ = 480;
-        height_ = 800;
+        shape_.width = 480;
+        shape_.height = 800;
     } else {
-        width_ = 800;
-        height_ = 480;
+        shape_.width = 800;
+        shape_.height = 480;
     }
 
     // MAUCCTR: Manufacture Command Set
