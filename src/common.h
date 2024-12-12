@@ -2,11 +2,7 @@
 #define COMMON_H_
 
 enum class Direction {
-    NONE = 0,
-    LEFT = 1,
-    UP = 2,
-    RIGHT = 3,
-    DOWN = 4,
+    NONE, LEFT, UP, RIGHT, DOWN
 };
 
 struct Shape {

@@ -5,12 +5,11 @@
 #include "common.h"
 #include "control.h"
 
-enum class TouchEvent {
-    NONE, PRESS, RELEASE
-};
-
 struct TouchState {
-    TouchEvent event;
+    enum class Event {
+        NONE, PRESS, RELEASE
+    };
+    Event event;
     Position position;
     int readings;
     TouchState();

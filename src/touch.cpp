@@ -3,7 +3,7 @@
 
 #include "touch.h"
 
-TouchState::TouchState(): event{TouchEvent::NONE}, position{0, 0}, readings{0}
+TouchState::TouchState(): event{Event::NONE}, position{0, 0}, readings{0}
 {
 }
 
@@ -25,7 +25,7 @@ void TouchState::press(int x, int y, int z)
     if (readings >= 10000) {
         readings = 10000;
     }
-    event = TouchEvent::PRESS;
+    event = Event::PRESS;
 }
 
 void TouchState::release()
@@ -33,10 +33,10 @@ void TouchState::release()
     // preserve position for use in release events
     readings = 0;
     // only allow one consecutive release event
-    if (event == TouchEvent::PRESS) {
-        event = TouchEvent::RELEASE;
-    } else if (event == TouchEvent::RELEASE) {
-        event = TouchEvent::NONE;
+    if (event == Event::PRESS) {
+        event = Event::RELEASE;
+    } else if (event == Event::RELEASE) {
+        event = Event::NONE;
     }
 }
 
@@ -95,14 +95,14 @@ void Touch::transition()
 void Touch::dispatch(Control &control)
 {
     transition();
-    if (state_.event == TouchEvent::NONE) {
+    if (state_.event == TouchState::Event::NONE) {
         return;
     }
 
     Position position = calibration_.translate(state_.position);
-    if (state_.event == TouchEvent::PRESS) {
+    if (state_.event == TouchState::Event::PRESS) {
         control.press(position);
-    } else if (state_.event == TouchEvent::RELEASE) {
+    } else if (state_.event == TouchState::Event::RELEASE) {
         control.release(position);
     }
 }

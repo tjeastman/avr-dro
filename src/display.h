@@ -6,8 +6,7 @@
 class Display {
 public:
     enum class Orientation {
-        PORTRAIT = 0,
-        LANDSCAPE = 1,
+        PORTRAIT, LANDSCAPE
     };
 private:
     void transmit(unsigned int) const;
