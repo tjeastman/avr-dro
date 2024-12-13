@@ -106,7 +106,6 @@ int main(void)
     Display display = Display();
     display.initialize(Display::Orientation::PORTRAIT);
 
-    // Shape shape = Shape{display.width(), display.height()};
     Shape shape = display.shape();
     Canvas canvas = Canvas(display);
 
@@ -119,18 +118,6 @@ int main(void)
 
     Calibration calibration = Calibration();
     Touch touch = Touch(calibration);
-
-    auto procedure = CalibrationProcedure(shape);
-    auto panel0 = CalibrationPanel(procedure, color);
-    while (!procedure.done()) {
-        touch.dispatch(panel0);
-        panel0.draw(canvas);
-        _delay_ms(10);
-    }
-    procedure.update(calibration);
-
-    canvas.dimension(shape);
-    canvas.fill(shape);
 
     MainPanel panel = MainPanel(color);
     panel.draw(canvas);
