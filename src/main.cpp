@@ -5,76 +5,8 @@
 #include "canvas.h"
 #include "color.h"
 #include "common.h"
-#include "control.h"
 #include "display.h"
-#include "grid.h"
-#include "integer.h"
-#include "label.h"
-#include "encoder.h"
-
-extern Encoder encoders[3];
-
-class MainPanel : public Control {
-private:
-    Label labelX_;
-    Label labelY_;
-    Label labelZ_;
-    SignedInteger integerX_;
-    SignedInteger integerY_;
-    SignedInteger integerZ_;
-    Label labelX_unit_;
-    Label labelY_unit_;
-    Label labelZ_unit_;
-    Grid gridX_;
-    Grid gridY_;
-    Grid gridZ_;
-    Grid grid_;
-public:
-    MainPanel(Color &);
-    void draw(Canvas) override;
-    void update(Encoder[3]);
-};
-
-MainPanel::MainPanel(Color &color):
-    labelX_{"X:", Font::medium, color},
-    labelY_{"Y:", Font::medium, color},
-    labelZ_{"Z:", Font::medium, color},
-    integerX_{5, Font::medium, color},
-    integerY_{5, Font::medium, color},
-    integerZ_{5, Font::medium, color},
-    labelX_unit_{"mm", Font::medium, color},
-    labelY_unit_{"mm", Font::medium, color},
-    labelZ_unit_{"mm", Font::medium, color},
-    gridX_{Direction::RIGHT, 20},
-    gridY_{Direction::RIGHT, 20},
-    gridZ_{Direction::RIGHT, 20},
-    grid_{Direction::DOWN, 20}
-{
-    gridX_.add(&labelX_);
-    gridX_.add(&integerX_);
-    gridX_.add(&labelX_unit_);
-    gridY_.add(&labelY_);
-    gridY_.add(&integerY_);
-    gridY_.add(&labelY_unit_);
-    gridZ_.add(&labelZ_);
-    gridZ_.add(&integerZ_);
-    gridZ_.add(&labelZ_unit_);
-    grid_.add(&gridX_);
-    grid_.add(&gridY_);
-    grid_.add(&gridZ_);
-}
-
-void MainPanel::draw(Canvas canvas)
-{
-    grid_.draw(canvas);
-}
-
-void MainPanel::update(Encoder encoders[3])
-{
-    integerX_.update(encoders[0].count());
-    integerY_.update(encoders[1].count());
-    integerZ_.update(encoders[2].count());
-}
+#include "touch.h"
 
 int main(void)
 {
@@ -135,13 +67,25 @@ int main(void)
     canvas.fill(shape);
 
     Color color = Color(2, 28, 4);
-    MainPanel panel = MainPanel(color);
 
-    while (true) {
-        panel.update(encoders);
+    Calibration calibration = Calibration();
+    Touch touch = Touch(calibration);
+
+    auto procedure = CalibrationProcedure(shape);
+    auto panel = CalibrationPanel(procedure, color);
+    while (!procedure.done()) {
+        touch.dispatch(panel);
         panel.draw(canvas);
         _delay_ms(10);
     }
+    procedure.update(calibration);
+
+    calibration.save();
+
+    canvas.dimension(shape);
+    canvas.fill(shape);
+
+    while (true) {}
 
     return 0;
 }
