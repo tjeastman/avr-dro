@@ -1,6 +1,10 @@
 #include "integer.h"
 
-Integer::Integer(int value, const Font &font, const Color &color): value_{value}, font_{font}, color_{color}
+Integer::Integer(int value, const Font &font, const Color &color):
+    value_{value},
+    font_{font},
+    color_{color},
+    changed_{true}
 {
     shape_.expand(Direction::RIGHT, font_.character('-')->shape, 1);
     for (unsigned int divisor = 10000; divisor > 0; divisor /= 10) {
