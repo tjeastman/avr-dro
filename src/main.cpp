@@ -104,7 +104,7 @@ int main(void)
     PORTB |= _BV(0); // deselect
 
     Display display = Display();
-    display.initialize(Display::Orientation::PORTRAIT);
+    display.initialize(Display::Orientation::LANDSCAPE);
 
     Shape shape = display.shape();
     Canvas canvas = Canvas(display);
