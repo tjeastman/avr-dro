@@ -14,6 +14,7 @@ add_executable(
   grid.cpp
   touch.cpp
   calibration.cpp
+  encoder.cpp
 )
 
 set_property(TARGET main.elf PROPERTY CXX_STANDARD 17)

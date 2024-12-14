@@ -1,7 +1,7 @@
+#include <avr/interrupt.h>
 #include <avr/io.h>
 #include <util/delay.h>
 
-#include "calibration.h"
 #include "canvas.h"
 #include "color.h"
 #include "common.h"
@@ -10,35 +10,44 @@
 #include "grid.h"
 #include "integer.h"
 #include "label.h"
-#include "touch.h"
+#include "encoder.h"
+
+extern Encoder encoders[3];
 
 class MainPanel : public Control {
 private:
     Label labelX_;
     Label labelY_;
+    Label labelZ_;
     Integer integerX_;
     Integer integerY_;
+    Integer integerZ_;
     Label labelX_unit_;
     Label labelY_unit_;
+    Label labelZ_unit_;
     Grid gridX_;
     Grid gridY_;
+    Grid gridZ_;
     Grid grid_;
 public:
     MainPanel(Color &);
     void draw(Canvas) override;
-    void press(const Position &) override;
-    void release(const Position &) override;
+    void update(Encoder[3]);
 };
 
 MainPanel::MainPanel(Color &color):
     labelX_{"X:", Font::medium, color},
     labelY_{"Y:", Font::medium, color},
+    labelZ_{"Z:", Font::medium, color},
     integerX_{-1, Font::medium, color},
     integerY_{-1, Font::medium, color},
-    labelX_unit_{"px", Font::medium, color},
-    labelY_unit_{"px", Font::medium, color},
+    integerZ_{-1, Font::medium, color},
+    labelX_unit_{"mm", Font::medium, color},
+    labelY_unit_{"mm", Font::medium, color},
+    labelZ_unit_{"mm", Font::medium, color},
     gridX_{Direction::RIGHT, 20},
     gridY_{Direction::RIGHT, 20},
+    gridZ_{Direction::RIGHT, 20},
     grid_{Direction::DOWN, 20}
 {
     gridX_.add(&labelX_);
@@ -47,8 +56,12 @@ MainPanel::MainPanel(Color &color):
     gridY_.add(&labelY_);
     gridY_.add(&integerY_);
     gridY_.add(&labelY_unit_);
+    gridZ_.add(&labelZ_);
+    gridZ_.add(&integerZ_);
+    gridZ_.add(&labelZ_unit_);
     grid_.add(&gridX_);
     grid_.add(&gridY_);
+    grid_.add(&gridZ_);
 }
 
 void MainPanel::draw(Canvas canvas)
@@ -56,16 +69,11 @@ void MainPanel::draw(Canvas canvas)
     grid_.draw(canvas);
 }
 
-void MainPanel::press(const Position &position)
+void MainPanel::update(Encoder encoders[3])
 {
-    integerX_.update(position.x);
-    integerY_.update(position.y);
-}
-
-void MainPanel::release(const Position &position)
-{
-    integerX_.update(0);
-    integerY_.update(0);
+    integerX_.update(encoders[0].count());
+    integerY_.update(encoders[1].count());
+    integerZ_.update(encoders[2].count());
 }
 
 int main(void)
@@ -109,6 +117,12 @@ int main(void)
 
     PORTB |= _BV(0); // deselect
 
+    // set up external interrupt (INT0) on any change
+    EIMSK |= _BV(INT0);
+    EICRA |= _BV(ISC00);
+
+    sei();
+
     Display display = Display();
     display.initialize(Display::Orientation::LANDSCAPE);
 
@@ -121,15 +135,10 @@ int main(void)
     canvas.fill(shape);
 
     Color color = Color(2, 28, 4);
-
-    Calibration calibration = Calibration();
-    Touch touch = Touch(calibration);
-
     MainPanel panel = MainPanel(color);
-    panel.draw(canvas);
 
     while (true) {
-        touch.dispatch(panel);
+        panel.update(encoders);
         panel.draw(canvas);
         _delay_ms(10);
     }
