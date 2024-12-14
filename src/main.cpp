@@ -18,6 +18,8 @@ private:
     Label labelY_;
     Integer integerX_;
     Integer integerY_;
+    Label labelX_unit_;
+    Label labelY_unit_;
     Grid gridX_;
     Grid gridY_;
     Grid grid_;
@@ -33,14 +35,18 @@ MainPanel::MainPanel(Color &color):
     labelY_{"Y:", Font::small, color},
     integerX_{-1, Font::small, color},
     integerY_{-1, Font::small, color},
-    gridX_{Direction::RIGHT},
-    gridY_{Direction::RIGHT},
-    grid_{Direction::DOWN}
+    labelX_unit_{"px", Font::small, color},
+    labelY_unit_{"px", Font::small, color},
+    gridX_{Direction::RIGHT, 20},
+    gridY_{Direction::RIGHT, 20},
+    grid_{Direction::DOWN, 20}
 {
     gridX_.add(&labelX_);
     gridX_.add(&integerX_);
+    gridX_.add(&labelX_unit_);
     gridY_.add(&labelY_);
     gridY_.add(&integerY_);
+    gridY_.add(&labelY_unit_);
     grid_.add(&gridX_);
     grid_.add(&gridY_);
 }

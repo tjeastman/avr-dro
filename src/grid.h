@@ -10,8 +10,9 @@ private:
     signed char count_;
     Control *controls_[8];
     Direction direction_;
+    char padding_;
 public:
-    Grid(Direction);
+    Grid(Direction, char);
     void draw(Canvas) override;
     void add(Control *);
 };
