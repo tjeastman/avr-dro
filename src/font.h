@@ -21,7 +21,7 @@ private:
     signed int offset_;
     signed int length_;
 public:
-    static Font small;
+    static Font medium;
     Font(Character *, Character *, signed char, signed char);
     const Character *character(signed char) const;
     const Character *digit(unsigned int) const;

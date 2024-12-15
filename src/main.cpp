@@ -31,12 +31,12 @@ public:
 };
 
 MainPanel::MainPanel(Color &color):
-    labelX_{"X:", Font::small, color},
-    labelY_{"Y:", Font::small, color},
-    integerX_{-1, Font::small, color},
-    integerY_{-1, Font::small, color},
-    labelX_unit_{"px", Font::small, color},
-    labelY_unit_{"px", Font::small, color},
+    labelX_{"X:", Font::medium, color},
+    labelY_{"Y:", Font::medium, color},
+    integerX_{-1, Font::medium, color},
+    integerY_{-1, Font::medium, color},
+    labelX_unit_{"px", Font::medium, color},
+    labelY_unit_{"px", Font::medium, color},
     gridX_{Direction::RIGHT, 20},
     gridY_{Direction::RIGHT, 20},
     grid_{Direction::DOWN, 20}

@@ -144,4 +144,4 @@ static Character characters[] = {
 
 static Character character_invalid = Character(CHARACTER_INVALID);
 
-Font Font::small = Font{characters, &character_invalid, 32, 95};
+Font Font::medium = Font{characters, &character_invalid, 32, 95};
