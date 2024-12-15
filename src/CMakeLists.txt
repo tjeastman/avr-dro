@@ -13,7 +13,6 @@ add_executable(
   label.cpp
   grid.cpp
   touch.cpp
-  target.cpp
   calibration.cpp
 )
 
