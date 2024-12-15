@@ -16,6 +16,7 @@ add_executable(
   calibration.cpp
   encoder.cpp
   decimal.cpp
+  button.cpp
 )
 
 set_property(TARGET main.elf PROPERTY CXX_STANDARD 17)

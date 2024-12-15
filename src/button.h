@@ -1,19 +1,20 @@
-#ifndef LABEL_H_
-#define LABEL_H_
+#ifndef BUTTON_H_
+#define BUTTON_H_
 
-#include "color.h"
 #include "canvas.h"
+#include "common.h"
 #include "control.h"
 #include "font.h"
 
-class Label : public Control {
+class Button : public Control {
 private:
     const char *text_;
     const Font &font_;
     const Color &color_;
+    bool pressed_;
     bool changed_;
 public:
-    Label(const char *, const Font &, const Color &);
+    Button(const char *, const Font &, const Color &);
     void draw(Canvas) override;
 };
 

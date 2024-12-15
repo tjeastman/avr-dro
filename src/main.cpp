@@ -2,79 +2,14 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
+#include "calibration.h"
 #include "canvas.h"
 #include "color.h"
 #include "common.h"
-#include "control.h"
-#include "decimal.h"
 #include "display.h"
-#include "grid.h"
-#include "label.h"
 #include "encoder.h"
-
-extern Encoder encoders[3];
-
-class MainPanel : public Control {
-private:
-    Label labelX_;
-    Label labelY_;
-    Label labelZ_;
-    Decimal integerX_;
-    Decimal integerY_;
-    Decimal integerZ_;
-    Label labelX_unit_;
-    Label labelY_unit_;
-    Label labelZ_unit_;
-    Grid gridX_;
-    Grid gridY_;
-    Grid gridZ_;
-    Grid grid_;
-public:
-    MainPanel(Color &);
-    void draw(Canvas) override;
-    void update(Encoder[3]);
-};
-
-MainPanel::MainPanel(Color &color):
-    labelX_{"X:", Font::medium, color},
-    labelY_{"Y:", Font::medium, color},
-    labelZ_{"Z:", Font::medium, color},
-    integerX_{3, 2, Font::medium, color},
-    integerY_{3, 2, Font::medium, color},
-    integerZ_{3, 2, Font::medium, color},
-    labelX_unit_{"mm", Font::medium, color},
-    labelY_unit_{"mm", Font::medium, color},
-    labelZ_unit_{"mm", Font::medium, color},
-    gridX_{Direction::RIGHT, 20},
-    gridY_{Direction::RIGHT, 20},
-    gridZ_{Direction::RIGHT, 20},
-    grid_{Direction::DOWN, 20}
-{
-    gridX_.add(&labelX_);
-    gridX_.add(&integerX_);
-    gridX_.add(&labelX_unit_);
-    gridY_.add(&labelY_);
-    gridY_.add(&integerY_);
-    gridY_.add(&labelY_unit_);
-    gridZ_.add(&labelZ_);
-    gridZ_.add(&integerZ_);
-    gridZ_.add(&labelZ_unit_);
-    grid_.add(&gridX_);
-    grid_.add(&gridY_);
-    grid_.add(&gridZ_);
-}
-
-void MainPanel::draw(Canvas canvas)
-{
-    grid_.draw(canvas);
-}
-
-void MainPanel::update(Encoder encoders[3])
-{
-    integerX_.update(encoders[0].count());
-    integerY_.update(encoders[1].count());
-    integerZ_.update(encoders[2].count());
-}
+#include "font.h"
+#include "touch.h"
 
 int main(void)
 {
@@ -134,11 +69,14 @@ int main(void)
     canvas.dimension(shape);
     canvas.fill(shape);
 
+    Calibration calibration = Calibration();
+    Touch touch = Touch(calibration);
+
     Color color = Color(2, 28, 4);
-    MainPanel panel = MainPanel(color);
+    EncoderPanel panel = EncoderPanel(Font::medium, color);
 
     while (true) {
-        panel.update(encoders);
+        touch.dispatch(panel);
         panel.draw(canvas);
         _delay_ms(10);
     }
