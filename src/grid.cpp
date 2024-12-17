@@ -12,20 +12,10 @@ Grid::Grid(Direction direction, char padding):
 
 void Grid::draw(Canvas canvas)
 {
-    Shape shape{0, 0};
-    if (direction_ == Direction::RIGHT) {
-        shape.width = padding_;
-    } else if (direction_== Direction::DOWN) {
-        shape.height = padding_;
-    } else {
-        return;
-    }
-
     for (signed char i = 0; i < count_; ++i) {
-        canvas.adjust(direction_, shape, padding_);
         Control *control = controls_[i];
         control->draw(canvas);
-        shape = control->shape();
+        canvas.adjust(direction_, control->shape(), padding_);
     }
 }
 
