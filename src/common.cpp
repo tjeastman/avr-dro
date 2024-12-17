@@ -11,6 +11,20 @@ void Shape::expand(Direction direction, Shape shape, signed char buffer)
     }
 }
 
+bool Shape::contains(int x, int y)
+{
+    if (x < 0) {
+        return false;
+    } else if (y < 0) {
+        return false;
+    } else if (x >= width) {
+        return false;
+    } else if (y >= height) {
+        return false;
+    }
+    return true;
+}
+
 void Position::adjust(Direction direction, Shape shape, signed char buffer)
 {
     if (direction == Direction::LEFT) {

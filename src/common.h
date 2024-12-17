@@ -9,6 +9,7 @@ struct Shape {
     int width;
     int height;
     void expand(Direction, Shape, signed char);
+    bool contains(int, int);
 };
 
 struct Position {

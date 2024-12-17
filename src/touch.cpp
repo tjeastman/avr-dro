@@ -100,7 +100,9 @@ void Touch::dispatch(Control &control)
     }
 
     Position position = calibration_.translate(state_.position);
-    if (state_.event == TouchState::Event::PRESS) {
+    if (!control.contains(position)) {
+        return;
+    } else if (state_.event == TouchState::Event::PRESS) {
         control.press(position);
     } else if (state_.event == TouchState::Event::RELEASE) {
         control.release(position);
