@@ -48,7 +48,7 @@ void Box::draw(Canvas canvas)
         canvas.adjust(Direction::RIGHT, shape_, 2);
         canvas.dimension(shape);
         canvas.fill(shape, color_, 0);
-        canvas.adjust(Direction::LEFT, shape_, -2);
+        canvas.adjust(Direction::LEFT, shape_, 2);
 
         // top side
         shape.width = shape_.width + 4;
@@ -60,7 +60,7 @@ void Box::draw(Canvas canvas)
         canvas.adjust(Direction::DOWN, shape_, 2);
         canvas.dimension(shape);
         canvas.dot(color_, 0, 2 * shape_.width + 8);
-        canvas.adjust(Direction::UP, shape_, -2);
+        canvas.adjust(Direction::UP, shape_, 2);
 
         changed_ = false;
     } else {
@@ -82,7 +82,7 @@ void Box::draw(Canvas canvas)
         canvas.dot(color_, 3, 1);
         canvas.dot(color_, 2, shape_.width + 3);
         canvas.dot(color_, 1, shape_.width + 4);
-        canvas.adjust(Direction::UP, shape_, -2);
+        canvas.adjust(Direction::UP, shape_, 2);
 
         // right side
         shape.width = 1;
@@ -92,12 +92,12 @@ void Box::draw(Canvas canvas)
         canvas.dot(color_, 3, 1);
         canvas.dot(color_, 2, shape_.height + 2);
         canvas.dot(color_, 1, 1);
-        canvas.adjust(Direction::LEFT, shape_, -2);
+        canvas.adjust(Direction::LEFT, shape_, 2);
 
         canvas.adjust(Direction::RIGHT, shape_, 3);
         canvas.dimension(shape);
         canvas.dot(color_, 1, shape_.height + 4);
-        canvas.adjust(Direction::LEFT, shape_, -3);
+        canvas.adjust(Direction::LEFT, shape_, 3);
 
         changed_ = false;
     }
