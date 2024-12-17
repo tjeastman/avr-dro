@@ -20,15 +20,15 @@ Encoder encoders[3];
 
 ISR(INT0_vect)
 {
-    encoders[0].consume(PIND);
+    encoders[0].consume(PINK);
 }
 
 // ISR(INT1_vect)
 // {
-//     encoders[1].consume(PIND >> 2);
+//     encoders[1].consume(PINK >> 2);
 // }
 
 // ISR(INT2_vect)
 // {
-//     encoders[2].consume(PIND >> 4);
+//     encoders[2].consume(PINK >> 4);
 // }
