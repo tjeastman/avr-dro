@@ -15,6 +15,10 @@ public:
     Grid(Direction, char);
     void draw(Canvas) override;
     void add(Control *);
+    void press(Position);
+    void release(Position);
+private:
+    Control *control(Position *);
 };
 
 #endif
