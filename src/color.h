@@ -9,10 +9,10 @@ private:
     unsigned char G() const;
     unsigned char B() const;
 public:
-    Color(): value_{0} {};
+    Color(): value_{0} {}
     Color(unsigned char, unsigned char, unsigned char);
     Color blend(Color, unsigned char) const;
-    unsigned int value() const { return value_; };
+    unsigned int value() const { return value_; }
 };
 
 #endif

@@ -28,7 +28,7 @@ private:
     bool interrupt();
     void transition();
 public:
-    Touch(Calibration &calibration): calibration_{calibration}, state_{} {};
+    Touch(Calibration &calibration): calibration_{calibration}, state_{} {}
     void dispatch(Control &);
 };
 

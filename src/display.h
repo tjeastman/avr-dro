@@ -18,7 +18,7 @@ public:
     void initialize(Orientation);
     void data(unsigned int) const;
     void address(unsigned int, unsigned int, unsigned int, unsigned int) const;
-    Shape shape() const { return shape_; };
+    Shape shape() const { return shape_; }
 };
 
 #endif
