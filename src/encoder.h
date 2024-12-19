@@ -9,7 +9,7 @@ private:
 public:
     Encoder(): count_{0}, state_{0} {}
     void consume(unsigned char) volatile;
-    int count() { return count_; }
+    int count() const { return count_; }
 };
 
 #endif

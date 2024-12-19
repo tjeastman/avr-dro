@@ -15,6 +15,7 @@ add_executable(
   touch.cpp
   calibration.cpp
   encoder.cpp
+  decimal.cpp
 )
 
 set_property(TARGET main.elf PROPERTY CXX_STANDARD 17)
