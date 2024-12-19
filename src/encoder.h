@@ -3,11 +3,9 @@
 
 #include "button.h"
 #include "canvas.h"
-#include "color.h"
 #include "common.h"
 #include "control.h"
 #include "decimal.h"
-#include "font.h"
 #include "grid.h"
 #include "label.h"
 
@@ -27,7 +25,7 @@ class EncoderResetButton : public Button {
 private:
     Encoder &encoder_;
 public:
-    EncoderResetButton(Encoder &, const char *, const Font &, const Color &);
+    EncoderResetButton(const ControlProperties &, Encoder &, const char *);
     void release(Position) override;
 };
 
@@ -39,7 +37,7 @@ private:
     EncoderResetButton button_;
     Encoder &encoder_;
 public:
-    EncoderPanelRow(Encoder &, const char *, const char *, const char *, const Font &, const Color &);
+    EncoderPanelRow(const ControlProperties &, Encoder &, const char *, const char *, const char *);
     void draw(Canvas) override;
 };
 
@@ -49,7 +47,7 @@ private:
     EncoderPanelRow rowY_;
     EncoderPanelRow rowZ_;
 public:
-    EncoderPanel(Font &, Color &);
+    EncoderPanel(const ControlProperties &);
 };
 
 #endif

@@ -1,6 +1,7 @@
 #include "grid.h"
 
-Grid::Grid(Direction direction, char padding):
+Grid::Grid(const ControlProperties &properties, Direction direction, char padding):
+    Control(properties),
     count_{0},
     direction_{direction},
     padding_{padding}

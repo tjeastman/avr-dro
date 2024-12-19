@@ -2,18 +2,17 @@
 
 #include "decimal.h"
 
-Decimal::Decimal(unsigned char n, unsigned char m, const Font &font, const Color &color):
-    font_{font},
-    color_{color},
-    integer_{n, font, color},
-    fractional_{m, font, color},
+Decimal::Decimal(const ControlProperties &properties, unsigned char n, unsigned char m):
+    Control(properties),
+    integer_{properties, n},
+    fractional_{properties, m},
     changed_{true},
     value_{0},
     divisor_{1}
 {
-    shape_.expand(Direction::RIGHT, font_.character('-')->shape(), 1);
+    shape_.expand(Direction::RIGHT, properties_.font.character('-')->shape(), 1);
     shape_.expand(Direction::RIGHT, integer_.shape(), 0);
-    shape_.expand(Direction::RIGHT, font_.character('.')->shape(), 1);
+    shape_.expand(Direction::RIGHT, properties_.font.character('.')->shape(), 1);
     shape_.expand(Direction::RIGHT, fractional_.shape(), 0);
 
     for (unsigned char i = 0; i < m; ++i) {
@@ -61,9 +60,9 @@ void Decimal::draw(Canvas canvas)
 
 void Decimal::draw_sign(Canvas &canvas)
 {
-    const Character *character = font_.character('-');
+    const Character *character = properties_.font.character('-');
     if (value_ < 0) {
-        character->draw(canvas, color_);
+        character->draw(canvas, properties_.color);
     } else {
         canvas.dimension(character->shape());
         canvas.fill(character->shape());
@@ -79,7 +78,7 @@ void Decimal::draw_integer(Canvas &canvas)
 
 void Decimal::draw_dot(Canvas &canvas)
 {
-    const Character *character = font_.character('.');
-    character->draw(canvas, color_);
+    const Character *character = properties_.font.character('.');
+    character->draw(canvas, properties_.color);
     canvas.adjust(Direction::RIGHT, character->shape(), 1);
 }

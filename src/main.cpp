@@ -72,7 +72,7 @@ int main(void)
     Touch touch = Touch(calibration);
 
     Color color = Color(2, 28, 4);
-    EncoderPanel panel = EncoderPanel(Font::medium, color);
+    EncoderPanel panel = EncoderPanel({Font::medium, color});
 
     while (true) {
         touch.dispatch(panel);
