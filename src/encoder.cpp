@@ -2,7 +2,7 @@
 
 #include "encoder.h"
 
-signed char Encoder::lookup[16] = {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, -1, 0, 0, 0};
+signed char Encoder::lookup_[16] = {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, -1, 0, 0, 0};
 
 void Encoder::consume(unsigned char input) volatile
 {
@@ -12,7 +12,7 @@ void Encoder::consume(unsigned char input) volatile
     state_ |= input;
     state_ &= 0x0f;
 
-    count_ += lookup[state_];
+    count_ += lookup_[state_];
 }
 
 Encoder encoders[3];

@@ -61,9 +61,8 @@ int main(void)
     Display display = Display();
     display.initialize(Display::Orientation::LANDSCAPE);
 
-    Shape shape = display.shape();
+    const Shape &shape = display.shape();
     Canvas canvas = Canvas(display);
-
     canvas.select(Color(0, 0, 0));
     canvas.move(Position{0, 0});
     canvas.dimension(shape);

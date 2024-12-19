@@ -9,16 +9,17 @@ public:
         PORTRAIT, LANDSCAPE
     };
 private:
-    void transmit(unsigned int) const;
-    void command(unsigned int) const;
-    void command(unsigned int, unsigned int) const;
     Shape shape_;
 public:
     Display(): shape_{0, 0} {}
+    Shape shape() const { return shape_; }
     void initialize(Orientation);
     void data(unsigned int) const;
     void address(unsigned int, unsigned int, unsigned int, unsigned int) const;
-    Shape shape() const { return shape_; }
+private:
+    void transmit(unsigned int) const;
+    void command(unsigned int) const;
+    void command(unsigned int, unsigned int) const;
 };
 
 #endif

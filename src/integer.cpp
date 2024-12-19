@@ -12,7 +12,7 @@ UnsignedInteger::UnsignedInteger(unsigned char digits, const Font &font, const C
     magnitude_{0}
 {
     for (int i = 0; i < digits_; ++i) {
-        shape_.expand(Direction::RIGHT, font_.digit(0)->shape, 1);
+        shape_.expand(Direction::RIGHT, font_.digit(0)->shape(), 1);
     }
 }
 
@@ -31,7 +31,7 @@ void UnsignedInteger::draw(Canvas canvas)
     for (int i = 5 - digits_; i < 5; ++i) {
         const Character *character = font_.digit(magnitude_ / divisors_[i]);
         character->draw(canvas, color_);
-        canvas.adjust(Direction::RIGHT, character->shape, 1);
+        canvas.adjust(Direction::RIGHT, character->shape(), 1);
     }
 
     changed_ = true;

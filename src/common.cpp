@@ -11,7 +11,7 @@ void Shape::expand(Direction direction, Shape shape, signed char buffer)
     }
 }
 
-bool Shape::contains(int x, int y)
+bool Shape::contains(int x, int y) const
 {
     if (x < 0) {
         return false;

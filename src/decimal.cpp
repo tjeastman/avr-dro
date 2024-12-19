@@ -11,9 +11,9 @@ Decimal::Decimal(unsigned char n, unsigned char m, const Font &font, const Color
     value_{0},
     divisor_{1}
 {
-    shape_.expand(Direction::RIGHT, font_.character('-')->shape, 1);
+    shape_.expand(Direction::RIGHT, font_.character('-')->shape(), 1);
     shape_.expand(Direction::RIGHT, integer_.shape(), 0);
-    shape_.expand(Direction::RIGHT, font_.character('.')->shape, 1);
+    shape_.expand(Direction::RIGHT, font_.character('.')->shape(), 1);
     shape_.expand(Direction::RIGHT, fractional_.shape(), 0);
 
     for (unsigned char i = 0; i < m; ++i) {
@@ -65,10 +65,10 @@ void Decimal::draw_sign(Canvas &canvas)
     if (value_ < 0) {
         character->draw(canvas, color_);
     } else {
-        canvas.dimension(character->shape);
-        canvas.fill(character->shape);
+        canvas.dimension(character->shape());
+        canvas.fill(character->shape());
     }
-    canvas.adjust(Direction::RIGHT, character->shape, 1);
+    canvas.adjust(Direction::RIGHT, character->shape(), 1);
 }
 
 void Decimal::draw_integer(Canvas &canvas)
@@ -81,5 +81,5 @@ void Decimal::draw_dot(Canvas &canvas)
 {
     const Character *character = font_.character('.');
     character->draw(canvas, color_);
-    canvas.adjust(Direction::RIGHT, character->shape, 1);
+    canvas.adjust(Direction::RIGHT, character->shape(), 1);
 }

@@ -7,13 +7,13 @@ Character::Character(const unsigned char *data)
 {
     data_ = data + 6;
     length_ = pgm_read_word(&data[0]);
-    shape.width = pgm_read_word(&data[2]);
-    shape.height = pgm_read_word(&data[4]);
+    shape_.width = pgm_read_word(&data[2]);
+    shape_.height = pgm_read_word(&data[4]);
 }
 
 void Character::draw(const Canvas &canvas, const Color &color) const
 {
-    canvas.dimension(shape);
+    canvas.dimension(shape_);
     for (int i = 0; i < length_; ++i) {
         unsigned char b = pgm_read_byte(&data_[i]);
         canvas.dot(color, b & 0x03, b >> 2);

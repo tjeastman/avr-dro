@@ -9,7 +9,6 @@
 class UnsignedInteger : public Control {
 private:
     static unsigned int divisors_[5];
-protected:
     const Font &font_;
     const Color &color_;
     unsigned char digits_;

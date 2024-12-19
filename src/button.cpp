@@ -1,14 +1,15 @@
 #include "button.h"
+#include "common.h"
 
 Button::Button(const char *text, const Font &font, const Color &color):
-    text_{text},
     font_{font},
     color_{color},
+    text_{text},
     pressed_{false},
     changed_{true}
 {
     for (signed char i = 0; i < 32 && text_[i] != '\0'; ++i) {
-        shape_.expand(Direction::RIGHT, font_.character(text_[i])->shape, 1);
+        shape_.expand(Direction::RIGHT, font_.character(text_[i])->shape(), 1);
     }
     shape_.width += 16;
     shape_.height += 8;
@@ -66,7 +67,7 @@ void Button::draw(Canvas canvas)
     for (signed char i = 0; i < 32 && text_[i] != '\0'; ++i) {
         const Character *character = font_.character(text_[i]);
         character->draw(canvas, color_);
-        canvas.adjust(Direction::RIGHT, character->shape, 1);
+        canvas.adjust(Direction::RIGHT, character->shape(), 1);
     }
 
     changed_ = false;

@@ -13,7 +13,7 @@
 
 class Encoder {
 private:
-    static signed char lookup[16];
+    static signed char lookup_[16];
     int count_;
     unsigned char state_;
 public:

@@ -8,9 +8,10 @@ class Character {
 private:
     const unsigned char *data_;
     int length_;
+    Shape shape_;
 public:
-    Shape shape;
     Character(const unsigned char *);
+    const Shape &shape() const { return shape_; }
     void draw(const Canvas &, const Color &) const;
 };
 

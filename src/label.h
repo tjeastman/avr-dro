@@ -8,9 +8,9 @@
 
 class Label : public Control {
 private:
-    const char *text_;
     const Font &font_;
     const Color &color_;
+    const char *text_;
     bool changed_;
 public:
     Label(const char *, const Font &, const Color &);

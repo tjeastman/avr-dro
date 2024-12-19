@@ -12,7 +12,7 @@ public:
     virtual void draw(Canvas) = 0;
     virtual void press(Position) {}
     virtual void release(Position) {}
-    bool contains(const Position &position) { return shape_.contains(position.x, position.y); }
+    bool contains(const Position &position) const { return shape_.contains(position.x, position.y); }
 };
 
 #endif

@@ -3,56 +3,6 @@
 
 #include "display.h"
 
-void Display::transmit(unsigned int v) const
-{
-    PORTA = v >> 8;
-    PORTC = v;
-    PORTG &= ~_BV(2); // WR=LOW
-    PORTG |= _BV(2); // WR=HIGH
-}
-
-void Display::command(unsigned int id) const
-{
-    PORTD &= ~_BV(7); // RS=LOW
-    transmit(id);
-}
-
-void Display::command(unsigned int id, unsigned int d) const
-{
-    command(id);
-    data(d);
-}
-
-void Display::data(unsigned int d) const
-{
-    PORTD |= _BV(7); // RS=HIGH
-    transmit(d);
-}
-
-void Display::address(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2) const
-{
-    // CASET: Column Address Set
-    command(0x2A00);
-	data(x1 >> 8);
-    command(0x2A01);
-	data(x1);
-    command(0x2A02);
-	data(x2 >> 8);
-    command(0x2A03);
-	data(x2);
-    // RASET: Row Address Set
-    command(0x2B00);
-	data(y1 >> 8);
-    command(0x2B01);
-	data(y1);
-    command(0x2B02);
-	data(y2 >> 8);
-    command(0x2B03);
-	data(y2);
-    // RAMWR: Memory Write
-	command(0x2C00);
-}
-
 void Display::initialize(Orientation orientation)
 {
     if (orientation == Orientation::PORTRAIT) {
@@ -494,4 +444,54 @@ void Display::initialize(Orientation orientation)
     command(0x2900);
     // RAMWR: Memory Write
     command(0x2C00);
+}
+
+void Display::data(unsigned int d) const
+{
+    PORTD |= _BV(7); // RS=HIGH
+    transmit(d);
+}
+
+void Display::address(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2) const
+{
+    // CASET: Column Address Set
+    command(0x2A00);
+	data(x1 >> 8);
+    command(0x2A01);
+	data(x1);
+    command(0x2A02);
+	data(x2 >> 8);
+    command(0x2A03);
+	data(x2);
+    // RASET: Row Address Set
+    command(0x2B00);
+	data(y1 >> 8);
+    command(0x2B01);
+	data(y1);
+    command(0x2B02);
+	data(y2 >> 8);
+    command(0x2B03);
+	data(y2);
+    // RAMWR: Memory Write
+	command(0x2C00);
+}
+
+void Display::transmit(unsigned int v) const
+{
+    PORTA = v >> 8;
+    PORTC = v;
+    PORTG &= ~_BV(2); // WR=LOW
+    PORTG |= _BV(2); // WR=HIGH
+}
+
+void Display::command(unsigned int id) const
+{
+    PORTD &= ~_BV(7); // RS=LOW
+    transmit(id);
+}
+
+void Display::command(unsigned int id, unsigned int d) const
+{
+    command(id);
+    data(d);
 }
