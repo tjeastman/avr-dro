@@ -6,10 +6,12 @@
 #include "canvas.h"
 #include "color.h"
 #include "common.h"
+#include "coordinate.h"
 #include "display.h"
-#include "encoder.h"
 #include "font.h"
 #include "touch.h"
+
+extern Pendant pendant;
 
 int main(void)
 {
@@ -56,6 +58,15 @@ int main(void)
     EIMSK |= _BV(INT0);
     EICRA |= _BV(ISC00);
 
+    // set up pin change interrupts
+    PCICR |= _BV(PCIE2);
+    PCMSK2 |= _BV(PCINT16);
+    PCMSK2 |= _BV(PCINT17);
+    PCMSK2 |= _BV(PCINT18);
+    PCMSK2 |= _BV(PCINT19);
+    PCMSK2 |= _BV(PCINT20);
+    PCMSK2 |= _BV(PCINT21);
+
     sei();
 
     Display display = Display();
@@ -72,7 +83,8 @@ int main(void)
     Touch touch = Touch(calibration);
 
     Color color = Color(2, 28, 4);
-    EncoderPanel panel = EncoderPanel({Font::medium, color});
+    CoordinateSystem system = CoordinateSystem(pendant);
+    CoordinatePanel panel = CoordinatePanel({Font::medium, color}, system);
 
     while (true) {
         touch.dispatch(panel);

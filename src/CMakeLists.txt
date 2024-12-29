@@ -13,9 +13,10 @@ add_executable(
   grid.cpp
   touch.cpp
   calibration.cpp
-  encoder.cpp
+  coordinate.cpp
   decimal.cpp
   button.cpp
+  pendant.cpp
 )
 
 set_property(TARGET main.elf PROPERTY CXX_STANDARD 17)
