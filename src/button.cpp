@@ -2,14 +2,9 @@
 #include "common.h"
 
 Button::Button(const ControlProperties &properties, const char *text):
-    Control(properties),
-    text_{text},
-    pressed_{false},
-    changed_{true}
+    Label(properties, text),
+    pressed_{false}
 {
-    for (signed char i = 0; i < 32 && text_[i] != '\0'; ++i) {
-        shape_.expand(Direction::RIGHT, properties_.font.character(text_[i])->shape(), 1);
-    }
     shape_.width += 16;
     shape_.height += 8;
 }
@@ -21,6 +16,10 @@ void Button::draw(Canvas canvas)
     }
 
     Shape shape{0, 0};
+
+    canvas.adjust(Direction::RIGHT, shape, 8);
+    Label::draw(canvas);
+    canvas.adjust(Direction::LEFT, shape, 8);
 
     // left side
     shape.width = 2;
@@ -56,18 +55,6 @@ void Button::draw(Canvas canvas)
     canvas.dimension(shape);
     canvas.dot(properties_.color, 1, shape_.height);
     canvas.adjust(Direction::LEFT, shape_, -1);
-
-    // label
-    shape.width = 8;
-    shape.height = 4;
-    canvas.adjust(Direction::RIGHT, shape, 0);
-    canvas.adjust(Direction::DOWN, shape, 0);
-
-    for (signed char i = 0; i < 32 && text_[i] != '\0'; ++i) {
-        const Character *character = properties_.font.character(text_[i]);
-        character->draw(canvas, properties_.color);
-        canvas.adjust(Direction::RIGHT, character->shape(), 1);
-    }
 
     changed_ = false;
 }

@@ -3,12 +3,11 @@
 
 #include "canvas.h"
 #include "control.h"
+#include "label.h"
 
-class Button : public Control {
+class Button : public Label {
 private:
-    const char *text_;
     bool pressed_;
-    bool changed_;
 public:
     Button(const ControlProperties &, const char *);
     void draw(Canvas) override;

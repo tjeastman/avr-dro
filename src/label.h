@@ -5,7 +5,7 @@
 #include "control.h"
 
 class Label : public Control {
-private:
+protected:
     const char *text_;
     bool changed_;
 public:
