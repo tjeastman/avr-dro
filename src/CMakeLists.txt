@@ -7,15 +7,15 @@ add_executable(
   color.cpp
   common.cpp
   display.cpp
-  font.cpp
-  integer.cpp
-  label.cpp
-  grid.cpp
+  ui/font.cpp
+  ui/integer.cpp
+  ui/label.cpp
+  ui/grid.cpp
   touch.cpp
   calibration.cpp
   coordinate.cpp
-  decimal.cpp
-  button.cpp
+  ui/decimal.cpp
+  ui/button.cpp
   pendant.cpp
 )
 

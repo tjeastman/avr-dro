@@ -1,14 +1,14 @@
 #ifndef COORDINATE_H_
 #define COORDINATE_H_
 
-#include "button.h"
 #include "canvas.h"
 #include "common.h"
-#include "control.h"
-#include "decimal.h"
-#include "grid.h"
-#include "label.h"
 #include "pendant.h"
+#include "ui/button.h"
+#include "ui/control.h"
+#include "ui/decimal.h"
+#include "ui/grid.h"
+#include "ui/label.h"
 
 class CoordinateAxis {
 private:

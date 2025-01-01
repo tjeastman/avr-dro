@@ -3,7 +3,7 @@
 
 #include "calibration.h"
 #include "common.h"
-#include "control.h"
+#include "ui/control.h"
 
 struct TouchState {
     enum class Event {

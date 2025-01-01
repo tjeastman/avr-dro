@@ -8,8 +8,8 @@
 #include "common.h"
 #include "coordinate.h"
 #include "display.h"
-#include "font.h"
 #include "touch.h"
+#include "ui/font.h"
 
 extern Pendant pendant;
 
