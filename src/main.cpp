@@ -4,11 +4,11 @@
 
 #include "calibration.h"
 #include "canvas.h"
-#include "color.h"
-#include "common.h"
 #include "coordinate.h"
 #include "display.h"
 #include "touch.h"
+#include "ui/color.h"
+#include "ui/common.h"
 #include "ui/font.h"
 
 extern Pendant pendant;
@@ -72,19 +72,19 @@ int main(void)
     Display display = Display();
     display.initialize(Display::Orientation::LANDSCAPE);
 
-    const Shape &shape = display.shape();
+    const UI::Shape &shape = display.shape();
     Canvas canvas = Canvas(display);
-    canvas.select(Color(0, 0, 0));
-    canvas.move(Position{0, 0});
+    canvas.select(UI::Color(0, 0, 0));
+    canvas.move(UI::Position{0, 0});
     canvas.dimension(shape);
     canvas.fill(shape);
 
     Calibration calibration = Calibration();
     Touch touch = Touch(calibration);
 
-    Color color = Color(2, 28, 4);
+    UI::Color color = UI::Color(2, 28, 4);
     CoordinateSystem system = CoordinateSystem(pendant);
-    CoordinatePanel panel = CoordinatePanel({Font::medium, color}, system);
+    CoordinatePanel panel = CoordinatePanel({UI::Font::medium, color}, system);
 
     while (true) {
         touch.dispatch(panel);

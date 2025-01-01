@@ -1,7 +1,7 @@
 #ifndef DISPLAY_H_
 #define DISPLAY_H_
 
-#include "common.h"
+#include "ui/common.h"
 
 class Display {
 public:
@@ -9,10 +9,10 @@ public:
         PORTRAIT, LANDSCAPE
     };
 private:
-    Shape shape_;
+    UI::Shape shape_;
 public:
     Display(): shape_{0, 0} {}
-    Shape shape() const { return shape_; }
+    UI::Shape shape() const { return shape_; }
     void initialize(Orientation);
     void data(unsigned int) const;
     void address(unsigned int, unsigned int, unsigned int, unsigned int) const;

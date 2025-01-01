@@ -1,6 +1,7 @@
 #ifndef COMMON_H_
 #define COMMON_H_
 
+namespace UI {
 enum class Direction {
     NONE, LEFT, UP, RIGHT, DOWN
 };
@@ -17,5 +18,6 @@ struct Position {
     int y;
     void adjust(Direction, Shape, signed char);
 };
+}
 
 #endif

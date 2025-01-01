@@ -3,7 +3,7 @@
 #include "font.inc"
 #include "font.h"
 
-Character::Character(const unsigned char *data)
+UI::Character::Character(const unsigned char *data)
 {
     data_ = data + 6;
     length_ = pgm_read_word(&data[0]);
@@ -11,7 +11,7 @@ Character::Character(const unsigned char *data)
     shape_.height = pgm_read_word(&data[4]);
 }
 
-void Character::draw(const Canvas &canvas, const Color &color) const
+void UI::Character::draw(const Canvas &canvas, const UI::Color &color) const
 {
     canvas.dimension(shape_);
     for (int i = 0; i < length_; ++i) {
@@ -20,7 +20,7 @@ void Character::draw(const Canvas &canvas, const Color &color) const
     }
 }
 
-Font::Font(Character *characters, Character *character_invalid, signed char offset, signed char length)
+UI::Font::Font(UI::Character *characters, Character *character_invalid, signed char offset, signed char length)
 {
     characters_ = characters;
     character_invalid_ = character_invalid;
@@ -28,7 +28,7 @@ Font::Font(Character *characters, Character *character_invalid, signed char offs
     length_ = length;
 }
 
-const Character *Font::character(signed char code) const
+const UI::Character *UI::Font::character(signed char code) const
 {
     code -= offset_;
     if (code < 0) {
@@ -39,109 +39,109 @@ const Character *Font::character(signed char code) const
     return &characters_[code];
 }
 
-const Character *Font::digit(unsigned int x) const
+const UI::Character *UI::Font::digit(unsigned int x) const
 {
     return character('0' + x % 10);
 }
 
-static Character characters[] = {
-    Character(CHARACTER_032),
-    Character(CHARACTER_033),
-    Character(CHARACTER_034),
-    Character(CHARACTER_035),
-    Character(CHARACTER_036),
-    Character(CHARACTER_037),
-    Character(CHARACTER_038),
-    Character(CHARACTER_039),
-    Character(CHARACTER_040),
-    Character(CHARACTER_041),
-    Character(CHARACTER_042),
-    Character(CHARACTER_043),
-    Character(CHARACTER_044),
-    Character(CHARACTER_045),
-    Character(CHARACTER_046),
-    Character(CHARACTER_047),
-    Character(CHARACTER_048),
-    Character(CHARACTER_049),
-    Character(CHARACTER_050),
-    Character(CHARACTER_051),
-    Character(CHARACTER_052),
-    Character(CHARACTER_053),
-    Character(CHARACTER_054),
-    Character(CHARACTER_055),
-    Character(CHARACTER_056),
-    Character(CHARACTER_057),
-    Character(CHARACTER_058),
-    Character(CHARACTER_059),
-    Character(CHARACTER_060),
-    Character(CHARACTER_061),
-    Character(CHARACTER_062),
-    Character(CHARACTER_063),
-    Character(CHARACTER_064),
-    Character(CHARACTER_065),
-    Character(CHARACTER_066),
-    Character(CHARACTER_067),
-    Character(CHARACTER_068),
-    Character(CHARACTER_069),
-    Character(CHARACTER_070),
-    Character(CHARACTER_071),
-    Character(CHARACTER_072),
-    Character(CHARACTER_073),
-    Character(CHARACTER_074),
-    Character(CHARACTER_075),
-    Character(CHARACTER_076),
-    Character(CHARACTER_077),
-    Character(CHARACTER_078),
-    Character(CHARACTER_079),
-    Character(CHARACTER_080),
-    Character(CHARACTER_081),
-    Character(CHARACTER_082),
-    Character(CHARACTER_083),
-    Character(CHARACTER_084),
-    Character(CHARACTER_085),
-    Character(CHARACTER_086),
-    Character(CHARACTER_087),
-    Character(CHARACTER_088),
-    Character(CHARACTER_089),
-    Character(CHARACTER_090),
-    Character(CHARACTER_091),
-    Character(CHARACTER_092),
-    Character(CHARACTER_093),
-    Character(CHARACTER_094),
-    Character(CHARACTER_095),
-    Character(CHARACTER_096),
-    Character(CHARACTER_097),
-    Character(CHARACTER_098),
-    Character(CHARACTER_099),
-    Character(CHARACTER_100),
-    Character(CHARACTER_101),
-    Character(CHARACTER_102),
-    Character(CHARACTER_103),
-    Character(CHARACTER_104),
-    Character(CHARACTER_105),
-    Character(CHARACTER_106),
-    Character(CHARACTER_107),
-    Character(CHARACTER_108),
-    Character(CHARACTER_109),
-    Character(CHARACTER_110),
-    Character(CHARACTER_111),
-    Character(CHARACTER_112),
-    Character(CHARACTER_113),
-    Character(CHARACTER_114),
-    Character(CHARACTER_115),
-    Character(CHARACTER_116),
-    Character(CHARACTER_117),
-    Character(CHARACTER_118),
-    Character(CHARACTER_119),
-    Character(CHARACTER_120),
-    Character(CHARACTER_121),
-    Character(CHARACTER_122),
-    Character(CHARACTER_123),
-    Character(CHARACTER_124),
-    Character(CHARACTER_125),
-    Character(CHARACTER_126),
+static UI::Character characters[] = {
+    UI::Character(CHARACTER_032),
+    UI::Character(CHARACTER_033),
+    UI::Character(CHARACTER_034),
+    UI::Character(CHARACTER_035),
+    UI::Character(CHARACTER_036),
+    UI::Character(CHARACTER_037),
+    UI::Character(CHARACTER_038),
+    UI::Character(CHARACTER_039),
+    UI::Character(CHARACTER_040),
+    UI::Character(CHARACTER_041),
+    UI::Character(CHARACTER_042),
+    UI::Character(CHARACTER_043),
+    UI::Character(CHARACTER_044),
+    UI::Character(CHARACTER_045),
+    UI::Character(CHARACTER_046),
+    UI::Character(CHARACTER_047),
+    UI::Character(CHARACTER_048),
+    UI::Character(CHARACTER_049),
+    UI::Character(CHARACTER_050),
+    UI::Character(CHARACTER_051),
+    UI::Character(CHARACTER_052),
+    UI::Character(CHARACTER_053),
+    UI::Character(CHARACTER_054),
+    UI::Character(CHARACTER_055),
+    UI::Character(CHARACTER_056),
+    UI::Character(CHARACTER_057),
+    UI::Character(CHARACTER_058),
+    UI::Character(CHARACTER_059),
+    UI::Character(CHARACTER_060),
+    UI::Character(CHARACTER_061),
+    UI::Character(CHARACTER_062),
+    UI::Character(CHARACTER_063),
+    UI::Character(CHARACTER_064),
+    UI::Character(CHARACTER_065),
+    UI::Character(CHARACTER_066),
+    UI::Character(CHARACTER_067),
+    UI::Character(CHARACTER_068),
+    UI::Character(CHARACTER_069),
+    UI::Character(CHARACTER_070),
+    UI::Character(CHARACTER_071),
+    UI::Character(CHARACTER_072),
+    UI::Character(CHARACTER_073),
+    UI::Character(CHARACTER_074),
+    UI::Character(CHARACTER_075),
+    UI::Character(CHARACTER_076),
+    UI::Character(CHARACTER_077),
+    UI::Character(CHARACTER_078),
+    UI::Character(CHARACTER_079),
+    UI::Character(CHARACTER_080),
+    UI::Character(CHARACTER_081),
+    UI::Character(CHARACTER_082),
+    UI::Character(CHARACTER_083),
+    UI::Character(CHARACTER_084),
+    UI::Character(CHARACTER_085),
+    UI::Character(CHARACTER_086),
+    UI::Character(CHARACTER_087),
+    UI::Character(CHARACTER_088),
+    UI::Character(CHARACTER_089),
+    UI::Character(CHARACTER_090),
+    UI::Character(CHARACTER_091),
+    UI::Character(CHARACTER_092),
+    UI::Character(CHARACTER_093),
+    UI::Character(CHARACTER_094),
+    UI::Character(CHARACTER_095),
+    UI::Character(CHARACTER_096),
+    UI::Character(CHARACTER_097),
+    UI::Character(CHARACTER_098),
+    UI::Character(CHARACTER_099),
+    UI::Character(CHARACTER_100),
+    UI::Character(CHARACTER_101),
+    UI::Character(CHARACTER_102),
+    UI::Character(CHARACTER_103),
+    UI::Character(CHARACTER_104),
+    UI::Character(CHARACTER_105),
+    UI::Character(CHARACTER_106),
+    UI::Character(CHARACTER_107),
+    UI::Character(CHARACTER_108),
+    UI::Character(CHARACTER_109),
+    UI::Character(CHARACTER_110),
+    UI::Character(CHARACTER_111),
+    UI::Character(CHARACTER_112),
+    UI::Character(CHARACTER_113),
+    UI::Character(CHARACTER_114),
+    UI::Character(CHARACTER_115),
+    UI::Character(CHARACTER_116),
+    UI::Character(CHARACTER_117),
+    UI::Character(CHARACTER_118),
+    UI::Character(CHARACTER_119),
+    UI::Character(CHARACTER_120),
+    UI::Character(CHARACTER_121),
+    UI::Character(CHARACTER_122),
+    UI::Character(CHARACTER_123),
+    UI::Character(CHARACTER_124),
+    UI::Character(CHARACTER_125),
+    UI::Character(CHARACTER_126),
 };
 
-static Character character_invalid = Character(CHARACTER_INVALID);
+static UI::Character character_invalid = UI::Character(CHARACTER_INVALID);
 
-Font Font::medium = Font{characters, &character_invalid, 32, 95};
+UI::Font UI::Font::medium = UI::Font{characters, &character_invalid, 32, 95};

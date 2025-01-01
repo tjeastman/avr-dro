@@ -1,6 +1,7 @@
 #ifndef COLOR_H_
 #define COLOR_H_
 
+namespace UI {
 class Color {
 private:
     static unsigned char scale_[2][32];
@@ -15,5 +16,6 @@ private:
     unsigned char G() const;
     unsigned char B() const;
 };
+}
 
 #endif

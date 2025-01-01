@@ -7,7 +7,7 @@ Calibration::Calibration()
     eeprom_read_block((void *)theta_, 0, 2 * 3 * sizeof(float));
 }
 
-Position Calibration::translate(Position position) const
+UI::Position Calibration::translate(UI::Position position) const
 {
     int x = position.x;
     int y = position.y;

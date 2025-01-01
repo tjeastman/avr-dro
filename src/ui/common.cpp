@@ -1,6 +1,6 @@
 #include "common.h"
 
-void Shape::expand(Direction direction, Shape shape, signed char buffer)
+void UI::Shape::expand(UI::Direction direction, UI::Shape shape, signed char buffer)
 {
     if (direction == Direction::RIGHT || direction == Direction::LEFT) {
         width += shape.width + buffer;
@@ -11,7 +11,7 @@ void Shape::expand(Direction direction, Shape shape, signed char buffer)
     }
 }
 
-bool Shape::contains(int x, int y) const
+bool UI::Shape::contains(int x, int y) const
 {
     if (x < 0) {
         return false;
@@ -25,7 +25,7 @@ bool Shape::contains(int x, int y) const
     return true;
 }
 
-void Position::adjust(Direction direction, Shape shape, signed char buffer)
+void UI::Position::adjust(UI::Direction direction, UI::Shape shape, signed char buffer)
 {
     if (direction == Direction::LEFT) {
         x -= shape.width + buffer;

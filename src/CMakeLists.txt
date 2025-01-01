@@ -3,20 +3,20 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 add_executable(
   main.elf
   main.cpp
+  calibration.cpp
   canvas.cpp
-  color.cpp
-  common.cpp
+  coordinate.cpp
   display.cpp
+  pendant.cpp
+  touch.cpp
+  ui/button.cpp
+  ui/color.cpp
+  ui/common.cpp
+  ui/decimal.cpp
   ui/font.cpp
+  ui/grid.cpp
   ui/integer.cpp
   ui/label.cpp
-  ui/grid.cpp
-  touch.cpp
-  calibration.cpp
-  coordinate.cpp
-  ui/decimal.cpp
-  ui/button.cpp
-  pendant.cpp
 )
 
 set_property(TARGET main.elf PROPERTY CXX_STANDARD 17)

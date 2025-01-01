@@ -99,7 +99,7 @@ void Touch::dispatch(UI::Control &control)
         return;
     }
 
-    Position position = calibration_.translate(state_.position);
+    UI::Position position = calibration_.translate(state_.position);
     if (!control.contains(position)) {
         return;
     } else if (state_.event == TouchState::Event::PRESS) {

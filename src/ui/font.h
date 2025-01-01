@@ -4,6 +4,7 @@
 #include "common.h"
 #include "canvas.h"
 
+namespace UI {
 class Character {
 private:
     const unsigned char *data_;
@@ -27,5 +28,6 @@ public:
     const Character *character(signed char) const;
     const Character *digit(unsigned int) const;
 };
+}
 
 #endif

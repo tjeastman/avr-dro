@@ -2,9 +2,9 @@
 #define COORDINATE_H_
 
 #include "canvas.h"
-#include "common.h"
 #include "pendant.h"
 #include "ui/button.h"
+#include "ui/common.h"
 #include "ui/control.h"
 #include "ui/decimal.h"
 #include "ui/grid.h"
@@ -38,7 +38,7 @@ private:
     CoordinateAxis &axis_;
 public:
     CoordinateResetButton(const UI::ControlProperties &, CoordinateAxis &);
-    void release(Position) override;
+    void release(UI::Position) override;
 };
 
 class CoordinatePanelRow : public UI::Grid {

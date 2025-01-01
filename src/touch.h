@@ -2,7 +2,7 @@
 #define TOUCH_H_
 
 #include "calibration.h"
-#include "common.h"
+#include "ui/common.h"
 #include "ui/control.h"
 
 struct TouchState {
@@ -10,7 +10,7 @@ struct TouchState {
         NONE, PRESS, RELEASE
     };
     Event event;
-    Position position;
+    UI::Position position;
     int readings;
     TouchState();
     void press(int, int, int);
