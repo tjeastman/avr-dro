@@ -1,6 +1,6 @@
 #include "grid.h"
 
-Grid::Grid(const ControlProperties &properties, Direction direction, char padding):
+UI::Grid::Grid(const UI::ControlProperties &properties, Direction direction, char padding):
     Control(properties),
     count_{0},
     direction_{direction},
@@ -11,7 +11,7 @@ Grid::Grid(const ControlProperties &properties, Direction direction, char paddin
     }
 }
 
-void Grid::draw(Canvas canvas)
+void UI::Grid::draw(Canvas canvas)
 {
     for (signed char i = 0; i < count_; ++i) {
         Control *control = controls_[i];
@@ -20,7 +20,7 @@ void Grid::draw(Canvas canvas)
     }
 }
 
-void Grid::add(Control *control)
+void UI::Grid::add(Control *control)
 {
     if (count_ < 8) {
         controls_[count_++] = control;
@@ -28,7 +28,7 @@ void Grid::add(Control *control)
     }
 }
 
-void Grid::press(Position position)
+void UI::Grid::press(Position position)
 {
     Control *c = control(&position);
     if (c != nullptr) {
@@ -36,7 +36,7 @@ void Grid::press(Position position)
     }
 }
 
-void Grid::release(Position position)
+void UI::Grid::release(Position position)
 {
     Control *c = control(&position);
     if (c != nullptr) {
@@ -44,7 +44,7 @@ void Grid::release(Position position)
     }
 }
 
-Control *Grid::control(Position *position)
+UI::Control *UI::Grid::control(Position *position)
 {
     Direction direction;
     if (direction_ == Direction::RIGHT) {

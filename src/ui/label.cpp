@@ -1,6 +1,6 @@
 #include "label.h"
 
-Label::Label(const ControlProperties &properties, const char *text):
+UI::Label::Label(const UI::ControlProperties &properties, const char *text):
     Control(properties),
     text_{text},
     changed_{true}
@@ -10,7 +10,7 @@ Label::Label(const ControlProperties &properties, const char *text):
     }
 }
 
-void Label::draw(Canvas canvas)
+void UI::Label::draw(Canvas canvas)
 {
     if (!changed_) {
         return;

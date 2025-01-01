@@ -33,7 +33,7 @@ void CoordinateAxis::reset()
     origin_ = axis_.position(0);
 }
 
-CoordinateResetButton::CoordinateResetButton(const ControlProperties &properties, CoordinateAxis &axis):
+CoordinateResetButton::CoordinateResetButton(const UI::ControlProperties &properties, CoordinateAxis &axis):
     Button(properties, axis.zero),
     axis_{axis}
 {
@@ -45,7 +45,7 @@ void CoordinateResetButton::release(Position position)
     Button::release(position);
 }
 
-CoordinatePanelRow::CoordinatePanelRow(const ControlProperties &properties, CoordinateSystem &system, int index):
+CoordinatePanelRow::CoordinatePanelRow(const UI::ControlProperties &properties, CoordinateSystem &system, int index):
     Grid(properties, Direction::RIGHT, 20),
     axis_{system.axis(index)},
     label_{properties, axis_.label},
@@ -65,7 +65,7 @@ void CoordinatePanelRow::draw(Canvas canvas)
     Grid::draw(canvas);
 }
 
-CoordinatePanel::CoordinatePanel(const ControlProperties &properties, CoordinateSystem &system):
+CoordinatePanel::CoordinatePanel(const UI::ControlProperties &properties, CoordinateSystem &system):
     Grid{properties, Direction::DOWN, 20},
     row_{{properties, system, 0}, {properties, system, 1}, {properties, system, 2}}
 {

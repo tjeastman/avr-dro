@@ -33,31 +33,31 @@ public:
     CoordinateAxis &axis(int);
 };
 
-class CoordinateResetButton : public Button {
+class CoordinateResetButton : public UI::Button {
 private:
     CoordinateAxis &axis_;
 public:
-    CoordinateResetButton(const ControlProperties &, CoordinateAxis &);
+    CoordinateResetButton(const UI::ControlProperties &, CoordinateAxis &);
     void release(Position) override;
 };
 
-class CoordinatePanelRow : public Grid {
+class CoordinatePanelRow : public UI::Grid {
 private:
     CoordinateAxis &axis_;
-    Label label_;
-    Decimal decimal_;
-    Label label_unit_;
+    UI::Label label_;
+    UI::Decimal decimal_;
+    UI::Label label_unit_;
     CoordinateResetButton button_;
 public:
-    CoordinatePanelRow(const ControlProperties &, CoordinateSystem &, int);
+    CoordinatePanelRow(const UI::ControlProperties &, CoordinateSystem &, int);
     void draw(Canvas) override;
 };
 
-class CoordinatePanel : public Grid {
+class CoordinatePanel : public UI::Grid {
 private:
     CoordinatePanelRow row_[3];
 public:
-    CoordinatePanel(const ControlProperties &, CoordinateSystem &);
+    CoordinatePanel(const UI::ControlProperties &, CoordinateSystem &);
 };
 
 #endif

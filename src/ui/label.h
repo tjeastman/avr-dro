@@ -4,6 +4,7 @@
 #include "canvas.h"
 #include "control.h"
 
+namespace UI {
 class Label : public Control {
 protected:
     const char *text_;
@@ -12,5 +13,6 @@ public:
     Label(const ControlProperties &, const char *);
     void draw(Canvas) override;
 };
+}
 
 #endif

@@ -29,7 +29,7 @@ private:
     void transition();
 public:
     Touch(Calibration &calibration): calibration_{calibration}, state_{} {}
-    void dispatch(Control &);
+    void dispatch(UI::Control &);
 };
 
 #endif

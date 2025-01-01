@@ -4,6 +4,7 @@
 #include "canvas.h"
 #include "control.h"
 
+namespace UI {
 class UnsignedInteger : public Control {
 private:
     static unsigned int divisors_[5];
@@ -15,5 +16,6 @@ public:
     void update(unsigned int);
     void draw(Canvas) override;
 };
+}
 
 #endif

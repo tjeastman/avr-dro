@@ -92,7 +92,7 @@ void Touch::transition()
     }
 }
 
-void Touch::dispatch(Control &control)
+void Touch::dispatch(UI::Control &control)
 {
     transition();
     if (state_.event == TouchState::Event::NONE) {

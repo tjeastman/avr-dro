@@ -2,7 +2,7 @@
 
 #include "decimal.h"
 
-Decimal::Decimal(const ControlProperties &properties, unsigned char n, unsigned char m):
+UI::Decimal::Decimal(const UI::ControlProperties &properties, unsigned char n, unsigned char m):
     Control(properties),
     integer_{properties, n},
     fractional_{properties, m},
@@ -20,7 +20,7 @@ Decimal::Decimal(const ControlProperties &properties, unsigned char n, unsigned 
     }
 }
 
-void Decimal::update(int value)
+void UI::Decimal::update(int value)
 {
     if (value_ == value) {
         return;
@@ -44,7 +44,7 @@ void Decimal::update(int value)
     changed_ = true;
 }
 
-void Decimal::draw(Canvas canvas)
+void UI::Decimal::draw(Canvas canvas)
 {
     if (!changed_) {
         return;
@@ -58,7 +58,7 @@ void Decimal::draw(Canvas canvas)
     changed_ = false;
 }
 
-void Decimal::draw_sign(Canvas &canvas)
+void UI::Decimal::draw_sign(Canvas &canvas)
 {
     const Character *character = properties_.font.character('-');
     if (value_ < 0) {
@@ -70,13 +70,13 @@ void Decimal::draw_sign(Canvas &canvas)
     canvas.adjust(Direction::RIGHT, character->shape(), 1);
 }
 
-void Decimal::draw_integer(Canvas &canvas)
+void UI::Decimal::draw_integer(Canvas &canvas)
 {
     integer_.draw(canvas);
     canvas.adjust(Direction::RIGHT, integer_.shape(), 0);
 }
 
-void Decimal::draw_dot(Canvas &canvas)
+void UI::Decimal::draw_dot(Canvas &canvas)
 {
     const Character *character = properties_.font.character('.');
     character->draw(canvas, properties_.color);

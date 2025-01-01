@@ -5,6 +5,7 @@
 #include "control.h"
 #include "integer.h"
 
+namespace UI {
 class Decimal : public Control {
 private:
     UnsignedInteger integer_;
@@ -21,5 +22,6 @@ private:
     void draw_integer(Canvas &);
     void draw_dot(Canvas &);
 };
+}
 
 #endif

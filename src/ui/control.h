@@ -6,6 +6,7 @@
 #include "common.h"
 #include "font.h"
 
+namespace UI {
 struct ControlProperties {
     const Font &font;
     const Color &color;
@@ -23,5 +24,6 @@ public:
     virtual void release(Position) {}
     bool contains(const Position &position) const { return shape_.contains(position.x, position.y); }
 };
+}
 
 #endif

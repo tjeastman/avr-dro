@@ -5,6 +5,7 @@
 #include "common.h"
 #include "control.h"
 
+namespace UI {
 class Grid : public Control {
 private:
     signed char count_;
@@ -20,5 +21,6 @@ public:
 private:
     Control *control(Position *);
 };
+}
 
 #endif
