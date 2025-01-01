@@ -1,8 +1,10 @@
-#ifndef FONT_H_
-#define FONT_H_
+#ifndef UI_FONT_H_
+#define UI_FONT_H_
 
 #include "common.h"
 #include "canvas.h"
+
+namespace ui {
 
 class Character {
 private:
@@ -28,4 +30,6 @@ public:
     const Character *digit(unsigned int) const;
 };
 
-#endif
+}  // namespace ui
+
+#endif  // UI_FONT_H_

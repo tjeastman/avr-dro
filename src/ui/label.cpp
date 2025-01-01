@@ -1,5 +1,7 @@
 #include "label.h"
 
+namespace ui {
+
 Label::Label(const ControlProperties &properties, const char *text):
     Control(properties),
     text_{text},
@@ -24,3 +26,5 @@ void Label::draw(Canvas canvas)
 
     changed_ = false;
 }
+
+}  // namespace ui

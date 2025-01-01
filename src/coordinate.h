@@ -1,14 +1,14 @@
 #ifndef COORDINATE_H_
 #define COORDINATE_H_
 
-#include "button.h"
-#include "canvas.h"
-#include "common.h"
-#include "control.h"
-#include "decimal.h"
-#include "grid.h"
-#include "label.h"
 #include "pendant.h"
+#include "ui/button.h"
+#include "ui/canvas.h"
+#include "ui/common.h"
+#include "ui/control.h"
+#include "ui/decimal.h"
+#include "ui/grid.h"
+#include "ui/label.h"
 
 class CoordinateAxis {
 private:
@@ -33,31 +33,31 @@ public:
     CoordinateAxis &axis(int);
 };
 
-class CoordinateResetButton : public Button {
+class CoordinateResetButton : public ui::Button {
 private:
     CoordinateAxis &axis_;
 public:
-    CoordinateResetButton(const ControlProperties &, CoordinateAxis &);
-    void release(Position) override;
+    CoordinateResetButton(const ui::ControlProperties &, CoordinateAxis &);
+    void release(ui::Position) override;
 };
 
-class CoordinatePanelRow : public Grid {
+class CoordinatePanelRow : public ui::Grid {
 private:
     CoordinateAxis &axis_;
-    Label label_;
-    Decimal decimal_;
-    Label label_unit_;
+    ui::Label label_;
+    ui::Decimal decimal_;
+    ui::Label label_unit_;
     CoordinateResetButton button_;
 public:
-    CoordinatePanelRow(const ControlProperties &, CoordinateSystem &, int);
-    void draw(Canvas) override;
+    CoordinatePanelRow(const ui::ControlProperties &, CoordinateSystem &, int);
+    void draw(ui::Canvas) override;
 };
 
-class CoordinatePanel : public Grid {
+class CoordinatePanel : public ui::Grid {
 private:
     CoordinatePanelRow row_[3];
 public:
-    CoordinatePanel(const ControlProperties &, CoordinateSystem &);
+    CoordinatePanel(const ui::ControlProperties &, CoordinateSystem &);
 };
 
 #endif

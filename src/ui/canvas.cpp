@@ -1,5 +1,7 @@
 #include "canvas.h"
 
+namespace ui {
+
 Canvas::Canvas(const Display &display):
     display_{display},
     position_{0, 0},
@@ -57,3 +59,5 @@ void Canvas::dot(const Color &color, unsigned char alpha, int n) const
         display_.data(value);
     }
 }
+
+}  // namespace ui

@@ -2,15 +2,15 @@
 #define TOUCH_H_
 
 #include "calibration.h"
-#include "common.h"
-#include "control.h"
+#include "ui/common.h"
+#include "ui/control.h"
 
 struct TouchState {
     enum class Event {
         NONE, PRESS, RELEASE
     };
     Event event;
-    Position position;
+    ui::Position position;
     int readings;
     TouchState();
     void press(int, int, int);
@@ -29,7 +29,7 @@ private:
     void transition();
 public:
     Touch(Calibration &calibration): calibration_{calibration}, state_{} {}
-    void dispatch(Control &);
+    void dispatch(ui::Control &);
 };
 
 #endif

@@ -2,6 +2,8 @@
 
 #include "decimal.h"
 
+namespace ui {
+
 Decimal::Decimal(const ControlProperties &properties, unsigned char n, unsigned char m):
     Control(properties),
     integer_{properties, n},
@@ -82,3 +84,5 @@ void Decimal::draw_dot(Canvas &canvas)
     character->draw(canvas, properties_.color);
     canvas.adjust(Direction::RIGHT, character->shape(), 1);
 }
+
+}  // namespace ui

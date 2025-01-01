@@ -1,5 +1,7 @@
-#ifndef COLOR_H_
-#define COLOR_H_
+#ifndef UI_COLOR_H_
+#define UI_COLOR_H_
+
+namespace ui {
 
 class Color {
 private:
@@ -16,4 +18,6 @@ private:
     unsigned char B() const;
 };
 
-#endif
+}  // namespace ui
+
+#endif  // UI_COLOR_H_

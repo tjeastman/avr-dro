@@ -1,10 +1,12 @@
-#ifndef CONTROL_H_
-#define CONTROL_H_
+#ifndef UI_CONTROL_H_
+#define UI_CONTROL_H_
 
 #include "canvas.h"
 #include "color.h"
 #include "common.h"
 #include "font.h"
+
+namespace ui {
 
 struct ControlProperties {
     const Font &font;
@@ -24,4 +26,6 @@ public:
     bool contains(const Position &position) const { return shape_.contains(position.x, position.y); }
 };
 
-#endif
+}  // namespace ui
+
+#endif  // UI_CONTROL_H_

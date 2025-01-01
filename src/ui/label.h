@@ -1,8 +1,10 @@
-#ifndef LABEL_H_
-#define LABEL_H_
+#ifndef UI_LABEL_H_
+#define UI_LABEL_H_
 
 #include "canvas.h"
 #include "control.h"
+
+namespace ui {
 
 class Label : public Control {
 protected:
@@ -13,4 +15,6 @@ public:
     void draw(Canvas) override;
 };
 
-#endif
+}  // namespace ui
+
+#endif  // UI_LABEL_H_

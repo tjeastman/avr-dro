@@ -2,6 +2,8 @@
 
 #include "integer.h"
 
+namespace ui {
+
 unsigned int UnsignedInteger::divisors_[5] = {10000, 1000, 100, 10, 1};
 
 UnsignedInteger::UnsignedInteger(const ControlProperties &properties, unsigned char digits):
@@ -35,3 +37,5 @@ void UnsignedInteger::draw(Canvas canvas)
 
     changed_ = true;
 }
+
+}  // namespace ui

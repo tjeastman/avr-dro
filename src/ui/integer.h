@@ -1,8 +1,10 @@
-#ifndef INTEGER_H_
-#define INTEGER_H_
+#ifndef UI_INTEGER_H_
+#define UI_INTEGER_H_
 
 #include "canvas.h"
 #include "control.h"
+
+namespace ui {
 
 class UnsignedInteger : public Control {
 private:
@@ -16,4 +18,6 @@ public:
     void draw(Canvas) override;
 };
 
-#endif
+}  // namespace ui
+
+#endif  // UI_INTEGER_H_

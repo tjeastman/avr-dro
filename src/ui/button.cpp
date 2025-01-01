@@ -1,6 +1,8 @@
 #include "button.h"
 #include "common.h"
 
+namespace ui {
+
 Button::Button(const ControlProperties &properties, const char *text):
     Label(properties, text),
     pressed_{false}
@@ -58,3 +60,5 @@ void Button::draw(Canvas canvas)
 
     changed_ = false;
 }
+
+}  // namespace ui

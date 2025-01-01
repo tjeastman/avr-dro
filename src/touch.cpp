@@ -92,14 +92,14 @@ void Touch::transition()
     }
 }
 
-void Touch::dispatch(Control &control)
+void Touch::dispatch(ui::Control &control)
 {
     transition();
     if (state_.event == TouchState::Event::NONE) {
         return;
     }
 
-    Position position = calibration_.translate(state_.position);
+    ui::Position position = calibration_.translate(state_.position);
     if (!control.contains(position)) {
         return;
     } else if (state_.event == TouchState::Event::PRESS) {

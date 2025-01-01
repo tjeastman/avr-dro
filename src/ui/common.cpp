@@ -1,5 +1,7 @@
 #include "common.h"
 
+namespace ui {
+
 void Shape::expand(Direction direction, Shape shape, signed char buffer)
 {
     if (direction == Direction::RIGHT || direction == Direction::LEFT) {
@@ -37,3 +39,5 @@ void Position::adjust(Direction direction, Shape shape, signed char buffer)
         y += shape.height + buffer;
     }
 }
+
+}  // namespace ui

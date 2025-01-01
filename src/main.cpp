@@ -3,13 +3,13 @@
 #include <util/delay.h>
 
 #include "calibration.h"
-#include "canvas.h"
-#include "color.h"
-#include "common.h"
 #include "coordinate.h"
 #include "display.h"
-#include "font.h"
 #include "touch.h"
+#include "ui/canvas.h"
+#include "ui/color.h"
+#include "ui/common.h"
+#include "ui/font.h"
 
 extern Pendant pendant;
 
@@ -72,19 +72,19 @@ int main(void)
     Display display = Display();
     display.initialize(Display::Orientation::LANDSCAPE);
 
-    const Shape &shape = display.shape();
-    Canvas canvas = Canvas(display);
-    canvas.select(Color(0, 0, 0));
-    canvas.move(Position{0, 0});
+    const ui::Shape &shape = display.shape();
+    ui::Canvas canvas = ui::Canvas(display);
+    canvas.select(ui::Color(0, 0, 0));
+    canvas.move(ui::Position{0, 0});
     canvas.dimension(shape);
     canvas.fill(shape);
 
     Calibration calibration = Calibration();
     Touch touch = Touch(calibration);
 
-    Color color = Color(2, 28, 4);
+    ui::Color color = ui::Color(2, 28, 4);
     CoordinateSystem system = CoordinateSystem(pendant);
-    CoordinatePanel panel = CoordinatePanel({Font::medium, color}, system);
+    CoordinatePanel panel = CoordinatePanel({ui::Font::medium, color}, system);
 
     while (true) {
         touch.dispatch(panel);

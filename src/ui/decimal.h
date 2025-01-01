@@ -1,9 +1,11 @@
-#ifndef DECIMAL_H_
-#define DECIMAL_H_
+#ifndef UI_DECIMAL_H_
+#define UI_DECIMAL_H_
 
 #include "canvas.h"
 #include "control.h"
 #include "integer.h"
+
+namespace ui {
 
 class Decimal : public Control {
 private:
@@ -22,4 +24,6 @@ private:
     void draw_dot(Canvas &);
 };
 
-#endif
+}  // namespace ui
+
+#endif  // UI_DECIMAL_H_

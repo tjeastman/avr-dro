@@ -1,9 +1,11 @@
-#ifndef BUTTON_H_
-#define BUTTON_H_
+#ifndef UI_BUTTON_H_
+#define UI_BUTTON_H_
 
 #include "canvas.h"
 #include "control.h"
 #include "label.h"
+
+namespace ui {
 
 class Button : public Label {
 private:
@@ -13,4 +15,6 @@ public:
     void draw(Canvas) override;
 };
 
-#endif
+}  // namespace ui
+
+#endif  // UI_BUTTON_H_

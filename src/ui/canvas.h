@@ -1,9 +1,11 @@
-#ifndef CANVAS_H_
-#define CANVAS_H_
+#ifndef UI_CANVAS_H_
+#define UI_CANVAS_H_
 
+#include "display.h"
 #include "color.h"
 #include "common.h"
-#include "display.h"
+
+namespace ui {
 
 class Canvas {
 private:
@@ -21,4 +23,6 @@ public:
     void dot(const Color &, unsigned char, int) const;
 };
 
-#endif
+}  // namespace ui
+
+#endif  // UI_CANVAS_H_

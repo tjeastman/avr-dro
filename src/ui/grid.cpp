@@ -1,5 +1,7 @@
 #include "grid.h"
 
+namespace ui {
+
 Grid::Grid(const ControlProperties &properties, Direction direction, char padding):
     Control(properties),
     count_{0},
@@ -64,3 +66,5 @@ Control *Grid::control(Position *position)
 
     return nullptr;
 }
+
+}  // namespace ui

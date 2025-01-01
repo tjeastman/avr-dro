@@ -3,6 +3,8 @@
 #include "font.inc"
 #include "font.h"
 
+namespace ui {
+
 Character::Character(const unsigned char *data)
 {
     data_ = data + 6;
@@ -145,3 +147,5 @@ static Character characters[] = {
 static Character character_invalid = Character(CHARACTER_INVALID);
 
 Font Font::medium = Font{characters, &character_invalid, 32, 95};
+
+}  // namespace ui
