@@ -2,8 +2,9 @@
 #define DISPLAY_H_
 
 #include "ui/common.h"
+#include "ui/display.h"
 
-class Display {
+class Display : public UI::Display {
 public:
     enum class Orientation {
         PORTRAIT, LANDSCAPE
@@ -14,8 +15,8 @@ public:
     Display(): shape_{0, 0} {}
     UI::Shape shape() const { return shape_; }
     void initialize(Orientation);
-    void data(unsigned int) const;
-    void address(unsigned int, unsigned int, unsigned int, unsigned int) const;
+    void data(unsigned int) const override;
+    void address(unsigned int, unsigned int, unsigned int, unsigned int) const override;
 private:
     void transmit(unsigned int) const;
     void command(unsigned int) const;

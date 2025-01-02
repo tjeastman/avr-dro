@@ -1,6 +1,6 @@
 #include "canvas.h"
 
-Canvas::Canvas(const Display &display):
+Canvas::Canvas(const UI::Display &display):
     display_{display},
     position_{0, 0},
     color_{0, 0, 0}
