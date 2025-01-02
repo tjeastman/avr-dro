@@ -59,7 +59,7 @@ CoordinatePanelRow::CoordinatePanelRow(const UI::ControlProperties &properties, 
     add(&button_);
 }
 
-void CoordinatePanelRow::draw(Canvas canvas)
+void CoordinatePanelRow::draw(UI::Canvas canvas)
 {
     decimal_.update(axis_.position());
     Grid::draw(canvas);

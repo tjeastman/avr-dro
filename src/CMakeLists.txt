@@ -4,12 +4,12 @@ add_executable(
   main.elf
   main.cpp
   calibration.cpp
-  canvas.cpp
   coordinate.cpp
   display.cpp
   pendant.cpp
   touch.cpp
   ui/button.cpp
+  ui/canvas.cpp
   ui/color.cpp
   ui/common.cpp
   ui/decimal.cpp

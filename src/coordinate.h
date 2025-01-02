@@ -1,9 +1,9 @@
 #ifndef COORDINATE_H_
 #define COORDINATE_H_
 
-#include "canvas.h"
 #include "pendant.h"
 #include "ui/button.h"
+#include "ui/canvas.h"
 #include "ui/common.h"
 #include "ui/control.h"
 #include "ui/decimal.h"
@@ -50,7 +50,7 @@ private:
     CoordinateResetButton button_;
 public:
     CoordinatePanelRow(const UI::ControlProperties &, CoordinateSystem &, int);
-    void draw(Canvas) override;
+    void draw(UI::Canvas) override;
 };
 
 class CoordinatePanel : public UI::Grid {

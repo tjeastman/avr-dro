@@ -3,10 +3,10 @@
 #include <util/delay.h>
 
 #include "calibration.h"
-#include "canvas.h"
 #include "coordinate.h"
 #include "display.h"
 #include "touch.h"
+#include "ui/canvas.h"
 #include "ui/color.h"
 #include "ui/common.h"
 #include "ui/font.h"
@@ -73,7 +73,7 @@ int main(void)
     display.initialize(Display::Orientation::LANDSCAPE);
 
     const UI::Shape &shape = display.shape();
-    Canvas canvas = Canvas(display);
+    UI::Canvas canvas = UI::Canvas(display);
     canvas.select(UI::Color(0, 0, 0));
     canvas.move(UI::Position{0, 0});
     canvas.dimension(shape);
