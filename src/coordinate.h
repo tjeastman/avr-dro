@@ -4,43 +4,24 @@
 #include "ui/button.h"
 #include "ui/canvas.h"
 #include "ui/common.h"
-#include "ui/control.h"
 #include "ui/decimal.h"
 #include "ui/grid.h"
 #include "ui/label.h"
 
-class CoordinateAxis {
-private:
-    int origin_;
-    int position_;
-public:
-    CoordinateAxis(): origin_{0}, position_{0} {}
-    int position() const;
-    void project(int);
-    void reset();
-};
-
-class CoordinateSystem {
-private:
-    CoordinateAxis axes_[3];
-public:
-    CoordinateAxis &axis(int);
-    void project(const int[3]);
-};
-
 class CoordinateDecimal : public ui::Decimal {
 private:
-    const CoordinateAxis &axis_;
+    int origin_;
 public:
-    CoordinateDecimal(const CoordinateAxis &);
-    void draw(ui::Canvas) override;
+    CoordinateDecimal(unsigned char, unsigned char);
+    void update(int);
+    void reset();
 };
 
 class CoordinateResetButton : public ui::Button {
 private:
-    CoordinateAxis &axis_;
+    CoordinateDecimal &decimal_;
 public:
-    CoordinateResetButton(CoordinateAxis &, const char *);
+    CoordinateResetButton(const char *, CoordinateDecimal &);
     void release(ui::Position) override;
 };
 
@@ -53,14 +34,35 @@ private:
     const char button_text_[3];
     CoordinateResetButton button_;
 public:
-    CoordinateAxisGrid(CoordinateAxis &, char);
+    CoordinateAxisGrid(char);
+    void set(int);
+};
+
+class CoordinateFeedGrid : public ui::Grid {
+private:
+    ui::Label label_;
+    ui::Decimal decimal_;
+    ui::Label label_unit_;
+public:
+    CoordinateFeedGrid();
+    void set(int);
 };
 
 class CoordinatePanel : public ui::Grid {
 private:
-    CoordinateAxisGrid row_[3];
+    CoordinateAxisGrid axes_[3];
+    CoordinateFeedGrid feed_;
 public:
-    CoordinatePanel(CoordinateSystem &);
+    CoordinatePanel();
+    void set(const int[3], int);
+};
+
+class CoordinateSystem {
+private:
+    CoordinatePanel &panel_;
+public:
+    CoordinateSystem(CoordinatePanel &panel): panel_{panel} {}
+    void project(const int[3], int) const;
 };
 
 #endif

@@ -18,6 +18,7 @@ class Pendant {
 private:
     int position_[3];
     PendantAxis axes_[3];
+    int rate_;
     int index_;
     int multiplier_;
     unsigned char state_;
@@ -25,6 +26,7 @@ public:
     Pendant();
     void turn(unsigned char) volatile;
     void press(unsigned char) volatile;
+    void pace(unsigned int) volatile;
     void project(CoordinateSystem &) const;
 };
 

@@ -33,6 +33,7 @@ void PendantAxis::decrement(int delta) volatile
 Pendant::Pendant():
     position_{0, 0, 0},
     axes_{{-14750, 14750, position_[0]}, {-12000, 12000, position_[1]}, {-25000, 0, position_[2]}},
+    rate_{0},
     index_{-1},
     multiplier_{0},
     state_{0}
@@ -85,9 +86,14 @@ void Pendant::press(unsigned char input) volatile
     }
 }
 
+void Pendant::pace(unsigned int input) volatile
+{
+    rate_ = input &= 0x3f8;
+}
+
 void Pendant::project(CoordinateSystem &system) const
 {
-    system.project(position_);
+    system.project(position_, rate_);
 }
 
 Pendant pendant;
@@ -100,4 +106,9 @@ ISR(INT0_vect)
 ISR(PCINT2_vect)
 {
     pendant.press(PINK);
+}
+
+ISR(ADC_vect)
+{
+    pendant.pace(ADCL + (ADCH << 8));
 }

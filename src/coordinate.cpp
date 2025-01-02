@@ -6,66 +6,43 @@
 #include "ui/decimal.h"
 #include "ui/grid.h"
 
-int CoordinateAxis::position() const
-{
-    return position_ - origin_;
-}
-
-void CoordinateAxis::project(int position)
-{
-    position_ = position;
-
-}
-
-void CoordinateAxis::reset()
-{
-    origin_ = position_;
-}
-
-CoordinateAxis &CoordinateSystem::axis(int index)
-{
-    return axes_[index];
-}
-
-void CoordinateSystem::project(const int position[3])
-{
-    axes_[0].project(position[0]);
-    axes_[1].project(position[1]);
-    axes_[2].project(position[2]);
-}
-
-CoordinateDecimal::CoordinateDecimal(const CoordinateAxis &axis):
-    Decimal(3, 2),
-    axis_{axis}
+CoordinateDecimal::CoordinateDecimal(unsigned char n, unsigned char m):
+    Decimal(n, m),
+    origin_{0}
 {
 }
 
-void CoordinateDecimal::draw(ui::Canvas canvas)
+void CoordinateDecimal::update(int position)
 {
-    Decimal::update(axis_.position());
-    Decimal::draw(canvas);
+    Decimal::update(position - origin_);
 }
 
-CoordinateResetButton::CoordinateResetButton(CoordinateAxis &axis, const char *text):
+void CoordinateDecimal::reset()
+{
+    origin_ = value_ + origin_;
+    Decimal::update(0);
+}
+
+CoordinateResetButton::CoordinateResetButton(const char *text, CoordinateDecimal &decimal):
     Button(text),
-    axis_{axis}
+    decimal_{decimal}
 {
 }
 
 void CoordinateResetButton::release(ui::Position position)
 {
-    axis_.reset();
+    decimal_.reset();
     Button::release(position);
 }
 
-CoordinateAxisGrid::CoordinateAxisGrid(CoordinateAxis &axis, char identifier):
+CoordinateAxisGrid::CoordinateAxisGrid(char identifier):
     Grid(ui::Direction::RIGHT, 20),
     label_text_{identifier, ':', '\0'},
     label_{label_text_},
-    decimal_{axis},
+    decimal_{3, 2},
     label_unit_{"mm"},
     button_text_{identifier, '0', '\0'},
-    button_{axis, button_text_}
+    button_{button_text_, decimal_}
 {
     add(&label_);
     add(&decimal_);
@@ -73,11 +50,47 @@ CoordinateAxisGrid::CoordinateAxisGrid(CoordinateAxis &axis, char identifier):
     add(&button_);
 }
 
-CoordinatePanel::CoordinatePanel(CoordinateSystem &system):
-    Grid{ui::Direction::DOWN, 20},
-    row_{{system.axis(0), 'X'}, {system.axis(1), 'Y'}, {system.axis(2), 'Z'}}
+void CoordinateAxisGrid::set(int position)
 {
-    add(&row_[0]);
-    add(&row_[1]);
-    add(&row_[2]);
+    decimal_.update(position);
+}
+
+CoordinateFeedGrid::CoordinateFeedGrid():
+    Grid(ui::Direction::RIGHT, 20),
+    label_{"F:"},
+    decimal_{3, 1},
+    label_unit_{"mm/min"}
+{
+    add(&label_);
+    add(&decimal_);
+    add(&label_unit_);
+}
+
+void CoordinateFeedGrid::set(int rate)
+{
+    decimal_.update(rate);
+}
+
+CoordinatePanel::CoordinatePanel():
+    Grid{ui::Direction::DOWN, 20},
+    axes_{{'X'}, {'Y'}, {'Z'}},
+    feed_{}
+{
+    add(&axes_[0]);
+    add(&axes_[1]);
+    add(&axes_[2]);
+    add(&feed_);
+}
+
+void CoordinatePanel::set(const int position[3], int rate)
+{
+    axes_[0].set(position[0]);
+    axes_[1].set(position[1]);
+    axes_[2].set(position[2]);
+    feed_.set(rate);
+}
+
+void CoordinateSystem::project(const int position[3], int rate) const
+{
+    panel_.set(position, rate);
 }

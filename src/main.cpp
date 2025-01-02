@@ -54,6 +54,22 @@ int main(void)
 
     PORTB |= _BV(0); // deselect
 
+    // set up analog to digital converter
+    ADMUX |= _BV(REFS0); // AVCC with external capacitor at AREF pin
+    ADMUX |= _BV(MUX1);
+    ADMUX |= _BV(MUX2);
+    ADCSRB |= _BV(MUX5); // ADC14
+
+    ADCSRA |= _BV(ADPS0);
+    ADCSRA |= _BV(ADPS1);
+    ADCSRA |= _BV(ADPS2);
+
+    ADCSRA |= _BV(ADEN);
+    ADCSRA |= _BV(ADATE); // auto trigger (free running mode)
+    ADCSRA |= _BV(ADIE);
+
+    ADCSRA |= _BV(ADSC); // start conversion
+
     // set up external interrupt (INT0) on any change
     EIMSK |= _BV(INT0);
     EICRA |= _BV(ISC00);
@@ -82,8 +98,8 @@ int main(void)
     Calibration calibration = Calibration();
     Touch touch = Touch(calibration);
 
-    CoordinateSystem system = CoordinateSystem();
-    CoordinatePanel panel = CoordinatePanel(system);
+    CoordinatePanel panel = CoordinatePanel();
+    CoordinateSystem system = CoordinateSystem(panel);
 
     while (true) {
         touch.dispatch(panel);

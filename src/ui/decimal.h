@@ -8,12 +8,13 @@
 namespace ui {
 
 class Decimal : public Control {
+protected:
+    int value_;
 private:
+    unsigned int divisor_;
+    bool changed_;
     UnsignedInteger integer_;
     UnsignedInteger fractional_;
-    bool changed_;
-    int value_;
-    unsigned int divisor_;
 public:
     Decimal(unsigned char, unsigned char);
     void update(int);

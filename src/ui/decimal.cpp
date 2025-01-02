@@ -8,11 +8,11 @@
 namespace ui {
 
 Decimal::Decimal(unsigned char n, unsigned char m):
-    integer_{n},
-    fractional_{m},
-    changed_{true},
     value_{0},
-    divisor_{1}
+    divisor_{1},
+    changed_{true},
+    integer_{n},
+    fractional_{m}
 {
     shape_.expand(Direction::RIGHT, properties_.font.character('-')->shape(), 1);
     shape_.expand(Direction::RIGHT, integer_.shape(), 0);
