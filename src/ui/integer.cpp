@@ -2,9 +2,11 @@
 
 #include "integer.h"
 
-unsigned int UI::UnsignedInteger::divisors_[5] = {10000, 1000, 100, 10, 1};
+namespace UI {
 
-UI::UnsignedInteger::UnsignedInteger(const ControlProperties &properties, unsigned char digits):
+unsigned int UnsignedInteger::divisors_[5] = {10000, 1000, 100, 10, 1};
+
+UnsignedInteger::UnsignedInteger(const ControlProperties &properties, unsigned char digits):
     Control(properties),
     digits_{digits},
     changed_{true},
@@ -15,13 +17,13 @@ UI::UnsignedInteger::UnsignedInteger(const ControlProperties &properties, unsign
     }
 }
 
-void UI::UnsignedInteger::update(unsigned int value)
+void UnsignedInteger::update(unsigned int value)
 {
     magnitude_ = value;
     changed_ = true;
 }
 
-void UI::UnsignedInteger::draw(Canvas canvas)
+void UnsignedInteger::draw(Canvas canvas)
 {
     if (!changed_) {
         return;
@@ -35,3 +37,5 @@ void UI::UnsignedInteger::draw(Canvas canvas)
 
     changed_ = true;
 }
+
+}  // namespace UI

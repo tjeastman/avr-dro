@@ -1,7 +1,9 @@
 #include "button.h"
 #include "common.h"
 
-UI::Button::Button(const UI::ControlProperties &properties, const char *text):
+namespace UI {
+
+Button::Button(const ControlProperties &properties, const char *text):
     Label(properties, text),
     pressed_{false}
 {
@@ -9,7 +11,7 @@ UI::Button::Button(const UI::ControlProperties &properties, const char *text):
     shape_.height += 8;
 }
 
-void UI::Button::draw(Canvas canvas)
+void Button::draw(Canvas canvas)
 {
     if (!changed_) {
         return;
@@ -58,3 +60,5 @@ void UI::Button::draw(Canvas canvas)
 
     changed_ = false;
 }
+
+}  // namespace UI
