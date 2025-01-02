@@ -1,5 +1,5 @@
-#ifndef BUTTON_H_
-#define BUTTON_H_
+#ifndef UI_BUTTON_H_
+#define UI_BUTTON_H_
 
 #include "canvas.h"
 #include "control.h"
@@ -15,4 +15,4 @@ namespace UI {
     };
 }
 
-#endif
+#endif  // UI_BUTTON_H_

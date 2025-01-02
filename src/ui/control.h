@@ -1,5 +1,5 @@
-#ifndef CONTROL_H_
-#define CONTROL_H_
+#ifndef UI_CONTROL_H_
+#define UI_CONTROL_H_
 
 #include "canvas.h"
 #include "color.h"
@@ -26,4 +26,4 @@ namespace UI {
     };
 }
 
-#endif
+#endif  // UI_CONTROL_H_

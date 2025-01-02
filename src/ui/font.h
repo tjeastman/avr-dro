@@ -1,5 +1,5 @@
-#ifndef FONT_H_
-#define FONT_H_
+#ifndef UI_FONT_H_
+#define UI_FONT_H_
 
 #include "common.h"
 #include "canvas.h"
@@ -30,4 +30,4 @@ namespace UI {
     };
 }
 
-#endif
+#endif  // UI_FONT_H_

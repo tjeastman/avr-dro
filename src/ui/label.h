@@ -1,5 +1,5 @@
-#ifndef LABEL_H_
-#define LABEL_H_
+#ifndef UI_LABEL_H_
+#define UI_LABEL_H_
 
 #include "canvas.h"
 #include "control.h"
@@ -15,4 +15,4 @@ namespace UI {
     };
 }
 
-#endif
+#endif  // UI_LABEL_H_

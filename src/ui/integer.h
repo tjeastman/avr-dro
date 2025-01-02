@@ -1,5 +1,5 @@
-#ifndef INTEGER_H_
-#define INTEGER_H_
+#ifndef UI_INTEGER_H_
+#define UI_INTEGER_H_
 
 #include "canvas.h"
 #include "control.h"
@@ -18,4 +18,4 @@ namespace UI {
     };
 }
 
-#endif
+#endif  // UI_INTEGER_H_

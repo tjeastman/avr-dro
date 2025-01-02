@@ -1,5 +1,5 @@
-#ifndef GRID_H_
-#define GRID_H_
+#ifndef UI_GRID_H_
+#define UI_GRID_H_
 
 #include "canvas.h"
 #include "common.h"
@@ -23,4 +23,4 @@ namespace UI {
     };
 }
 
-#endif
+#endif  // UI_GRID_H_
