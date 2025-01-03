@@ -11,7 +11,7 @@ class Button : public Label {
 private:
     bool pressed_;
 public:
-    Button(const ControlProperties &, const char *);
+    Button(const char *);
     void draw(Canvas) override;
 };
 

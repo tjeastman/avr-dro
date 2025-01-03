@@ -15,15 +15,15 @@ struct ControlProperties {
 
 class Control {
 protected:
-    const ControlProperties &properties_;
+    static const ControlProperties &properties_;
     Shape shape_;
 public:
-    Control(const ControlProperties &properties): properties_{properties}, shape_{0, 0} {}
+    Control(): shape_{0, 0} {}
     const Shape &shape() const { return shape_; }
     virtual void draw(Canvas) = 0;
     virtual void press(Position) {}
     virtual void release(Position) {}
-    bool contains(const Position &position) const { return shape_.contains(position.x, position.y); }
+    bool contains(const Position &) const;
 };
 
 }  // namespace ui

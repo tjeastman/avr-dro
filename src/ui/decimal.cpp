@@ -3,15 +3,13 @@
 #include <stdint.h>
 
 #include "canvas.h"
-#include "control.h"
 #include "integer.h"
 
 namespace ui {
 
-Decimal::Decimal(const ControlProperties &properties, unsigned char n, unsigned char m):
-    Control(properties),
-    integer_{properties, n},
-    fractional_{properties, m},
+Decimal::Decimal(unsigned char n, unsigned char m):
+    integer_{n},
+    fractional_{m},
     changed_{true},
     value_{0},
     divisor_{1}

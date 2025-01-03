@@ -9,7 +9,6 @@
 #include "ui/canvas.h"
 #include "ui/color.h"
 #include "ui/common.h"
-#include "ui/font.h"
 
 extern Pendant pendant;
 
@@ -82,9 +81,8 @@ int main(void)
     Calibration calibration = Calibration();
     Touch touch = Touch(calibration);
 
-    ui::Color color = ui::Color(2, 28, 4);
     CoordinateSystem system = CoordinateSystem(pendant);
-    CoordinatePanel panel = CoordinatePanel({ui::Font::medium, color}, system);
+    CoordinatePanel panel = CoordinatePanel(system);
 
     while (true) {
         touch.dispatch(panel);

@@ -37,7 +37,7 @@ class CoordinateResetButton : public ui::Button {
 private:
     CoordinateAxis &axis_;
 public:
-    CoordinateResetButton(const ui::ControlProperties &, CoordinateAxis &);
+    CoordinateResetButton(CoordinateAxis &);
     void release(ui::Position) override;
 };
 
@@ -49,7 +49,7 @@ private:
     ui::Label label_unit_;
     CoordinateResetButton button_;
 public:
-    CoordinatePanelRow(const ui::ControlProperties &, CoordinateSystem &, int);
+    CoordinatePanelRow(CoordinateSystem &, int);
     void draw(ui::Canvas) override;
 };
 
@@ -57,7 +57,7 @@ class CoordinatePanel : public ui::Grid {
 private:
     CoordinatePanelRow row_[3];
 public:
-    CoordinatePanel(const ui::ControlProperties &, CoordinateSystem &);
+    CoordinatePanel(CoordinateSystem &);
 };
 
 #endif

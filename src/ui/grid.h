@@ -14,7 +14,7 @@ private:
     Direction direction_;
     char padding_;
 public:
-    Grid(const ControlProperties &, Direction, char);
+    Grid(Direction, char);
     void draw(Canvas) override;
     void add(Control *);
     void press(Position) override;

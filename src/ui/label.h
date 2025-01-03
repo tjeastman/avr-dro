@@ -11,7 +11,7 @@ protected:
     const char *text_;
     bool changed_;
 public:
-    Label(const ControlProperties &, const char *);
+    Label(const char *);
     void draw(Canvas) override;
 };
 

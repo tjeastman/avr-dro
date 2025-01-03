@@ -6,8 +6,7 @@
 
 namespace ui {
 
-Grid::Grid(const ControlProperties &properties, Direction direction, char padding):
-    Control(properties),
+Grid::Grid(Direction direction, char padding):
     count_{0},
     direction_{direction},
     padding_{padding}

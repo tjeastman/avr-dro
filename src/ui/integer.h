@@ -13,7 +13,7 @@ private:
     bool changed_;
     unsigned int magnitude_;
 public:
-    UnsignedInteger(const ControlProperties &, unsigned char);
+    UnsignedInteger(unsigned char);
     void update(unsigned int);
     void draw(Canvas) override;
 };

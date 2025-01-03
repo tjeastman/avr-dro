@@ -2,13 +2,12 @@
 
 #include "canvas.h"
 #include "common.h"
-#include "control.h"
 #include "label.h"
 
 namespace ui {
 
-Button::Button(const ControlProperties &properties, const char *text):
-    Label(properties, text),
+Button::Button(const char *text):
+    Label(text),
     pressed_{false}
 {
     shape_.width += 16;

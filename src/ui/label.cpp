@@ -2,13 +2,11 @@
 
 #include "canvas.h"
 #include "common.h"
-#include "control.h"
 #include "font.h"
 
 namespace ui {
 
-Label::Label(const ControlProperties &properties, const char *text):
-    Control(properties),
+Label::Label(const char *text):
     text_{text},
     changed_{true}
 {

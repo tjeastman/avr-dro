@@ -12,6 +12,7 @@ add_executable(
   ui/canvas.cpp
   ui/color.cpp
   ui/common.cpp
+  ui/control.cpp
   ui/decimal.cpp
   ui/font.cpp
   ui/grid.cpp

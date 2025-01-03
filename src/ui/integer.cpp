@@ -4,15 +4,13 @@
 
 #include "canvas.h"
 #include "common.h"
-#include "control.h"
 #include "font.h"
 
 namespace ui {
 
 unsigned int UnsignedInteger::divisors_[5] = {10000, 1000, 100, 10, 1};
 
-UnsignedInteger::UnsignedInteger(const ControlProperties &properties, unsigned char digits):
-    Control(properties),
+UnsignedInteger::UnsignedInteger(unsigned char digits):
     digits_{digits},
     changed_{true},
     magnitude_{0}

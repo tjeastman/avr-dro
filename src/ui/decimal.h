@@ -15,7 +15,7 @@ private:
     int value_;
     unsigned int divisor_;
 public:
-    Decimal(const ControlProperties &, unsigned char, unsigned char);
+    Decimal(unsigned char, unsigned char);
     void update(int);
     void draw(Canvas) override;
 private:

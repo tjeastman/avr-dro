@@ -4,7 +4,6 @@
 #include "ui/button.h"
 #include "ui/canvas.h"
 #include "ui/common.h"
-#include "ui/control.h"
 
 CoordinateSystem::CoordinateSystem(const Pendant &pendant):
     pendant_{pendant},
@@ -39,8 +38,8 @@ void CoordinateAxis::reset()
     origin_ = axis_.position(0);
 }
 
-CoordinateResetButton::CoordinateResetButton(const ui::ControlProperties &properties, CoordinateAxis &axis):
-    Button(properties, axis.zero),
+CoordinateResetButton::CoordinateResetButton(CoordinateAxis &axis):
+    Button(axis.zero),
     axis_{axis}
 {
 }
@@ -51,13 +50,13 @@ void CoordinateResetButton::release(ui::Position position)
     Button::release(position);
 }
 
-CoordinatePanelRow::CoordinatePanelRow(const ui::ControlProperties &properties, CoordinateSystem &system, int index):
-    Grid(properties, ui::Direction::RIGHT, 20),
+CoordinatePanelRow::CoordinatePanelRow(CoordinateSystem &system, int index):
+    Grid(ui::Direction::RIGHT, 20),
     axis_{system.axis(index)},
-    label_{properties, axis_.label},
-    decimal_{properties, axis_.digits[0], axis_.digits[1]},
-    label_unit_{properties, axis_.unit},
-    button_{properties, axis_}
+    label_{axis_.label},
+    decimal_{axis_.digits[0], axis_.digits[1]},
+    label_unit_{axis_.unit},
+    button_{axis_}
 {
     add(&label_);
     add(&decimal_);
@@ -71,9 +70,9 @@ void CoordinatePanelRow::draw(ui::Canvas canvas)
     Grid::draw(canvas);
 }
 
-CoordinatePanel::CoordinatePanel(const ui::ControlProperties &properties, CoordinateSystem &system):
-    Grid{properties, ui::Direction::DOWN, 20},
-    row_{{properties, system, 0}, {properties, system, 1}, {properties, system, 2}}
+CoordinatePanel::CoordinatePanel(CoordinateSystem &system):
+    Grid{ui::Direction::DOWN, 20},
+    row_{{system, 0}, {system, 1}, {system, 2}}
 {
     add(&row_[0]);
     add(&row_[1]);
