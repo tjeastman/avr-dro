@@ -1,6 +1,8 @@
+#include "calibration.h"
+
 #include <avr/eeprom.h>
 
-#include "calibration.h"
+#include "ui/common.h"
 
 Calibration::Calibration()
 {

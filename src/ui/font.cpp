@@ -1,7 +1,10 @@
+#include "font.h"
+
 #include <avr/pgmspace.h>
 
+#include "common.h"
+#include "canvas.h"
 #include "font.inc"
-#include "font.h"
 
 namespace ui {
 

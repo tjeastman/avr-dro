@@ -1,6 +1,11 @@
+#include "integer.h"
+
 #include <stdint.h>
 
-#include "integer.h"
+#include "canvas.h"
+#include "common.h"
+#include "control.h"
+#include "font.h"
 
 namespace ui {
 

@@ -1,7 +1,7 @@
+#include "pendant.h"
+
 #include <avr/interrupt.h>
 #include <avr/io.h>
-
-#include "pendant.h"
 
 void PendantAxis::move(int delta) volatile
 {

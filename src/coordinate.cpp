@@ -1,5 +1,11 @@
 #include "coordinate.h"
 
+#include "pendant.h"
+#include "ui/button.h"
+#include "ui/canvas.h"
+#include "ui/common.h"
+#include "ui/control.h"
+
 CoordinateSystem::CoordinateSystem(const Pendant &pendant):
     pendant_{pendant},
     axes_{{pendant, 'X'}, {pendant, 'Y'}, {pendant, 'Z'}}

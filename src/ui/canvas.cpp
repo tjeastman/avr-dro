@@ -1,5 +1,9 @@
 #include "canvas.h"
 
+#include "display.h"
+#include "color.h"
+#include "common.h"
+
 namespace ui {
 
 Canvas::Canvas(const Display &display):

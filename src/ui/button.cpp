@@ -1,5 +1,9 @@
 #include "button.h"
+
+#include "canvas.h"
 #include "common.h"
+#include "control.h"
+#include "label.h"
 
 namespace ui {
 

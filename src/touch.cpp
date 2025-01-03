@@ -1,7 +1,10 @@
+#include "touch.h"
+
 #include <avr/io.h>
 #include <util/delay.h>
 
-#include "touch.h"
+#include "ui/common.h"
+#include "ui/control.h"
 
 TouchState::TouchState(): event{Event::NONE}, position{0, 0}, readings{0}
 {

@@ -1,5 +1,9 @@
 #include "grid.h"
 
+#include "canvas.h"
+#include "common.h"
+#include "control.h"
+
 namespace ui {
 
 Grid::Grid(const ControlProperties &properties, Direction direction, char padding):

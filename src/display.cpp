@@ -1,7 +1,7 @@
+#include "display.h"
+
 #include <avr/io.h>
 #include <util/delay.h>
-
-#include "display.h"
 
 void Display::initialize(Orientation orientation)
 {

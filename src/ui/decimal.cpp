@@ -1,6 +1,10 @@
+#include "decimal.h"
+
 #include <stdint.h>
 
-#include "decimal.h"
+#include "canvas.h"
+#include "control.h"
+#include "integer.h"
 
 namespace ui {
 
