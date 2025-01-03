@@ -42,6 +42,8 @@ void Pendant::turn(unsigned char input) volatile
 
 void Pendant::press(unsigned char input) volatile
 {
+    input &= 0x3f;
+
     if (input == 0) {
         return;
     }
