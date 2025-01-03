@@ -1,28 +1,17 @@
 #include "coordinate.h"
 
-#include "pendant.h"
 #include "ui/button.h"
 #include "ui/canvas.h"
 #include "ui/common.h"
-
-CoordinateSystem::CoordinateSystem(const Pendant &pendant):
-    pendant_{pendant},
-    axes_{{pendant, 'X'}, {pendant, 'Y'}, {pendant, 'Z'}}
-{
-}
-
-CoordinateAxis &CoordinateSystem::axis(int index)
-{
-    return axes_[index];
-}
+#include "ui/grid.h"
 
 const unsigned char CoordinateAxis::digits[2] = {3, 2};
 
 const char *CoordinateAxis::unit = "mm";
 
-CoordinateAxis::CoordinateAxis(const Pendant &pendant, char identifier):
-    axis_{pendant.axis(identifier)},
+CoordinateAxis::CoordinateAxis(char identifier):
     origin_{0},
+    position_{0},
     label{identifier, ':', 0},
     zero{identifier, '0', 0}
 {
@@ -30,12 +19,27 @@ CoordinateAxis::CoordinateAxis(const Pendant &pendant, char identifier):
 
 int CoordinateAxis::position() const
 {
-    return axis_.position(origin_);
+    return position_ - origin_;
+}
+
+void CoordinateAxis::project(int position)
+{
+    position_ = position;
+
 }
 
 void CoordinateAxis::reset()
 {
-    origin_ = axis_.position(0);
+    origin_ = position_;
+}
+
+CoordinateSystem::CoordinateSystem(): axes_{{'X'}, {'Y'}, {'Z'}}
+{
+}
+
+CoordinateAxis &CoordinateSystem::axis(int index)
+{
+    return axes_[index];
 }
 
 CoordinateResetButton::CoordinateResetButton(CoordinateAxis &axis):

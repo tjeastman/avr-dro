@@ -3,6 +3,15 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
 
+#include "coordinate.h"
+
+PendantAxis::PendantAxis(int minimum, int maximum):
+    minimum_{minimum},
+    maximum_{maximum},
+    position_{0}
+{
+}
+
 void PendantAxis::move(int delta) volatile
 {
     if (position_ >= 0 && delta > maximum_ - position_) {
@@ -14,16 +23,14 @@ void PendantAxis::move(int delta) volatile
     }
 }
 
-int PendantAxis::position(int origin) const
+void PendantAxis::project(CoordinateAxis &axis) const
 {
-    return position_ - origin;
+    axis.project(position_);
 }
 
-signed char Pendant::lookup_[16] = {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, -1, 0, 0, 0};
-
 Pendant::Pendant():
-    axes_{{}, {-14750, 14750}, {-12000, 12000}, {-25000, 0}},
-    index_{0},
+    axes_{{-14750, 14750}, {-12000, 12000}, {-25000, 0}},
+    index_{-1},
     multiplier_{0},
     state_{0}
 {
@@ -37,7 +44,13 @@ void Pendant::turn(unsigned char input) volatile
     state_ |= input;
     state_ &= 0x0f;
 
-    axes_[index_].move(multiplier_ * lookup_[state_]);
+    if (index_ == -1) {
+
+    } else if (state_ == 0x06) {
+        axes_[index_].move(multiplier_);
+    } else if (state_ == 0x0c) {
+        axes_[index_].move(-multiplier_);
+    }
 }
 
 void Pendant::press(unsigned char input) volatile
@@ -49,13 +62,13 @@ void Pendant::press(unsigned char input) volatile
     }
 
     if (input & _BV(0)) {
-        index_ = 1;
-    } else if (input & _BV(1)) {
-        index_ = 2;
-    } else if (input & _BV(2)) {
-        index_ = 3;
-    } else {
         index_ = 0;
+    } else if (input & _BV(1)) {
+        index_ = 1;
+    } else if (input & _BV(2)) {
+        index_ = 2;
+    } else {
+        index_ = -1;
     }
 
     if (input & _BV(3)) {
@@ -69,18 +82,11 @@ void Pendant::press(unsigned char input) volatile
     }
 }
 
-const PendantAxis &Pendant::axis(char axis) const
+void Pendant::project(CoordinateSystem &system) const
 {
-    switch (axis) {
-    case 'X':
-        return axes_[1];
-    case 'Y':
-        return axes_[2];
-    case 'Z':
-        return axes_[3];
-    default:
-        return axes_[0];
-    }
+    axes_[0].project(system.axis(0));
+    axes_[1].project(system.axis(1));
+    axes_[2].project(system.axis(2));
 }
 
 Pendant pendant;

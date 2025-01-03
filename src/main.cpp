@@ -6,6 +6,7 @@
 #include "coordinate.h"
 #include "display.h"
 #include "touch.h"
+#include "pendant.h"
 #include "ui/canvas.h"
 #include "ui/color.h"
 #include "ui/common.h"
@@ -81,11 +82,12 @@ int main(void)
     Calibration calibration = Calibration();
     Touch touch = Touch(calibration);
 
-    CoordinateSystem system = CoordinateSystem(pendant);
+    CoordinateSystem system = CoordinateSystem();
     CoordinatePanel panel = CoordinatePanel(system);
 
     while (true) {
         touch.dispatch(panel);
+        pendant.project(system);
         panel.draw(canvas);
         _delay_ms(10);
     }

@@ -1,7 +1,7 @@
 #ifndef PENDANT_H_
 #define PENDANT_H_
 
-#include <stdint.h>
+#include "coordinate.h"
 
 class PendantAxis {
 private:
@@ -9,16 +9,14 @@ private:
     int maximum_;
     int position_;
 public:
-    PendantAxis(): minimum_{INT16_MIN}, maximum_{INT16_MAX}, position_{0} {}
-    PendantAxis(int minimum, int maximum): minimum_{minimum}, maximum_{maximum}, position_{0} {}
+    PendantAxis(int, int);
     void move(int) volatile;
-    int position(int) const;
+    void project(CoordinateAxis &) const;
 };
 
 class Pendant {
 private:
-    static signed char lookup_[16];
-    PendantAxis axes_[4];
+    PendantAxis axes_[3];
     int index_;
     int multiplier_;
     unsigned char state_;
@@ -26,7 +24,7 @@ public:
     Pendant();
     void turn(unsigned char) volatile;
     void press(unsigned char) volatile;
-    const PendantAxis &axis(char) const;
+    void project(CoordinateSystem &) const;
 };
 
 #endif

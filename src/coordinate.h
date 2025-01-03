@@ -1,7 +1,6 @@
 #ifndef COORDINATE_H_
 #define COORDINATE_H_
 
-#include "pendant.h"
 #include "ui/button.h"
 #include "ui/canvas.h"
 #include "ui/common.h"
@@ -12,24 +11,24 @@
 
 class CoordinateAxis {
 private:
-    const PendantAxis &axis_;
     int origin_;
+    int position_;
 public:
     const char label[3];
     static const unsigned char digits[2];
     static const char *unit;
     const char zero[3];
-    CoordinateAxis(const Pendant &, char);
+    CoordinateAxis(char);
     int position() const;
+    void project(int);
     void reset();
 };
 
 class CoordinateSystem {
 private:
-    const Pendant &pendant_;
     CoordinateAxis axes_[3];
 public:
-    CoordinateSystem(const Pendant &);
+    CoordinateSystem();
     CoordinateAxis &axis(int);
 };
 
