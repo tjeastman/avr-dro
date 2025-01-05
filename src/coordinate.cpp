@@ -42,6 +42,13 @@ CoordinateAxis &CoordinateSystem::axis(int index)
     return axes_[index];
 }
 
+void CoordinateSystem::project(const int position[3])
+{
+    axes_[0].project(position[0]);
+    axes_[1].project(position[1]);
+    axes_[2].project(position[2]);
+}
+
 CoordinateResetButton::CoordinateResetButton(CoordinateAxis &axis):
     Button(axis.zero),
     axis_{axis}

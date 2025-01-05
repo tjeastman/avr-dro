@@ -7,15 +7,16 @@ class PendantAxis {
 private:
     int minimum_;
     int maximum_;
-    int position_;
+    int &position_;
 public:
-    PendantAxis(int, int);
-    void move(int) volatile;
-    void project(CoordinateAxis &) const;
+    PendantAxis(int, int, int &);
+    void increment(int) volatile;
+    void decrement(int) volatile;
 };
 
 class Pendant {
 private:
+    int position_[3];
     PendantAxis axes_[3];
     int index_;
     int multiplier_;

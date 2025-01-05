@@ -30,6 +30,7 @@ private:
 public:
     CoordinateSystem();
     CoordinateAxis &axis(int);
+    void project(const int[3]);
 };
 
 class CoordinateResetButton : public ui::Button {
