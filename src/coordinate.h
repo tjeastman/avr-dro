@@ -14,11 +14,7 @@ private:
     int origin_;
     int position_;
 public:
-    const char label[3];
-    static const unsigned char digits[2];
-    static const char *unit;
-    const char zero[3];
-    CoordinateAxis(char);
+    CoordinateAxis(): origin_{0}, position_{0} {}
     int position() const;
     void project(int);
     void reset();
@@ -28,34 +24,41 @@ class CoordinateSystem {
 private:
     CoordinateAxis axes_[3];
 public:
-    CoordinateSystem();
     CoordinateAxis &axis(int);
     void project(const int[3]);
+};
+
+class CoordinateDecimal : public ui::Decimal {
+private:
+    const CoordinateAxis &axis_;
+public:
+    CoordinateDecimal(const CoordinateAxis &);
+    void draw(ui::Canvas) override;
 };
 
 class CoordinateResetButton : public ui::Button {
 private:
     CoordinateAxis &axis_;
 public:
-    CoordinateResetButton(CoordinateAxis &);
+    CoordinateResetButton(CoordinateAxis &, const char *);
     void release(ui::Position) override;
 };
 
-class CoordinatePanelRow : public ui::Grid {
+class CoordinateAxisGrid : public ui::Grid {
 private:
-    CoordinateAxis &axis_;
+    const char label_text_[3];
     ui::Label label_;
-    ui::Decimal decimal_;
+    CoordinateDecimal decimal_;
     ui::Label label_unit_;
+    const char button_text_[3];
     CoordinateResetButton button_;
 public:
-    CoordinatePanelRow(CoordinateSystem &, int);
-    void draw(ui::Canvas) override;
+    CoordinateAxisGrid(CoordinateAxis &, char);
 };
 
 class CoordinatePanel : public ui::Grid {
 private:
-    CoordinatePanelRow row_[3];
+    CoordinateAxisGrid row_[3];
 public:
     CoordinatePanel(CoordinateSystem &);
 };

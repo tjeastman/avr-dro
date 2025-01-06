@@ -3,19 +3,8 @@
 #include "ui/button.h"
 #include "ui/canvas.h"
 #include "ui/common.h"
+#include "ui/decimal.h"
 #include "ui/grid.h"
-
-const unsigned char CoordinateAxis::digits[2] = {3, 2};
-
-const char *CoordinateAxis::unit = "mm";
-
-CoordinateAxis::CoordinateAxis(char identifier):
-    origin_{0},
-    position_{0},
-    label{identifier, ':', 0},
-    zero{identifier, '0', 0}
-{
-}
 
 int CoordinateAxis::position() const
 {
@@ -33,10 +22,6 @@ void CoordinateAxis::reset()
     origin_ = position_;
 }
 
-CoordinateSystem::CoordinateSystem(): axes_{{'X'}, {'Y'}, {'Z'}}
-{
-}
-
 CoordinateAxis &CoordinateSystem::axis(int index)
 {
     return axes_[index];
@@ -49,8 +34,20 @@ void CoordinateSystem::project(const int position[3])
     axes_[2].project(position[2]);
 }
 
-CoordinateResetButton::CoordinateResetButton(CoordinateAxis &axis):
-    Button(axis.zero),
+CoordinateDecimal::CoordinateDecimal(const CoordinateAxis &axis):
+    Decimal(3, 2),
+    axis_{axis}
+{
+}
+
+void CoordinateDecimal::draw(ui::Canvas canvas)
+{
+    Decimal::update(axis_.position());
+    Decimal::draw(canvas);
+}
+
+CoordinateResetButton::CoordinateResetButton(CoordinateAxis &axis, const char *text):
+    Button(text),
     axis_{axis}
 {
 }
@@ -61,13 +58,14 @@ void CoordinateResetButton::release(ui::Position position)
     Button::release(position);
 }
 
-CoordinatePanelRow::CoordinatePanelRow(CoordinateSystem &system, int index):
+CoordinateAxisGrid::CoordinateAxisGrid(CoordinateAxis &axis, char identifier):
     Grid(ui::Direction::RIGHT, 20),
-    axis_{system.axis(index)},
-    label_{axis_.label},
-    decimal_{axis_.digits[0], axis_.digits[1]},
-    label_unit_{axis_.unit},
-    button_{axis_}
+    label_text_{identifier, ':', '\0'},
+    label_{label_text_},
+    decimal_{axis},
+    label_unit_{"mm"},
+    button_text_{identifier, '0', '\0'},
+    button_{axis, button_text_}
 {
     add(&label_);
     add(&decimal_);
@@ -75,15 +73,9 @@ CoordinatePanelRow::CoordinatePanelRow(CoordinateSystem &system, int index):
     add(&button_);
 }
 
-void CoordinatePanelRow::draw(ui::Canvas canvas)
-{
-    decimal_.update(axis_.position());
-    Grid::draw(canvas);
-}
-
 CoordinatePanel::CoordinatePanel(CoordinateSystem &system):
     Grid{ui::Direction::DOWN, 20},
-    row_{{system, 0}, {system, 1}, {system, 2}}
+    row_{{system.axis(0), 'X'}, {system.axis(1), 'Y'}, {system.axis(2), 'Z'}}
 {
     add(&row_[0]);
     add(&row_[1]);
