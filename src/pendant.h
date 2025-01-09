@@ -30,4 +30,4 @@ public:
     void project(CoordinateSystem &) const;
 };
 
-#endif
+#endif  // PENDANT_H_

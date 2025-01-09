@@ -23,4 +23,4 @@ private:
     void command(unsigned int, unsigned int) const;
 };
 
-#endif
+#endif  // DISPLAY_H_

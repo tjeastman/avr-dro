@@ -11,4 +11,4 @@ public:
     ui::Position translate(ui::Position) const;
 };
 
-#endif
+#endif  // CALIBRATION_H_

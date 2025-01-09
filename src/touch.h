@@ -32,4 +32,4 @@ public:
     void dispatch(ui::Control &);
 };
 
-#endif
+#endif  // TOUCH_H_

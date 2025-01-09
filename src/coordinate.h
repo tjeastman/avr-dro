@@ -65,4 +65,4 @@ public:
     void project(const int[3], int) const;
 };
 
-#endif
+#endif  // COORDINATE_H_
