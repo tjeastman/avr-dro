@@ -48,20 +48,20 @@ public:
     void set(int);
 };
 
-class CoordinatePanel : public ui::Grid {
+class CoordinateGrid : public ui::Grid {
 private:
     CoordinateAxisGrid axes_[3];
     CoordinateFeedGrid feed_;
 public:
-    CoordinatePanel();
+    CoordinateGrid();
     void set(int, int, int);
 };
 
 class CoordinateSystem {
 private:
-    CoordinatePanel &panel_;
+    CoordinateGrid &grid_;
 public:
-    CoordinateSystem(CoordinatePanel &panel): panel_{panel} {}
+    CoordinateSystem(CoordinateGrid &grid): grid_{grid} {}
     void project(int, int, int) const;
 };
 

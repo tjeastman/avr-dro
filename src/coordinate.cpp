@@ -71,7 +71,7 @@ void CoordinateFeedGrid::set(int rate)
     decimal_.update(rate);
 }
 
-CoordinatePanel::CoordinatePanel():
+CoordinateGrid::CoordinateGrid():
     Grid{ui::Direction::DOWN, 20},
     axes_{{'X'}, {'Y'}, {'Z'}},
     feed_{}
@@ -82,7 +82,7 @@ CoordinatePanel::CoordinatePanel():
     add(&feed_);
 }
 
-void CoordinatePanel::set(int index, int position, int rate)
+void CoordinateGrid::set(int index, int position, int rate)
 {
     axes_[index].set(position);
     feed_.set(rate);
@@ -90,5 +90,5 @@ void CoordinatePanel::set(int index, int position, int rate)
 
 void CoordinateSystem::project(int index, int position, int rate) const
 {
-    panel_.set(index, position, rate);
+    grid_.set(index, position, rate);
 }
