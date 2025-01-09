@@ -1,7 +1,10 @@
 #ifndef PENDANT_H_
 #define PENDANT_H_
 
-#include "coordinate.h"
+class PendantAxisSpace {
+public:
+    virtual void project(int, int, int) = 0;
+};
 
 class PendantAxis {
 private:
@@ -27,7 +30,7 @@ public:
     void turn(unsigned char) volatile;
     void press(unsigned char) volatile;
     void pace(unsigned int) volatile;
-    void project(CoordinateSystem &) const;
+    void project(PendantAxisSpace &) const;
 };
 
 #endif  // PENDANT_H_

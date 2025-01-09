@@ -1,6 +1,7 @@
 #ifndef COORDINATE_H_
 #define COORDINATE_H_
 
+#include "pendant.h"
 #include "ui/button.h"
 #include "ui/canvas.h"
 #include "ui/common.h"
@@ -57,12 +58,12 @@ public:
     void set(int, int, int);
 };
 
-class CoordinateSystem {
+class CoordinatePanel : public PendantAxisSpace {
 private:
     CoordinateGrid &grid_;
 public:
-    CoordinateSystem(CoordinateGrid &grid): grid_{grid} {}
-    void project(int, int, int) const;
+    CoordinatePanel(CoordinateGrid &grid): grid_{grid} {}
+    void project(int, int, int) override;
 };
 
 #endif  // COORDINATE_H_

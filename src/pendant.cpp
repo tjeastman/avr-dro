@@ -91,10 +91,10 @@ void Pendant::pace(unsigned int input) volatile
     rate_ = input &= 0x3f8;
 }
 
-void Pendant::project(CoordinateSystem &system) const
+void Pendant::project(PendantAxisSpace &space) const
 {
     if (index_ != -1) {
-        system.project(index_, position_[index_], rate_);
+        space.project(index_, position_[index_], rate_);
     }
 }
 

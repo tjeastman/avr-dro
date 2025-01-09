@@ -99,11 +99,11 @@ int main(void)
     Touch touch = Touch(calibration);
 
     CoordinateGrid grid = CoordinateGrid();
-    CoordinateSystem system = CoordinateSystem(grid);
+    CoordinatePanel panel = CoordinatePanel(grid);
 
     while (true) {
         touch.dispatch(grid);
-        pendant.project(system);
+        pendant.project(panel);
         grid.draw(canvas);
         _delay_ms(10);
     }

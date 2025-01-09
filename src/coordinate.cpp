@@ -88,7 +88,7 @@ void CoordinateGrid::set(int index, int position, int rate)
     feed_.set(rate);
 }
 
-void CoordinateSystem::project(int index, int position, int rate) const
+void CoordinatePanel::project(int index, int position, int rate)
 {
     grid_.set(index, position, rate);
 }
