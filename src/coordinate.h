@@ -63,7 +63,7 @@ private:
     CoordinateGrid grid_;
 public:
     CoordinatePanel();
-    void project(int, int, int) override;
+    void project(PendantAxis::Identifier, int, int) override;
     void dispatch(Touch &);
     void draw(ui::Canvas &);
 };

@@ -1,5 +1,6 @@
 #include "coordinate.h"
 
+#include "pendant.h"
 #include "ui/button.h"
 #include "ui/canvas.h"
 #include "ui/common.h"
@@ -72,9 +73,15 @@ CoordinateGrid::CoordinateGrid(CoordinateDecimal &decimal0, CoordinateDecimal &d
     add(&feed_);
 }
 
-void CoordinatePanel::project(int index, int position, int rate)
+void CoordinatePanel::project(PendantAxis::Identifier identifier, int position, int rate)
 {
-    decimals_[index].update(position);
+    if (identifier == PendantAxis::Identifier::X) {
+        decimals_[0].update(position);
+    } else if (identifier == PendantAxis::Identifier::Y) {
+        decimals_[1].update(position);
+    } else if (identifier == PendantAxis::Identifier::Z) {
+        decimals_[2].update(position);
+    }
     decimal_.update(rate);
 }
 

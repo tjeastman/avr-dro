@@ -93,8 +93,14 @@ void Pendant::pace(unsigned int input) volatile
 
 void Pendant::project(PendantAxisSpace &space) const
 {
-    if (index_ != -1) {
-        space.project(index_, position_[index_], rate_);
+    if (index_ == -1) {
+        space.project(PendantAxis::Identifier::NONE, 0, 0);
+    } else if (index_ == 0) {
+        space.project(PendantAxis::Identifier::X, position_[index_], rate_);
+    } else if (index_ == 1) {
+        space.project(PendantAxis::Identifier::Y, position_[index_], rate_);
+    } else if (index_ == 2) {
+        space.project(PendantAxis::Identifier::Z, position_[index_], rate_);
     }
 }
 

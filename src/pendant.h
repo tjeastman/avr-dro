@@ -1,12 +1,11 @@
 #ifndef PENDANT_H_
 #define PENDANT_H_
 
-class PendantAxisSpace {
-public:
-    virtual void project(int, int, int) = 0;
-};
-
 class PendantAxis {
+public:
+    enum class Identifier {
+        NONE, X, Y, Z
+    };
 private:
     int minimum_;
     int maximum_;
@@ -15,6 +14,11 @@ public:
     PendantAxis(int, int, int &);
     void increment(int) volatile;
     void decrement(int) volatile;
+};
+
+class PendantAxisSpace {
+public:
+    virtual void project(PendantAxis::Identifier, int, int) = 0;
 };
 
 class Pendant {
