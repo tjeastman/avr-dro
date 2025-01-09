@@ -35,11 +35,11 @@ void CoordinateResetButton::release(ui::Position position)
     Button::release(position);
 }
 
-CoordinateAxisGrid::CoordinateAxisGrid(char identifier):
+CoordinateAxisGrid::CoordinateAxisGrid(char identifier, CoordinateDecimal &decimal):
     Grid(ui::Direction::RIGHT, 20),
     label_text_{identifier, ':', '\0'},
     label_{label_text_},
-    decimal_{3, 2},
+    decimal_{decimal},
     label_unit_{"mm"},
     button_text_{identifier, '0', '\0'},
     button_{button_text_, decimal_}
@@ -50,15 +50,10 @@ CoordinateAxisGrid::CoordinateAxisGrid(char identifier):
     add(&button_);
 }
 
-void CoordinateAxisGrid::set(int position)
-{
-    decimal_.update(position);
-}
-
-CoordinateFeedGrid::CoordinateFeedGrid():
+CoordinateFeedGrid::CoordinateFeedGrid(ui::Decimal &decimal):
     Grid(ui::Direction::RIGHT, 20),
     label_{"F:"},
-    decimal_{3, 1},
+    decimal_{decimal},
     label_unit_{"mm/min"}
 {
     add(&label_);
@@ -66,15 +61,10 @@ CoordinateFeedGrid::CoordinateFeedGrid():
     add(&label_unit_);
 }
 
-void CoordinateFeedGrid::set(int rate)
-{
-    decimal_.update(rate);
-}
-
-CoordinateGrid::CoordinateGrid():
+CoordinateGrid::CoordinateGrid(CoordinateDecimal &decimal0, CoordinateDecimal &decimal1, CoordinateDecimal &decimal2, ui::Decimal &decimal):
     Grid{ui::Direction::DOWN, 20},
-    axes_{{'X'}, {'Y'}, {'Z'}},
-    feed_{}
+    axes_{{'X', decimal0}, {'Y', decimal1}, {'Z', decimal2}},
+    feed_{decimal}
 {
     add(&axes_[0]);
     add(&axes_[1]);
@@ -82,13 +72,25 @@ CoordinateGrid::CoordinateGrid():
     add(&feed_);
 }
 
-void CoordinateGrid::set(int index, int position, int rate)
-{
-    axes_[index].set(position);
-    feed_.set(rate);
-}
-
 void CoordinatePanel::project(int index, int position, int rate)
 {
-    grid_.set(index, position, rate);
+    decimals_[index].update(position);
+    decimal_.update(rate);
+}
+
+CoordinatePanel::CoordinatePanel():
+    decimals_{{3, 2}, {3, 2}, {3, 2}},
+    decimal_{3, 1},
+    grid_{decimals_[0], decimals_[1], decimals_[2], decimal_}
+{
+}
+
+void CoordinatePanel::dispatch(Touch &touch)
+{
+    touch.dispatch(grid_);
+}
+
+void CoordinatePanel::draw(ui::Canvas &canvas)
+{
+    grid_.draw(canvas);
 }

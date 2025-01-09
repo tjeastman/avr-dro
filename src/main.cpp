@@ -98,13 +98,12 @@ int main(void)
     Calibration calibration = Calibration();
     Touch touch = Touch(calibration);
 
-    CoordinateGrid grid = CoordinateGrid();
-    CoordinatePanel panel = CoordinatePanel(grid);
+    CoordinatePanel panel = CoordinatePanel();
 
     while (true) {
-        touch.dispatch(grid);
+        panel.dispatch(touch);
         pendant.project(panel);
-        grid.draw(canvas);
+        panel.draw(canvas);
         _delay_ms(10);
     }
 

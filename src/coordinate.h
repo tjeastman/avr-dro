@@ -2,6 +2,7 @@
 #define COORDINATE_H_
 
 #include "pendant.h"
+#include "touch.h"
 #include "ui/button.h"
 #include "ui/canvas.h"
 #include "ui/common.h"
@@ -30,23 +31,21 @@ class CoordinateAxisGrid : public ui::Grid {
 private:
     const char label_text_[3];
     ui::Label label_;
-    CoordinateDecimal decimal_;
+    CoordinateDecimal &decimal_;
     ui::Label label_unit_;
     const char button_text_[3];
     CoordinateResetButton button_;
 public:
-    CoordinateAxisGrid(char);
-    void set(int);
+    CoordinateAxisGrid(char, CoordinateDecimal &);
 };
 
 class CoordinateFeedGrid : public ui::Grid {
 private:
     ui::Label label_;
-    ui::Decimal decimal_;
+    ui::Decimal &decimal_;
     ui::Label label_unit_;
 public:
-    CoordinateFeedGrid();
-    void set(int);
+    CoordinateFeedGrid(ui::Decimal &);
 };
 
 class CoordinateGrid : public ui::Grid {
@@ -54,16 +53,19 @@ private:
     CoordinateAxisGrid axes_[3];
     CoordinateFeedGrid feed_;
 public:
-    CoordinateGrid();
-    void set(int, int, int);
+    CoordinateGrid(CoordinateDecimal &, CoordinateDecimal &, CoordinateDecimal &, ui::Decimal &);
 };
 
 class CoordinatePanel : public PendantAxisSpace {
 private:
-    CoordinateGrid &grid_;
+    CoordinateDecimal decimals_[3];
+    ui::Decimal decimal_;
+    CoordinateGrid grid_;
 public:
-    CoordinatePanel(CoordinateGrid &grid): grid_{grid} {}
+    CoordinatePanel();
     void project(int, int, int) override;
+    void dispatch(Touch &);
+    void draw(ui::Canvas &);
 };
 
 #endif  // COORDINATE_H_
