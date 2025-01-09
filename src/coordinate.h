@@ -54,7 +54,7 @@ private:
     CoordinateFeedGrid feed_;
 public:
     CoordinatePanel();
-    void set(const int[3], int);
+    void set(int, int, int);
 };
 
 class CoordinateSystem {
@@ -62,7 +62,7 @@ private:
     CoordinatePanel &panel_;
 public:
     CoordinateSystem(CoordinatePanel &panel): panel_{panel} {}
-    void project(const int[3], int) const;
+    void project(int, int, int) const;
 };
 
 #endif  // COORDINATE_H_

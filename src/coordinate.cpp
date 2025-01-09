@@ -82,15 +82,13 @@ CoordinatePanel::CoordinatePanel():
     add(&feed_);
 }
 
-void CoordinatePanel::set(const int position[3], int rate)
+void CoordinatePanel::set(int index, int position, int rate)
 {
-    axes_[0].set(position[0]);
-    axes_[1].set(position[1]);
-    axes_[2].set(position[2]);
+    axes_[index].set(position);
     feed_.set(rate);
 }
 
-void CoordinateSystem::project(const int position[3], int rate) const
+void CoordinateSystem::project(int index, int position, int rate) const
 {
-    panel_.set(position, rate);
+    panel_.set(index, position, rate);
 }
