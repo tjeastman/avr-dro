@@ -104,7 +104,6 @@ int main(void)
         panel.dispatch(touch);
         pendant.project(panel);
         panel.draw(canvas);
-        _delay_ms(10);
     }
 
     return 0;
