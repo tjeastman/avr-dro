@@ -7,6 +7,48 @@
 #include "ui/decimal.h"
 #include "ui/grid.h"
 
+CoordinateLabel::CoordinateLabel(const char *text): Label(text), selected_{false}
+{
+    ui::Shape shape{30, 0};
+    shape_.expand(ui::Direction::RIGHT, shape, 0);
+}
+
+void CoordinateLabel::draw(ui::Canvas canvas)
+{
+    if (!changed_) {
+        return;
+    }
+
+    draw_selector(canvas);
+
+    ui::Shape shape{30, 0};
+    canvas.adjust(ui::Direction::RIGHT, shape, 0);
+    Label::draw(canvas);
+}
+
+void CoordinateLabel::draw_selector(ui::Canvas canvas)
+{
+    ui::Shape shape{0, 0};
+
+    canvas.adjust(ui::Direction::RIGHT, shape, 12);
+    canvas.adjust(ui::Direction::DOWN, shape, 8);
+
+    shape.width = 8;
+    shape.height = shape_.height - 16;
+    canvas.dimension(shape);
+    canvas.fill(shape, properties_.color, selected_ ? 3 : 0);
+}
+
+void CoordinateLabel::select(bool selected)
+{
+    if (selected_ == selected) {
+        return;
+    }
+
+    selected_ = selected;
+    changed_ = true;
+}
+
 CoordinateDecimal::CoordinateDecimal(unsigned char n, unsigned char m):
     Decimal(n, m),
     origin_{0}
@@ -36,11 +78,11 @@ void CoordinateResetButton::release(ui::Position position)
     Button::release(position);
 }
 
-CoordinateAxisGrid::CoordinateAxisGrid(char identifier, CoordinateDecimal &decimal):
+CoordinateAxisGrid::CoordinateAxisGrid(char identifier):
     Grid(ui::Direction::RIGHT, 20),
     label_text_{identifier, ':', '\0'},
     label_{label_text_},
-    decimal_{decimal},
+    decimal_{3, 2},
     label_unit_{"mm"},
     button_text_{identifier, '0', '\0'},
     button_{button_text_, decimal_}
@@ -51,10 +93,21 @@ CoordinateAxisGrid::CoordinateAxisGrid(char identifier, CoordinateDecimal &decim
     add(&button_);
 }
 
-CoordinateFeedGrid::CoordinateFeedGrid(ui::Decimal &decimal):
+void CoordinateAxisGrid::update(int position)
+{
+    decimal_.update(position);
+    label_.select(true);
+}
+
+void CoordinateAxisGrid::select(bool selected)
+{
+    label_.select(selected);
+}
+
+CoordinateFeedGrid::CoordinateFeedGrid():
     Grid(ui::Direction::RIGHT, 20),
     label_{"F:"},
-    decimal_{decimal},
+    decimal_{3, 1},
     label_unit_{"mm/min"}
 {
     add(&label_);
@@ -62,10 +115,15 @@ CoordinateFeedGrid::CoordinateFeedGrid(ui::Decimal &decimal):
     add(&label_unit_);
 }
 
-CoordinateGrid::CoordinateGrid(CoordinateDecimal &decimal0, CoordinateDecimal &decimal1, CoordinateDecimal &decimal2, ui::Decimal &decimal):
+void CoordinateFeedGrid::update(int rate)
+{
+    decimal_.update(rate);
+}
+
+CoordinateGrid::CoordinateGrid():
     Grid{ui::Direction::DOWN, 20},
-    axes_{{'X', decimal0}, {'Y', decimal1}, {'Z', decimal2}},
-    feed_{decimal}
+    axes_{{'X'}, {'Y'}, {'Z'}},
+    feed_{}
 {
     add(&axes_[0]);
     add(&axes_[1]);
@@ -73,23 +131,30 @@ CoordinateGrid::CoordinateGrid(CoordinateDecimal &decimal0, CoordinateDecimal &d
     add(&feed_);
 }
 
-void CoordinatePanel::project(PendantAxis::Identifier identifier, int position, int rate)
+void CoordinateGrid::update(PendantAxis::Identifier identifier, int position, int rate)
 {
+    axes_[0].select(false);
+    axes_[1].select(false);
+    axes_[2].select(false);
+
     if (identifier == PendantAxis::Identifier::X) {
-        decimals_[0].update(position);
+        axes_[0].update(position);
     } else if (identifier == PendantAxis::Identifier::Y) {
-        decimals_[1].update(position);
+        axes_[1].update(position);
     } else if (identifier == PendantAxis::Identifier::Z) {
-        decimals_[2].update(position);
+        axes_[2].update(position);
     }
-    decimal_.update(rate);
+
+    if (identifier == PendantAxis::Identifier::NONE) {
+        feed_.update(0);
+    } else {
+        feed_.update(rate);
+    }
 }
 
-CoordinatePanel::CoordinatePanel():
-    decimals_{{3, 2}, {3, 2}, {3, 2}},
-    decimal_{3, 1},
-    grid_{decimals_[0], decimals_[1], decimals_[2], decimal_}
+void CoordinatePanel::project(PendantAxis::Identifier identifier, int position, int rate)
 {
+    grid_.update(identifier, position, rate);
 }
 
 void CoordinatePanel::dispatch(Touch &touch)
