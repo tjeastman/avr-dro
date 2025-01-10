@@ -6,6 +6,7 @@
 #include "coordinate.h"
 #include "display.h"
 #include "pendant.h"
+#include "serial.h"
 #include "touch.h"
 #include "ui/canvas.h"
 #include "ui/color.h"
@@ -52,6 +53,17 @@ int main(void)
 
     PORTB |= _BV(PB0); // deselect
 
+    // configure UART for 115200 baud 8N1
+    UBRR0H = 0;
+    UBRR0L = 16;
+    UCSR0A |= _BV(U2X0);
+    UCSR0B |= _BV(RXEN0);
+    UCSR0B |= _BV(TXEN0);
+    UCSR0C |= _BV(UCSZ01);
+    UCSR0C |= _BV(UCSZ00);
+
+    sei();
+
     Display display = Display();
     display.initialize(Display::Orientation::LANDSCAPE);
 
@@ -61,6 +73,20 @@ int main(void)
     canvas.move(ui::Position { 0, 0 });
     canvas.dimension(shape);
     canvas.fill(shape);
+
+    Serial serial = Serial();
+    serial << 'H';
+    serial << 'e';
+    serial << 'l';
+    serial << 'l';
+    serial << 'o';
+    serial << '!';
+    serial << '\r';
+    serial << '\n';
+    _delay_ms(5000);
+
+    serial << "Hello, world!\r\n";
+    _delay_ms(5000);
 
     Calibration calibration = Calibration();
     Touch touch = Touch(calibration);
