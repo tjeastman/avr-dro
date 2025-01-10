@@ -14,19 +14,23 @@ PendantAxis::PendantAxis(PendantAxis::Identifier identifier, int minimum, int ma
 
 void PendantAxis::increment(int delta) volatile
 {
-    if (position_ >= 0 && delta > maximum_ - position_) {
-        position_ = maximum_;
-    } else {
+    if (position_ < 0) {
         position_ += delta;
+    } else if (delta <= maximum_ - position_) {
+        position_ += delta;
+    } else {
+        position_ = maximum_;
     }
 }
 
 void PendantAxis::decrement(int delta) volatile
 {
-    if (position_ <= 0 && -delta < minimum_ - position_) {
-        position_ = minimum_;
-    } else {
+    if (position_ > 0) {
         position_ -= delta;
+    } else if (-delta >= minimum_ - position_) {
+        position_ -= delta;
+    } else {
+        position_ = minimum_;
     }
 }
 
