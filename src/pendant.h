@@ -13,18 +13,19 @@ private:
     int minimum_;
     int maximum_;
     int position_;
+    int rate_;
 public:
     PendantAxis(Identifier, int, int);
     void increment(int) volatile;
     void decrement(int) volatile;
-    void project(PendantAxisSpace &, int) const;
+    void pace(int) volatile;
+    void project(PendantAxisSpace &) const;
 };
 
 class Pendant {
 private:
     PendantAxis axes_[4];
     int index_;
-    int rate_;
     int delta_;
     unsigned char state_;
 public:

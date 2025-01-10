@@ -7,7 +7,8 @@ PendantAxis::PendantAxis(PendantAxis::Identifier identifier, int minimum, int ma
     identifier_{identifier},
     minimum_{minimum},
     maximum_{maximum},
-    position_{0}
+    position_{0},
+    rate_{0}
 {
 }
 
@@ -29,9 +30,14 @@ void PendantAxis::decrement(int delta) volatile
     }
 }
 
-void PendantAxis::project(PendantAxisSpace &space, int rate) const
+void PendantAxis::pace(int rate) volatile
 {
-    space.project(identifier_, position_, rate);
+    rate_ = rate;
+}
+
+void PendantAxis::project(PendantAxisSpace &space) const
+{
+    space.project(identifier_, position_, rate_);
 }
 
 Pendant::Pendant():
@@ -42,7 +48,6 @@ Pendant::Pendant():
         {PendantAxis::Identifier::Z, -25000, 0}
     },
     index_{0},
-    rate_{0},
     delta_{0},
     state_{0}
 {
@@ -94,12 +99,12 @@ void Pendant::press(unsigned char input) volatile
 
 void Pendant::pace(unsigned int input) volatile
 {
-    rate_ = input & 0x3f8;
+    axes_[index_].pace(input & 0x3f8);
 }
 
 void Pendant::project(PendantAxisSpace &space) const
 {
-    axes_[index_].project(space, rate_);
+    axes_[index_].project(space);
 }
 
 Pendant pendant;
