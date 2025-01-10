@@ -3,12 +3,11 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
 
-#include "coordinate.h"
-
-PendantAxis::PendantAxis(int minimum, int maximum, int &position):
+PendantAxis::PendantAxis(PendantAxis::Identifier identifier, int minimum, int maximum):
+    identifier_{identifier},
     minimum_{minimum},
     maximum_{maximum},
-    position_{position}
+    position_{0}
 {
 }
 
@@ -30,12 +29,21 @@ void PendantAxis::decrement(int delta) volatile
     }
 }
 
+void PendantAxis::project(PendantAxisSpace &space, int rate) const
+{
+    space.project(identifier_, position_, rate);
+}
+
 Pendant::Pendant():
-    position_{0, 0, 0},
-    axes_{{-14750, 14750, position_[0]}, {-12000, 12000, position_[1]}, {-25000, 0, position_[2]}},
+    axes_{
+        {PendantAxis::Identifier::NONE, 0, 0},
+        {PendantAxis::Identifier::X, -14750, 14750},
+        {PendantAxis::Identifier::Y, -12000, 12000},
+        {PendantAxis::Identifier::Z, -25000, 0}
+    },
+    index_{0},
     rate_{0},
-    index_{-1},
-    multiplier_{0},
+    delta_{0},
     state_{0}
 {
 }
@@ -48,12 +56,10 @@ void Pendant::turn(unsigned char input) volatile
     state_ |= input;
     state_ &= 0x0f;
 
-    if (index_ == -1) {
-
-    } else if (state_ == 0x06) {
-        axes_[index_].increment(multiplier_);
+    if (state_ == 0x06) {
+        axes_[index_].increment(delta_);
     } else if (state_ == 0x0c) {
-        axes_[index_].decrement(multiplier_);
+        axes_[index_].decrement(delta_);
     }
 }
 
@@ -66,42 +72,34 @@ void Pendant::press(unsigned char input) volatile
     }
 
     if (input & _BV(0)) {
-        index_ = 0;
-    } else if (input & _BV(1)) {
         index_ = 1;
-    } else if (input & _BV(2)) {
+    } else if (input & _BV(1)) {
         index_ = 2;
+    } else if (input & _BV(2)) {
+        index_ = 3;
     } else {
-        index_ = -1;
+        index_ = 0;
     }
 
     if (input & _BV(3)) {
-        multiplier_ = 1;
+        delta_ = 1;
     } else if (input & _BV(4)) {
-        multiplier_ = 10;
+        delta_ = 10;
     } else if (input & _BV(5)) {
-        multiplier_ = 100;
+        delta_ = 100;
     } else {
-        multiplier_ = 0;
+        delta_ = 0;
     }
 }
 
 void Pendant::pace(unsigned int input) volatile
 {
-    rate_ = input &= 0x3f8;
+    rate_ = input & 0x3f8;
 }
 
 void Pendant::project(PendantAxisSpace &space) const
 {
-    if (index_ == -1) {
-        space.project(PendantAxis::Identifier::NONE, 0, 0);
-    } else if (index_ == 0) {
-        space.project(PendantAxis::Identifier::X, position_[index_], rate_);
-    } else if (index_ == 1) {
-        space.project(PendantAxis::Identifier::Y, position_[index_], rate_);
-    } else if (index_ == 2) {
-        space.project(PendantAxis::Identifier::Z, position_[index_], rate_);
-    }
+    axes_[index_].project(space, rate_);
 }
 
 Pendant pendant;
