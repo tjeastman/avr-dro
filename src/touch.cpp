@@ -60,10 +60,10 @@ unsigned int Touch::transmit16(unsigned int value)
 
 void Touch::update()
 {
-    transmit8(0xB1);
-    int z0 = transmit16(0xC1) >> 3;
+    transmit8(0xb1);
+    int z0 = transmit16(0xc1) >> 3;
     int z1 = transmit16(0x91) >> 3;
-    int y = transmit16(0xD0) >> 3;
+    int y = transmit16(0xd0) >> 3;
     int x = transmit16(0x00) >> 3;
     state_.press(x, y, z1 - z0);
 }

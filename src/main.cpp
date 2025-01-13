@@ -15,8 +15,8 @@ extern Pendant pendant;
 
 int main(void)
 {
-    DDRC = 0xFF;
-    DDRA = 0xFF;
+    DDRC = 0xff;
+    DDRA = 0xff;
 
     DDRD |= _BV(7); // RS
     DDRG |= _BV(2); // WR
