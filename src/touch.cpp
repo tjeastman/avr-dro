@@ -46,7 +46,7 @@ void TouchState::release()
 unsigned char Touch::transmit8(unsigned char value)
 {
     SPDR = value;
-    while(!(SPSR & (1 << SPIF)))
+    while(!(SPSR & _BV(SPIF)))
         ;
     return SPDR;
 }
@@ -76,11 +76,7 @@ void Touch::clear()
 
 bool Touch::interrupt()
 {
-    unsigned char val = 0;
-    val = PINL;
-    val >>= 5;
-    val &= 0x01;
-    return val != 1;
+    return !(PINL & _BV(5));
 }
 
 void Touch::transition()

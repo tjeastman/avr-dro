@@ -49,8 +49,8 @@ int main(void)
     DDRB |= _BV(2); // MOSI (output) pin 51 PB2
     // enable SPI master with SCK=F_CPU/4
     SPCR = 0;
-    SPCR |= (1 << MSTR);
-    SPCR |= (1 << SPE);
+    SPCR |= _BV(MSTR);
+    SPCR |= _BV(SPE);
 
     PORTB |= _BV(0); // deselect
 
