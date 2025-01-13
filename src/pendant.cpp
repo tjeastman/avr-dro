@@ -106,19 +106,50 @@ void Pendant::project(PendantAxisSpace &space) const
     axes_[index_].project(space);
 }
 
-Pendant pendant;
+Pendant *Pendant::instance = nullptr;
+
+void Pendant::initialize(Pendant *pendant)
+{
+    instance = pendant;
+
+    // set up external interrupt to handle MPG turn events
+    EIMSK |= _BV(INT0);
+    EICRA |= _BV(ISC00);
+
+    // set up pin change interrupts to handle button press events
+    PCICR |= _BV(PCIE2);
+    PCMSK2 |= _BV(PCINT16);
+    PCMSK2 |= _BV(PCINT17);
+    PCMSK2 |= _BV(PCINT18);
+    PCMSK2 |= _BV(PCINT19);
+    PCMSK2 |= _BV(PCINT20);
+    PCMSK2 |= _BV(PCINT21);
+
+    // set up analog to digital converter to manage feed rate
+    ADMUX |= _BV(REFS0);
+    ADMUX |= _BV(MUX2);
+    ADMUX |= _BV(MUX1);
+    ADCSRA |= _BV(ADEN);
+    ADCSRA |= _BV(ADSC);
+    ADCSRA |= _BV(ADATE);
+    ADCSRA |= _BV(ADIE);
+    ADCSRA |= _BV(ADPS2);
+    ADCSRA |= _BV(ADPS1);
+    ADCSRA |= _BV(ADPS0);
+    ADCSRB |= _BV(MUX5);
+}
 
 ISR(INT0_vect)
 {
-    pendant.turn(PIND);
+    Pendant::instance->turn(PIND);
 }
 
 ISR(PCINT2_vect)
 {
-    pendant.press(PINK);
+    Pendant::instance->press(PINK);
 }
 
 ISR(ADC_vect)
 {
-    pendant.pace(ADCL + (ADCH << 8));
+    Pendant::instance->pace(ADCL + (ADCH << 8));
 }

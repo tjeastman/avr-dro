@@ -33,6 +33,8 @@ public:
     void press(unsigned char) volatile;
     void pace(unsigned int) volatile;
     void project(PendantAxisSpace &) const;
+    static Pendant *instance;
+    static void initialize(Pendant *);
 };
 
 #endif  // PENDANT_H_

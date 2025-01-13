@@ -11,8 +11,6 @@
 #include "ui/color.h"
 #include "ui/common.h"
 
-extern Pendant pendant;
-
 int main(void)
 {
     DDRC = 0xff;
@@ -54,37 +52,6 @@ int main(void)
 
     PORTB |= _BV(0); // deselect
 
-    // set up analog to digital converter
-    ADMUX |= _BV(REFS0); // AVCC with external capacitor at AREF pin
-    ADMUX |= _BV(MUX1);
-    ADMUX |= _BV(MUX2);
-    ADCSRB |= _BV(MUX5); // ADC14
-
-    ADCSRA |= _BV(ADPS0);
-    ADCSRA |= _BV(ADPS1);
-    ADCSRA |= _BV(ADPS2);
-
-    ADCSRA |= _BV(ADEN);
-    ADCSRA |= _BV(ADATE); // auto trigger (free running mode)
-    ADCSRA |= _BV(ADIE);
-
-    ADCSRA |= _BV(ADSC); // start conversion
-
-    // set up external interrupt (INT0) on any change
-    EIMSK |= _BV(INT0);
-    EICRA |= _BV(ISC00);
-
-    // set up pin change interrupts
-    PCICR |= _BV(PCIE2);
-    PCMSK2 |= _BV(PCINT16);
-    PCMSK2 |= _BV(PCINT17);
-    PCMSK2 |= _BV(PCINT18);
-    PCMSK2 |= _BV(PCINT19);
-    PCMSK2 |= _BV(PCINT20);
-    PCMSK2 |= _BV(PCINT21);
-
-    sei();
-
     Display display = Display();
     display.initialize(Display::Orientation::LANDSCAPE);
 
@@ -99,6 +66,11 @@ int main(void)
     Touch touch = Touch(calibration);
 
     CoordinatePanel panel = CoordinatePanel();
+
+    Pendant pendant = Pendant();
+    Pendant::initialize(&pendant);
+
+    sei();
 
     while (true) {
         panel.dispatch(touch);
