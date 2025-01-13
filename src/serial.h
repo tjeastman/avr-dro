@@ -3,10 +3,10 @@
 
 class Serial {
 public:
-    Serial();
+    Serial() {}
     void operator<<(char) const;
     void operator<<(const char *) const;
-    // void operator<<(unsigned int) const;
+    void write(unsigned int, int) const;
 private:
     void write(char) const;
 };
