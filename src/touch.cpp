@@ -46,8 +46,7 @@ void TouchState::release()
 unsigned char Touch::transmit8(unsigned char value)
 {
     SPDR = value;
-    while(!(SPSR & _BV(SPIF)))
-        ;
+    loop_until_bit_is_set(SPSR, SPIF);
     return SPDR;
 }
 
