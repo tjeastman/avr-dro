@@ -3,6 +3,7 @@
 #include <util/delay.h>
 
 #include "calibration.h"
+#include "command.h"
 #include "coordinate.h"
 #include "display.h"
 #include "pendant.h"
@@ -83,10 +84,20 @@ int main(void)
     serial << '!';
     serial << '\r';
     serial << '\n';
-    _delay_ms(5000);
+    _delay_ms(1000);
 
     serial << "Hello, world!\r\n";
-    _delay_ms(5000);
+    _delay_ms(1000);
+
+    serial << "Example commands:\r\n";
+    serial << Command();
+    serial << Command('X');
+    serial << Command('Y');
+    serial << Command('Z');
+    serial << Command('X', 225, 102);
+    serial << Command('Y', -592, 99);
+    serial << Command('Z', -3, -10);
+    _delay_ms(1000);
 
     Calibration calibration = Calibration();
     Touch touch = Touch(calibration);

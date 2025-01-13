@@ -4,6 +4,7 @@ add_executable(
   main.elf
   main.cpp
   calibration.cpp
+  command.cpp
   coordinate.cpp
   display.cpp
   pendant.cpp
