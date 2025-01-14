@@ -113,8 +113,8 @@ void Touch::initialize(Touch *touch)
     OCR1AL = 12500 & 0xff;
 
     // set up pin change interrupts
-    PCICR |= _BV(PCIE2);
-    PCMSK2 |= _BV(PCINT9);
+    PCICR |= _BV(PCIE1);
+    PCMSK1 |= _BV(PCINT9);
 }
 
 void Touch::clock()
@@ -141,7 +141,7 @@ void Touch::press(bool state)
 
 ISR(PCINT1_vect)
 {
-    Touch::instance->press(PORTJ & _BV(0));
+    Touch::instance->press(PINJ & _BV(0));
 }
 
 ISR(TIMER1_OVF_vect)
