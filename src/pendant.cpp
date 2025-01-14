@@ -3,7 +3,7 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
 
-PendantAxis::PendantAxis(PendantAxis::Identifier identifier, int minimum, int maximum):
+PendantAxis::PendantAxis(char identifier, int minimum, int maximum):
     identifier_{identifier},
     minimum_{minimum},
     maximum_{maximum},
@@ -45,12 +45,7 @@ void PendantAxis::project(PendantAxisSpace &space) const
 }
 
 Pendant::Pendant():
-    axes_{
-        {PendantAxis::Identifier::NONE, 0, 0},
-        {PendantAxis::Identifier::X, -14750, 14750},
-        {PendantAxis::Identifier::Y, -12000, 12000},
-        {PendantAxis::Identifier::Z, -25000, 0}
-    },
+    axes_{{0, 0, 0}, {'X', -14750, 14750}, {'Y', -12000, 12000}, {'Z', -25000, 0}},
     index_{0},
     delta_{0},
     state_{0}

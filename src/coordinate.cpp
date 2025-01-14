@@ -78,13 +78,13 @@ void CoordinateResetButton::release(ui::Position position)
     Button::release(position);
 }
 
-CoordinateAxisGrid::CoordinateAxisGrid(char identifier):
+CoordinateAxisGrid::CoordinateAxisGrid(char axis):
     Grid(ui::Direction::RIGHT, 20),
-    label_text_{identifier, ':', '\0'},
+    label_text_{axis, ':', '\0'},
     label_{label_text_},
     decimal_{3, 2},
     label_unit_{"mm"},
-    button_text_{identifier, '0', '\0'},
+    button_text_{axis, '0', '\0'},
     button_{button_text_, decimal_}
 {
     add(&label_);
@@ -131,30 +131,30 @@ CoordinateGrid::CoordinateGrid():
     add(&feed_);
 }
 
-void CoordinateGrid::update(PendantAxis::Identifier identifier, int position, int rate)
+void CoordinateGrid::update(char axis, int position, int rate)
 {
     axes_[0].select(false);
     axes_[1].select(false);
     axes_[2].select(false);
 
-    if (identifier == PendantAxis::Identifier::X) {
+    if (axis == 'X') {
         axes_[0].update(position);
-    } else if (identifier == PendantAxis::Identifier::Y) {
+    } else if (axis == 'Y') {
         axes_[1].update(position);
-    } else if (identifier == PendantAxis::Identifier::Z) {
+    } else if (axis == 'Z') {
         axes_[2].update(position);
     }
 
-    if (identifier == PendantAxis::Identifier::NONE) {
+    if (axis == 0) {
         feed_.update(0);
     } else {
         feed_.update(rate);
     }
 }
 
-void CoordinatePanel::project(PendantAxis::Identifier identifier, int position, int rate)
+void CoordinatePanel::project(char axis, int position, int rate)
 {
-    grid_.update(identifier, position, rate);
+    grid_.update(axis, position, rate);
 }
 
 void CoordinatePanel::dispatch(Touch &touch)

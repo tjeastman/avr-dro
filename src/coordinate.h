@@ -68,14 +68,14 @@ private:
     CoordinateFeedGrid feed_;
 public:
     CoordinateGrid();
-    void update(PendantAxis::Identifier, int, int);
+    void update(char, int, int);
 };
 
 class CoordinatePanel : public PendantAxisSpace {
 private:
     CoordinateGrid grid_;
 public:
-    void project(PendantAxis::Identifier, int, int) override;
+    void project(char, int, int) override;
     void dispatch(Touch &);
     void draw(ui::Canvas &);
 };
