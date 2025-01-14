@@ -6,9 +6,7 @@
 
 namespace ui {
 
-Button::Button(const char *text):
-    Label(text),
-    pressed_{false}
+Button::Button(const char *text): Label(text)
 {
     shape_.width += 16;
     shape_.height += 8;

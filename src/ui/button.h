@@ -8,8 +8,6 @@
 namespace ui {
 
 class Button : public Label {
-private:
-    bool pressed_;
 public:
     Button(const char *);
     void draw(Canvas) override;
