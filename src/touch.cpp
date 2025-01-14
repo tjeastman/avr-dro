@@ -1,12 +1,16 @@
 #include "touch.h"
 
+#include <avr/interrupt.h>
 #include <avr/io.h>
 #include <util/delay.h>
 
 #include "ui/common.h"
 #include "ui/control.h"
 
-TouchState::TouchState(): event{Event::NONE}, position{0, 0}, readings{0}
+TouchState::TouchState():
+    event{Event::NONE},
+    position{0, 0},
+    readings{0}
 {
 }
 
@@ -68,31 +72,8 @@ void Touch::update()
     state_.press(x, y, z1 - z0);
 }
 
-void Touch::clear()
-{
-    state_.release();
-}
-
-bool Touch::interrupt()
-{
-    return !(PINL & _BV(5));
-}
-
-void Touch::transition()
-{
-    _delay_ms(10);
-    if (interrupt()) {
-        PORTB &= ~_BV(0); // select
-        update();
-        PORTB |= _BV(0); // deselect
-    } else {
-        clear();
-    }
-}
-
 void Touch::dispatch(ui::Control &control)
 {
-    transition();
     if (state_.event == TouchState::Event::NONE) {
         return;
     }
@@ -104,5 +85,57 @@ void Touch::dispatch(ui::Control &control)
         control.press(position);
     } else if (state_.event == TouchState::Event::RELEASE) {
         control.release(position);
+        state_.release();
     }
+}
+
+Touch *Touch::instance = nullptr;
+
+void Touch::initialize(Touch *touch)
+{
+    instance = touch;
+
+    // set up timer for fast PWM, prescaler=256, frequency=5Hz
+    TIMSK1 |= _BV(TOIE1);
+    TCCR1A |= _BV(WGM10);
+    TCCR1A |= _BV(WGM11);
+    TCCR1B |= _BV(WGM12);
+    TCCR1B |= _BV(WGM13);
+    TCCR1B |= _BV(CS12);
+    OCR1AH = (12500 >> 8) & 0xff;
+    OCR1AL = 12500 & 0xff;
+
+    // set up pin change interrupts
+    PCICR |= _BV(PCIE2);
+    PCMSK2 |= _BV(PCINT9);
+}
+
+void Touch::clock()
+{
+    if (pressed_) {
+        update();
+    }
+}
+
+void Touch::press(bool state)
+{
+    if (!state) {
+        pressed_ = true;
+        PORTB &= ~_BV(0); // select
+        update();
+        PORTB |= _BV(0); // deselect
+    } else {
+        pressed_ = false;
+        state_.release();
+    }
+}
+
+ISR(PCINT1_vect)
+{
+    Touch::instance->press(PORTJ & _BV(0));
+}
+
+ISR(TIMER1_OVF_vect)
+{
+    Touch::instance->clock();
 }

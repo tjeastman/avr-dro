@@ -64,6 +64,7 @@ int main(void)
 
     Calibration calibration = Calibration();
     Touch touch = Touch(calibration);
+    Touch::initialize(&touch);
 
     CoordinatePanel panel = CoordinatePanel();
 

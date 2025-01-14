@@ -21,15 +21,17 @@ class Touch {
 private:
     Calibration &calibration_;
     TouchState state_;
+    bool pressed_;
     unsigned char transmit8(unsigned char);
     unsigned int transmit16(unsigned int);
     void update();
-    void clear();
-    bool interrupt();
-    void transition();
 public:
-    Touch(Calibration &calibration): calibration_{calibration}, state_{} {}
+    Touch(Calibration &calibration): calibration_{calibration}, state_{}, pressed_{false} {}
     void dispatch(ui::Control &);
+    static Touch *instance;
+    static void initialize(Touch *);
+    void clock();
+    void press(bool);
 };
 
 #endif  // TOUCH_H_
