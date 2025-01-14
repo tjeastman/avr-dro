@@ -120,7 +120,9 @@ void Touch::initialize(Touch *touch)
 void Touch::clock()
 {
     if (pressed_) {
+        PORTB &= ~_BV(0); // select
         update();
+        PORTB |= _BV(0); // deselect
     }
 }
 
