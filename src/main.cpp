@@ -16,41 +16,41 @@ int main(void)
     DDRC = 0xff;
     DDRA = 0xff;
 
-    DDRD |= _BV(7); // RS
-    DDRG |= _BV(2); // WR
-    DDRG |= _BV(1); // CS
-    DDRG |= _BV(0); // RST
-    DDRL |= _BV(6); // RD
+    DDRD |= _BV(PD7); // RS
+    DDRG |= _BV(PG2); // WR
+    DDRG |= _BV(PG1); // CS
+    DDRG |= _BV(PG0); // RST
+    DDRL |= _BV(PL6); // RD
 
-    PORTD |= _BV(7);
-    PORTG |= _BV(2);
-    PORTG |= _BV(1);
-    PORTG |= _BV(0);
-    PORTL |= _BV(6);
+    PORTD |= _BV(PD7);
+    PORTG |= _BV(PG2);
+    PORTG |= _BV(PG1);
+    PORTG |= _BV(PG0);
+    PORTL |= _BV(PL6);
 
-    PORTG |= _BV(0); // RST=HIGH
+    PORTG |= _BV(PG0); // RST=HIGH
     _delay_ms(10);
-    PORTG &= ~_BV(0); // RST=LOW
+    PORTG &= ~_BV(PG0); // RST=LOW
     _delay_ms(100);
-    PORTG |= _BV(0); // RST=HIGH
+    PORTG |= _BV(PG0); // RST=HIGH
     _delay_ms(50);
 
-    PORTG |= _BV(1); // CS=HIGH
-    PORTG |= _BV(2); // WR=HIGH
-    PORTG &= ~_BV(1); // CS=LOW
+    PORTG |= _BV(PG1); // CS=HIGH
+    PORTG |= _BV(PG2); // WR=HIGH
+    PORTG &= ~_BV(PG1); // CS=LOW
     _delay_ms(50);
 
     // SPI
     // MISO (input) pin 50 PB3
-    DDRB |= _BV(0); // TP_CS (output) pin 53 PB0
-    DDRB |= _BV(1); // EX_CLK (output) pin 52 PB1
-    DDRB |= _BV(2); // MOSI (output) pin 51 PB2
+    DDRB |= _BV(PB0); // TP_CS (output) pin 53 PB0
+    DDRB |= _BV(PB1); // EX_CLK (output) pin 52 PB1
+    DDRB |= _BV(PB2); // MOSI (output) pin 51 PB2
     // enable SPI master with SCK=F_CPU/4
     SPCR = 0;
     SPCR |= _BV(MSTR);
     SPCR |= _BV(SPE);
 
-    PORTB |= _BV(0); // deselect
+    PORTB |= _BV(PB0); // deselect
 
     Display display = Display();
     display.initialize(Display::Orientation::LANDSCAPE);

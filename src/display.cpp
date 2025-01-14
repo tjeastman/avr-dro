@@ -448,7 +448,7 @@ void Display::initialize(Orientation orientation)
 
 void Display::data(unsigned int d) const
 {
-    PORTD |= _BV(7); // RS=HIGH
+    PORTD |= _BV(PD7); // RS=HIGH
     transmit(d);
 }
 
@@ -480,13 +480,13 @@ void Display::transmit(unsigned int v) const
 {
     PORTA = v >> 8;
     PORTC = v;
-    PORTG &= ~_BV(2); // WR=LOW
-    PORTG |= _BV(2); // WR=HIGH
+    PORTG &= ~_BV(PG2); // WR=LOW
+    PORTG |= _BV(PG2); // WR=HIGH
 }
 
 void Display::command(unsigned int id) const
 {
-    PORTD &= ~_BV(7); // RS=LOW
+    PORTD &= ~_BV(PD7); // RS=LOW
     transmit(id);
 }
 

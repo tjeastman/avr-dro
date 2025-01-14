@@ -75,16 +75,16 @@ void Touch::clear()
 
 bool Touch::interrupt()
 {
-    return bit_is_clear(PINL, 5);
+    return bit_is_clear(PINL, PL5);
 }
 
 void Touch::transition()
 {
     _delay_ms(10);
     if (interrupt()) {
-        PORTB &= ~_BV(0); // select
+        PORTB &= ~_BV(PB0); // select
         update();
-        PORTB |= _BV(0); // deselect
+        PORTB |= _BV(PB0); // deselect
     } else {
         clear();
     }
