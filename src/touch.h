@@ -26,7 +26,7 @@ private:
     unsigned int transmit16(unsigned int);
     void update();
 public:
-    Touch(Calibration &calibration): calibration_{calibration}, state_{}, pressed_{false} {}
+    Touch(Calibration &);
     void dispatch(ui::Control &);
     static Touch *instance;
     static void initialize(Touch *);

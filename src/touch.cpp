@@ -72,6 +72,13 @@ void Touch::update()
     state_.press(x, y, z1 - z0);
 }
 
+Touch::Touch(Calibration &calibration):
+    calibration_{calibration},
+    state_{},
+    pressed_{false}
+{
+}
+
 void Touch::dispatch(ui::Control &control)
 {
     if (state_.event == TouchState::Event::NONE) {
