@@ -40,16 +40,17 @@ void PendantAxis::pace(int16_t rate) volatile
     rate_ = rate;
 }
 
-void PendantAxis::project(PendantAxisSpace& space) const
+void PendantAxis::project(PendantAxisSpace &space) volatile const
 {
     space.project(identifier_, position_, rate_);
 }
 
-Pendant::Pendant()
+Pendant::Pendant(PendantAxisSpace& commands)
     : axes_ { { 0, 0, 0 }, { 'X', -14750, 14750 }, { 'Y', -12000, 12000 }, { 'Z', -25000, 0 } }
     , index_ { 0 }
     , delta_ { 0 }
     , state_ { 0 }
+    , commands_{commands}
 {
 }
 
@@ -74,6 +75,10 @@ void Pendant::press(uint8_t input) volatile
 
     if (input == 0) {
         return;
+    }
+
+    if (index_ > 0) {
+        axes_[index_].project(commands_);
     }
 
     if (input & _BV(0)) {

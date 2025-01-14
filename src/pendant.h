@@ -21,7 +21,7 @@ public:
     void increment(int16_t) volatile;
     void decrement(int16_t) volatile;
     void pace(int16_t) volatile;
-    void project(PendantAxisSpace&) const;
+    void project(PendantAxisSpace&) volatile const;
 };
 
 class Pendant {
@@ -30,9 +30,10 @@ private:
     int16_t index_;
     int16_t delta_;
     uint8_t state_;
+    PendantAxisSpace &commands_;
 
 public:
-    Pendant();
+    Pendant(PendantAxisSpace &);
     void turn(uint8_t) volatile;
     void press(uint8_t) volatile;
     void pace(uint16_t) volatile;

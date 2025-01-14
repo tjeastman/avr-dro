@@ -33,20 +33,9 @@ int CommandQueue::size() const
     return (head_ + 20 - tail_) % 20;
 }
 
-void CommandQueue::project(PendantAxis::Identifier identifier, int position, int rate)
+void CommandQueue::project(char axis, int position, int rate)
 {
-    char axis = 0;
-    switch (identifier) {
-    case PendantAxis::Identifier::X:
-        axis = 'X';
-        break;
-    case PendantAxis::Identifier::Y:
-        axis = 'Y';
-        break;
-    case PendantAxis::Identifier::Z:
-        axis = 'Z';
-        break;
-    default:
+    if (axis == 0) {
         return;
     }
 

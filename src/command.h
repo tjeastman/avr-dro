@@ -25,7 +25,7 @@ private:
 public:
     CommandQueue(): head_{0}, tail_{0} {}
     int size() const;
-    void project(PendantAxis::Identifier, int, int);
+    void project(char, int, int);
     void something(const Serial &);
 };
 

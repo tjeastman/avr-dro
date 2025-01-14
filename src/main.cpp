@@ -104,7 +104,8 @@ int main(void)
 
     CoordinatePanel panel = CoordinatePanel();
 
-    Pendant pendant = Pendant();
+    CommandQueue commands = CommandQueue();
+    Pendant pendant = Pendant(commands);
     Pendant::initialize(&pendant);
 
     sei();
@@ -113,6 +114,7 @@ int main(void)
         panel.dispatch(touch);
         pendant.project(panel);
         panel.draw(canvas);
+        commands.something(serial);
     }
 
     return 0;
