@@ -75,7 +75,7 @@ void Touch::clear()
 
 bool Touch::interrupt()
 {
-    return !(PINL & _BV(5));
+    return bit_is_clear(PINL, 5);
 }
 
 void Touch::transition()
