@@ -5,31 +5,36 @@
 #include "ui/common.h"
 #include "ui/control.h"
 
-struct TouchState {
+class TouchState {
+public:
     enum class Event {
         NONE, PRESS, RELEASE
     };
-    Event event;
-    ui::Position position;
-    int readings;
+private:
+    Event event_;
+    ui::Position position_;
+    int readings_;
+public:
     TouchState();
     void press(int, int, int);
     void release();
+    void dispatch(const Calibration &, ui::Control &);
 };
 
 class Touch {
 private:
-    Calibration &calibration_;
+    const Calibration &calibration_;
     TouchState state_;
+public:
+    Touch(const Calibration &);
+    void dispatch(ui::Control &);
+private:
     unsigned char transmit8(unsigned char);
     unsigned int transmit16(unsigned int);
     void update();
     void clear();
     bool interrupt();
     void transition();
-public:
-    Touch(Calibration &calibration): calibration_{calibration}, state_{} {}
-    void dispatch(ui::Control &);
 };
 
 #endif  // TOUCH_H_

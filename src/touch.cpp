@@ -6,41 +6,72 @@
 #include "ui/common.h"
 #include "ui/control.h"
 
-TouchState::TouchState(): event{Event::NONE}, position{0, 0}, readings{0}
+TouchState::TouchState():
+    event_{Event::NONE},
+    position_{0, 0},
+    readings_{0}
 {
 }
 
 void TouchState::press(int x, int y, int z)
 {
-    if (readings == 0) {
-        position.x = x;
-        position.y = y;
+    if (readings_ == 0) {
+        position_.x = x;
+        position_.y = y;
     } else {
-        position.x += x;
-        position.y += y;
+        position_.x += x;
+        position_.y += y;
     }
     // keep a running "average" of the press coordinates
-    if (readings++) {
-        position.x >>= 1;
-        position.y >>= 1;
+    if (readings_++) {
+        position_.x >>= 1;
+        position_.y >>= 1;
     }
     // avoid spurious state transitions due to overflow
-    if (readings >= 10000) {
-        readings = 10000;
+    if (readings_ >= 10000) {
+        readings_ = 10000;
     }
-    event = Event::PRESS;
+    event_ = Event::PRESS;
 }
 
 void TouchState::release()
 {
     // preserve position for use in release events
-    readings = 0;
+    readings_ = 0;
     // only allow one consecutive release event
-    if (event == Event::PRESS) {
-        event = Event::RELEASE;
-    } else if (event == Event::RELEASE) {
-        event = Event::NONE;
+    if (event_ == Event::PRESS) {
+        event_ = Event::RELEASE;
+    } else if (event_ == Event::RELEASE) {
+        event_ = Event::NONE;
     }
+}
+
+void TouchState::dispatch(const Calibration &calibration, ui::Control &control)
+{
+    if (event_ == TouchState::Event::NONE) {
+        return;
+    }
+
+    ui::Position position = calibration.translate(position_);
+    if (!control.contains(position)) {
+        return;
+    } else if (event_ == TouchState::Event::PRESS) {
+        control.press(position);
+    } else if (event_ == TouchState::Event::RELEASE) {
+        control.release(position);
+    }
+}
+
+Touch::Touch(const Calibration &calibration):
+    calibration_{calibration},
+    state_{}
+{
+}
+
+void Touch::dispatch(ui::Control &control)
+{
+    transition();
+    state_.dispatch(calibration_, control);
 }
 
 unsigned char Touch::transmit8(unsigned char value)
@@ -87,22 +118,5 @@ void Touch::transition()
         PORTB |= _BV(PB0); // deselect
     } else {
         clear();
-    }
-}
-
-void Touch::dispatch(ui::Control &control)
-{
-    transition();
-    if (state_.event == TouchState::Event::NONE) {
-        return;
-    }
-
-    ui::Position position = calibration_.translate(state_.position);
-    if (!control.contains(position)) {
-        return;
-    } else if (state_.event == TouchState::Event::PRESS) {
-        control.press(position);
-    } else if (state_.event == TouchState::Event::RELEASE) {
-        control.release(position);
     }
 }
