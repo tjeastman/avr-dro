@@ -1,6 +1,7 @@
 #include "touch.h"
 
 #include <avr/io.h>
+#include <stdint.h>
 #include <util/delay.h>
 
 #include "ui/common.h"
@@ -13,7 +14,7 @@ TouchState::TouchState()
 {
 }
 
-void TouchState::press(int x, int y, int z)
+void TouchState::press(int16_t x, int16_t y, int16_t z)
 {
     if (readings_ == 0) {
         position_.x = x;
@@ -74,16 +75,16 @@ void Touch::dispatch(ui::Control& control)
     state_.dispatch(calibration_, control);
 }
 
-unsigned char Touch::transmit8(unsigned char value)
+uint8_t Touch::transmit8(uint8_t value)
 {
     SPDR = value;
     loop_until_bit_is_set(SPSR, SPIF);
     return SPDR;
 }
 
-unsigned int Touch::transmit16(unsigned int value)
+uint16_t Touch::transmit16(uint16_t value)
 {
-    unsigned int result;
+    uint16_t result;
     result = transmit8(value >> 8) << 8;
     result |= transmit8(value);
     return result;
@@ -92,10 +93,10 @@ unsigned int Touch::transmit16(unsigned int value)
 void Touch::update()
 {
     transmit8(0xb1);
-    int z0 = transmit16(0xc1) >> 3;
-    int z1 = transmit16(0x91) >> 3;
-    int y = transmit16(0xd0) >> 3;
-    int x = transmit16(0x00) >> 3;
+    int16_t z0 = transmit16(0xc1) >> 3;
+    int16_t z1 = transmit16(0x91) >> 3;
+    int16_t y = transmit16(0xd0) >> 3;
+    int16_t x = transmit16(0x00) >> 3;
     state_.press(x, y, z1 - z0);
 }
 

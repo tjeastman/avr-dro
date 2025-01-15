@@ -1,5 +1,7 @@
 #include "coordinate.h"
 
+#include <stdint.h>
+
 #include "pendant.h"
 #include "ui/button.h"
 #include "ui/canvas.h"
@@ -51,13 +53,13 @@ void CoordinateLabel::select(bool selected)
     changed_ = true;
 }
 
-CoordinateDecimal::CoordinateDecimal(unsigned char n, unsigned char m)
+CoordinateDecimal::CoordinateDecimal(uint8_t n, uint8_t m)
     : Decimal(n, m)
     , origin_ { 0 }
 {
 }
 
-void CoordinateDecimal::update(int position)
+void CoordinateDecimal::update(int16_t position)
 {
     Decimal::update(position - origin_);
 }
@@ -117,7 +119,7 @@ CoordinateFeedGrid::CoordinateFeedGrid()
     add(&label_unit_);
 }
 
-void CoordinateFeedGrid::update(int rate)
+void CoordinateFeedGrid::update(int16_t rate)
 {
     decimal_.update(rate);
 }
@@ -133,7 +135,7 @@ CoordinateGrid::CoordinateGrid()
     add(&feed_);
 }
 
-void CoordinateGrid::update(char axis, int position, int rate)
+void CoordinateGrid::update(char axis, int16_t position, int16_t rate)
 {
     axes_[0].select(false);
     axes_[1].select(false);
@@ -154,7 +156,7 @@ void CoordinateGrid::update(char axis, int position, int rate)
     }
 }
 
-void CoordinatePanel::project(char axis, int position, int rate)
+void CoordinatePanel::project(char axis, int16_t position, int16_t rate)
 {
     grid_.update(axis, position, rate);
 }

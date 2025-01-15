@@ -2,8 +2,9 @@
 
 #include <avr/interrupt.h>
 #include <avr/io.h>
+#include <stdint.h>
 
-PendantAxis::PendantAxis(char identifier, int minimum, int maximum)
+PendantAxis::PendantAxis(char identifier, int16_t minimum, int16_t maximum)
     : identifier_ { identifier }
     , minimum_ { minimum }
     , maximum_ { maximum }
@@ -12,7 +13,7 @@ PendantAxis::PendantAxis(char identifier, int minimum, int maximum)
 {
 }
 
-void PendantAxis::increment(int delta) volatile
+void PendantAxis::increment(int16_t delta) volatile
 {
     if (position_ < 0) {
         position_ += delta;
@@ -23,7 +24,7 @@ void PendantAxis::increment(int delta) volatile
     }
 }
 
-void PendantAxis::decrement(int delta) volatile
+void PendantAxis::decrement(int16_t delta) volatile
 {
     if (position_ > 0) {
         position_ -= delta;
@@ -34,7 +35,7 @@ void PendantAxis::decrement(int delta) volatile
     }
 }
 
-void PendantAxis::pace(int rate) volatile
+void PendantAxis::pace(int16_t rate) volatile
 {
     rate_ = rate;
 }
@@ -52,7 +53,7 @@ Pendant::Pendant()
 {
 }
 
-void Pendant::turn(unsigned char input) volatile
+void Pendant::turn(uint8_t input) volatile
 {
     input &= 0x03;
 
@@ -67,7 +68,7 @@ void Pendant::turn(unsigned char input) volatile
     }
 }
 
-void Pendant::press(unsigned char input) volatile
+void Pendant::press(uint8_t input) volatile
 {
     input &= 0x3f;
 
@@ -96,7 +97,7 @@ void Pendant::press(unsigned char input) volatile
     }
 }
 
-void Pendant::pace(unsigned int input) volatile
+void Pendant::pace(uint16_t input) volatile
 {
     axes_[index_].pace(input & 0x3f8);
 }

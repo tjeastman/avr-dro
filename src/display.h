@@ -1,6 +1,8 @@
 #ifndef DISPLAY_H_
 #define DISPLAY_H_
 
+#include <stdint.h>
+
 #include "ui/common.h"
 #include "ui/display.h"
 
@@ -21,13 +23,13 @@ public:
     }
     ui::Shape shape() const { return shape_; }
     void initialize(Orientation);
-    void data(unsigned int) const override;
-    void address(unsigned int, unsigned int, unsigned int, unsigned int) const override;
+    void data(uint16_t) const override;
+    void address(uint16_t, uint16_t, uint16_t, uint16_t) const override;
 
 private:
-    void transmit(unsigned int) const;
-    void command(unsigned int) const;
-    void command(unsigned int, unsigned int) const;
+    void transmit(uint16_t) const;
+    void command(uint16_t) const;
+    void command(uint16_t, uint16_t) const;
 };
 
 #endif // DISPLAY_H_

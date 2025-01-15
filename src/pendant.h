@@ -1,39 +1,41 @@
 #ifndef PENDANT_H_
 #define PENDANT_H_
 
+#include <stdint.h>
+
 class PendantAxisSpace {
 public:
-    virtual void project(char, int, int) = 0;
+    virtual void project(char, int16_t, int16_t) = 0;
 };
 
 class PendantAxis {
 private:
     char identifier_;
-    int minimum_;
-    int maximum_;
-    int position_;
-    int rate_;
+    int16_t minimum_;
+    int16_t maximum_;
+    int16_t position_;
+    int16_t rate_;
 
 public:
-    PendantAxis(char, int, int);
-    void increment(int) volatile;
-    void decrement(int) volatile;
-    void pace(int) volatile;
+    PendantAxis(char, int16_t, int16_t);
+    void increment(int16_t) volatile;
+    void decrement(int16_t) volatile;
+    void pace(int16_t) volatile;
     void project(PendantAxisSpace&) const;
 };
 
 class Pendant {
 private:
     PendantAxis axes_[4];
-    int index_;
-    int delta_;
-    unsigned char state_;
+    int16_t index_;
+    int16_t delta_;
+    uint8_t state_;
 
 public:
     Pendant();
-    void turn(unsigned char) volatile;
-    void press(unsigned char) volatile;
-    void pace(unsigned int) volatile;
+    void turn(uint8_t) volatile;
+    void press(uint8_t) volatile;
+    void pace(uint16_t) volatile;
     void project(PendantAxisSpace&) const;
     static Pendant* instance;
     static void initialize(Pendant*);

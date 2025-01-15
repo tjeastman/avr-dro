@@ -1,4 +1,4 @@
-const unsigned char PROGMEM CHARACTER_INVALID[] = {
+const uint8_t PROGMEM CHARACTER_INVALID[] = {
     0x42, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -37,7 +37,7 @@ const unsigned char PROGMEM CHARACTER_INVALID[] = {
     0xfc, 0x08,
 };
 // character:   (67)
-const unsigned char PROGMEM CHARACTER_032[] = {
+const uint8_t PROGMEM CHARACTER_032[] = {
     0x43, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -50,7 +50,7 @@ const unsigned char PROGMEM CHARACTER_032[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x6c,
 };
 // character: ! (197)
-const unsigned char PROGMEM CHARACTER_033[] = {
+const uint8_t PROGMEM CHARACTER_033[] = {
     0xc5, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -76,7 +76,7 @@ const unsigned char PROGMEM CHARACTER_033[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x54,
 };
 // character: " (199)
-const unsigned char PROGMEM CHARACTER_034[] = {
+const uint8_t PROGMEM CHARACTER_034[] = {
     0xc7, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -102,7 +102,7 @@ const unsigned char PROGMEM CHARACTER_034[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x58,
 };
 // character: # (336)
-const unsigned char PROGMEM CHARACTER_035[] = {
+const uint8_t PROGMEM CHARACTER_035[] = {
     0x50, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -142,7 +142,7 @@ const unsigned char PROGMEM CHARACTER_035[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x04,
 };
 // character: $ (360)
-const unsigned char PROGMEM CHARACTER_036[] = {
+const uint8_t PROGMEM CHARACTER_036[] = {
     0x68, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -185,7 +185,7 @@ const unsigned char PROGMEM CHARACTER_036[] = {
 
 };
 // character: % (436)
-const unsigned char PROGMEM CHARACTER_037[] = {
+const uint8_t PROGMEM CHARACTER_037[] = {
     0xb4, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -235,7 +235,7 @@ const unsigned char PROGMEM CHARACTER_037[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x20,
 };
 // character: & (362)
-const unsigned char PROGMEM CHARACTER_038[] = {
+const uint8_t PROGMEM CHARACTER_038[] = {
     0x6a, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -278,7 +278,7 @@ const unsigned char PROGMEM CHARACTER_038[] = {
     0xfc, 0x1c,
 };
 // character: ' (127)
-const unsigned char PROGMEM CHARACTER_039[] = {
+const uint8_t PROGMEM CHARACTER_039[] = {
     0x7f, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -297,7 +297,7 @@ const unsigned char PROGMEM CHARACTER_039[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x74,
 };
 // character: ( (244)
-const unsigned char PROGMEM CHARACTER_040[] = {
+const uint8_t PROGMEM CHARACTER_040[] = {
     0xf4, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -328,7 +328,7 @@ const unsigned char PROGMEM CHARACTER_040[] = {
     0xfc, 0xfc, 0xfc, 0x6c,
 };
 // character: ) (250)
-const unsigned char PROGMEM CHARACTER_041[] = {
+const uint8_t PROGMEM CHARACTER_041[] = {
     0xfa, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -360,7 +360,7 @@ const unsigned char PROGMEM CHARACTER_041[] = {
 
 };
 // character: * (252)
-const unsigned char PROGMEM CHARACTER_042[] = {
+const uint8_t PROGMEM CHARACTER_042[] = {
     0xfc, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -392,7 +392,7 @@ const unsigned char PROGMEM CHARACTER_042[] = {
     0xfc, 0x0c,
 };
 // character: + (155)
-const unsigned char PROGMEM CHARACTER_043[] = {
+const uint8_t PROGMEM CHARACTER_043[] = {
     0x9b, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -414,7 +414,7 @@ const unsigned char PROGMEM CHARACTER_043[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0x28,
 };
 // character: , (129)
-const unsigned char PROGMEM CHARACTER_044[] = {
+const uint8_t PROGMEM CHARACTER_044[] = {
     0x81, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -433,7 +433,7 @@ const unsigned char PROGMEM CHARACTER_044[] = {
     0x98, 0x06, 0x13, 0x06, 0xa0, 0x05, 0x0b, 0x06, 0x64,
 };
 // character: - (83)
-const unsigned char PROGMEM CHARACTER_045[] = {
+const uint8_t PROGMEM CHARACTER_045[] = {
     0x53, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -448,7 +448,7 @@ const unsigned char PROGMEM CHARACTER_045[] = {
     0xfc, 0xfc, 0xb4,
 };
 // character: . (94)
-const unsigned char PROGMEM CHARACTER_046[] = {
+const uint8_t PROGMEM CHARACTER_046[] = {
     0x5e, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -464,7 +464,7 @@ const unsigned char PROGMEM CHARACTER_046[] = {
     0xfc, 0xfc, 0xfc, 0x54,
 };
 // character: / (218)
-const unsigned char PROGMEM CHARACTER_047[] = {
+const uint8_t PROGMEM CHARACTER_047[] = {
     0xda, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -492,7 +492,7 @@ const unsigned char PROGMEM CHARACTER_047[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x60,
 };
 // character: 0 (385)
-const unsigned char PROGMEM CHARACTER_048[] = {
+const uint8_t PROGMEM CHARACTER_048[] = {
     0x81, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -537,7 +537,7 @@ const unsigned char PROGMEM CHARACTER_048[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0x48,
 };
 // character: 1 (217)
-const unsigned char PROGMEM CHARACTER_049[] = {
+const uint8_t PROGMEM CHARACTER_049[] = {
     0xd9, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -565,7 +565,7 @@ const unsigned char PROGMEM CHARACTER_049[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xf8,
 };
 // character: 2 (220)
-const unsigned char PROGMEM CHARACTER_050[] = {
+const uint8_t PROGMEM CHARACTER_050[] = {
     0xdc, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -594,7 +594,7 @@ const unsigned char PROGMEM CHARACTER_050[] = {
 
 };
 // character: 3 (252)
-const unsigned char PROGMEM CHARACTER_051[] = {
+const uint8_t PROGMEM CHARACTER_051[] = {
     0xfc, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -626,7 +626,7 @@ const unsigned char PROGMEM CHARACTER_051[] = {
     0xfc, 0x48,
 };
 // character: 4 (301)
-const unsigned char PROGMEM CHARACTER_052[] = {
+const uint8_t PROGMEM CHARACTER_052[] = {
     0x2d, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -663,7 +663,7 @@ const unsigned char PROGMEM CHARACTER_052[] = {
     0xd8,
 };
 // character: 5 (269)
-const unsigned char PROGMEM CHARACTER_053[] = {
+const uint8_t PROGMEM CHARACTER_053[] = {
     0x0d, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -696,7 +696,7 @@ const unsigned char PROGMEM CHARACTER_053[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x44,
 };
 // character: 6 (332)
-const unsigned char PROGMEM CHARACTER_054[] = {
+const uint8_t PROGMEM CHARACTER_054[] = {
     0x4c, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -736,7 +736,7 @@ const unsigned char PROGMEM CHARACTER_054[] = {
     0xfc, 0x44,
 };
 // character: 7 (197)
-const unsigned char PROGMEM CHARACTER_055[] = {
+const uint8_t PROGMEM CHARACTER_055[] = {
     0xc5, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -762,7 +762,7 @@ const unsigned char PROGMEM CHARACTER_055[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x14,
 };
 // character: 8 (339)
-const unsigned char PROGMEM CHARACTER_056[] = {
+const uint8_t PROGMEM CHARACTER_056[] = {
     0x53, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -802,7 +802,7 @@ const unsigned char PROGMEM CHARACTER_056[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x40,
 };
 // character: 9 (321)
-const unsigned char PROGMEM CHARACTER_057[] = {
+const uint8_t PROGMEM CHARACTER_057[] = {
     0x41, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -841,7 +841,7 @@ const unsigned char PROGMEM CHARACTER_057[] = {
     0x50,
 };
 // character: : (124)
-const unsigned char PROGMEM CHARACTER_058[] = {
+const uint8_t PROGMEM CHARACTER_058[] = {
     0x7c, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -860,7 +860,7 @@ const unsigned char PROGMEM CHARACTER_058[] = {
     0xfc, 0xfc, 0xfc, 0x54,
 };
 // character: ; (159)
-const unsigned char PROGMEM CHARACTER_059[] = {
+const uint8_t PROGMEM CHARACTER_059[] = {
     0x9f, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -882,7 +882,7 @@ const unsigned char PROGMEM CHARACTER_059[] = {
     0x98, 0x06, 0x13, 0x06, 0xa0, 0x05, 0x0b, 0x06, 0x64,
 };
 // character: < (206)
-const unsigned char PROGMEM CHARACTER_060[] = {
+const uint8_t PROGMEM CHARACTER_060[] = {
     0xce, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -909,7 +909,7 @@ const unsigned char PROGMEM CHARACTER_060[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x9c,
 };
 // character: = (84)
-const unsigned char PROGMEM CHARACTER_061[] = {
+const uint8_t PROGMEM CHARACTER_061[] = {
     0x54, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -924,7 +924,7 @@ const unsigned char PROGMEM CHARACTER_061[] = {
     0xfc, 0xfc, 0xfc, 0x34,
 };
 // character: > (210)
-const unsigned char PROGMEM CHARACTER_062[] = {
+const uint8_t PROGMEM CHARACTER_062[] = {
     0xd2, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -952,7 +952,7 @@ const unsigned char PROGMEM CHARACTER_062[] = {
 
 };
 // character: ? (220)
-const unsigned char PROGMEM CHARACTER_063[] = {
+const uint8_t PROGMEM CHARACTER_063[] = {
     0xdc, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -981,7 +981,7 @@ const unsigned char PROGMEM CHARACTER_063[] = {
 
 };
 // character: @ (387)
-const unsigned char PROGMEM CHARACTER_064[] = {
+const uint8_t PROGMEM CHARACTER_064[] = {
     0x83, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1026,7 +1026,7 @@ const unsigned char PROGMEM CHARACTER_064[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x34,
 };
 // character: A (304)
-const unsigned char PROGMEM CHARACTER_065[] = {
+const uint8_t PROGMEM CHARACTER_065[] = {
     0x30, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1063,7 +1063,7 @@ const unsigned char PROGMEM CHARACTER_065[] = {
     0xfc, 0xfc, 0xfc, 0xb8,
 };
 // character: B (318)
-const unsigned char PROGMEM CHARACTER_066[] = {
+const uint8_t PROGMEM CHARACTER_066[] = {
     0x3e, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1101,7 +1101,7 @@ const unsigned char PROGMEM CHARACTER_066[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xf8,
 };
 // character: C (259)
-const unsigned char PROGMEM CHARACTER_067[] = {
+const uint8_t PROGMEM CHARACTER_067[] = {
     0x03, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1133,7 +1133,7 @@ const unsigned char PROGMEM CHARACTER_067[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x38,
 };
 // character: D (345)
-const unsigned char PROGMEM CHARACTER_068[] = {
+const uint8_t PROGMEM CHARACTER_068[] = {
     0x59, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1174,7 +1174,7 @@ const unsigned char PROGMEM CHARACTER_068[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0x0c,
 };
 // character: E (184)
-const unsigned char PROGMEM CHARACTER_069[] = {
+const uint8_t PROGMEM CHARACTER_069[] = {
     0xb8, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1199,7 +1199,7 @@ const unsigned char PROGMEM CHARACTER_069[] = {
     0xfc, 0xfc, 0xfc, 0xc8,
 };
 // character: F (197)
-const unsigned char PROGMEM CHARACTER_070[] = {
+const uint8_t PROGMEM CHARACTER_070[] = {
     0xc5, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1225,7 +1225,7 @@ const unsigned char PROGMEM CHARACTER_070[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x34,
 };
 // character: G (295)
-const unsigned char PROGMEM CHARACTER_071[] = {
+const uint8_t PROGMEM CHARACTER_071[] = {
     0x27, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1261,7 +1261,7 @@ const unsigned char PROGMEM CHARACTER_071[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0x38,
 };
 // character: H (290)
-const unsigned char PROGMEM CHARACTER_072[] = {
+const uint8_t PROGMEM CHARACTER_072[] = {
     0x22, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1297,7 +1297,7 @@ const unsigned char PROGMEM CHARACTER_072[] = {
 
 };
 // character: I (197)
-const unsigned char PROGMEM CHARACTER_073[] = {
+const uint8_t PROGMEM CHARACTER_073[] = {
     0xc5, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1323,7 +1323,7 @@ const unsigned char PROGMEM CHARACTER_073[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xd4,
 };
 // character: J (220)
-const unsigned char PROGMEM CHARACTER_074[] = {
+const uint8_t PROGMEM CHARACTER_074[] = {
     0xdc, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1352,7 +1352,7 @@ const unsigned char PROGMEM CHARACTER_074[] = {
 
 };
 // character: K (411)
-const unsigned char PROGMEM CHARACTER_075[] = {
+const uint8_t PROGMEM CHARACTER_075[] = {
     0x9b, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1400,7 +1400,7 @@ const unsigned char PROGMEM CHARACTER_075[] = {
     0x20,
 };
 // character: L (244)
-const unsigned char PROGMEM CHARACTER_076[] = {
+const uint8_t PROGMEM CHARACTER_076[] = {
     0xf4, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1431,7 +1431,7 @@ const unsigned char PROGMEM CHARACTER_076[] = {
     0xfc, 0xfc, 0xfc, 0xc8,
 };
 // character: M (457)
-const unsigned char PROGMEM CHARACTER_077[] = {
+const uint8_t PROGMEM CHARACTER_077[] = {
     0xc9, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1483,7 +1483,7 @@ const unsigned char PROGMEM CHARACTER_077[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xc0,
 };
 // character: N (432)
-const unsigned char PROGMEM CHARACTER_078[] = {
+const uint8_t PROGMEM CHARACTER_078[] = {
     0xb0, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1533,7 +1533,7 @@ const unsigned char PROGMEM CHARACTER_078[] = {
     0xfc, 0xc4,
 };
 // character: O (337)
-const unsigned char PROGMEM CHARACTER_079[] = {
+const uint8_t PROGMEM CHARACTER_079[] = {
     0x51, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1573,7 +1573,7 @@ const unsigned char PROGMEM CHARACTER_079[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x44,
 };
 // character: P (213)
-const unsigned char PROGMEM CHARACTER_080[] = {
+const uint8_t PROGMEM CHARACTER_080[] = {
     0xd5, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1601,7 +1601,7 @@ const unsigned char PROGMEM CHARACTER_080[] = {
     0xfc, 0xfc, 0x38,
 };
 // character: Q (401)
-const unsigned char PROGMEM CHARACTER_081[] = {
+const uint8_t PROGMEM CHARACTER_081[] = {
     0x91, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1648,7 +1648,7 @@ const unsigned char PROGMEM CHARACTER_081[] = {
     0xc8,
 };
 // character: R (380)
-const unsigned char PROGMEM CHARACTER_082[] = {
+const uint8_t PROGMEM CHARACTER_082[] = {
     0x7c, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1693,7 +1693,7 @@ const unsigned char PROGMEM CHARACTER_082[] = {
 
 };
 // character: S (263)
-const unsigned char PROGMEM CHARACTER_083[] = {
+const uint8_t PROGMEM CHARACTER_083[] = {
     0x07, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1726,7 +1726,7 @@ const unsigned char PROGMEM CHARACTER_083[] = {
     0xfc, 0xfc, 0x40,
 };
 // character: T (197)
-const unsigned char PROGMEM CHARACTER_084[] = {
+const uint8_t PROGMEM CHARACTER_084[] = {
     0xc5, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1752,7 +1752,7 @@ const unsigned char PROGMEM CHARACTER_084[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x04,
 };
 // character: U (319)
-const unsigned char PROGMEM CHARACTER_085[] = {
+const uint8_t PROGMEM CHARACTER_085[] = {
     0x3f, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1790,7 +1790,7 @@ const unsigned char PROGMEM CHARACTER_085[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x40,
 };
 // character: V (308)
-const unsigned char PROGMEM CHARACTER_086[] = {
+const uint8_t PROGMEM CHARACTER_086[] = {
     0x34, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1827,7 +1827,7 @@ const unsigned char PROGMEM CHARACTER_086[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x08,
 };
 // character: W (500)
-const unsigned char PROGMEM CHARACTER_087[] = {
+const uint8_t PROGMEM CHARACTER_087[] = {
     0xf4, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1884,7 +1884,7 @@ const unsigned char PROGMEM CHARACTER_087[] = {
 
 };
 // character: X (316)
-const unsigned char PROGMEM CHARACTER_088[] = {
+const uint8_t PROGMEM CHARACTER_088[] = {
     0x3c, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1922,7 +1922,7 @@ const unsigned char PROGMEM CHARACTER_088[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xbc,
 };
 // character: Y (292)
-const unsigned char PROGMEM CHARACTER_089[] = {
+const uint8_t PROGMEM CHARACTER_089[] = {
     0x24, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1958,7 +1958,7 @@ const unsigned char PROGMEM CHARACTER_089[] = {
     0xfc, 0xf8,
 };
 // character: Z (192)
-const unsigned char PROGMEM CHARACTER_090[] = {
+const uint8_t PROGMEM CHARACTER_090[] = {
     0xc0, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -1984,7 +1984,7 @@ const unsigned char PROGMEM CHARACTER_090[] = {
     0xfc, 0xc0,
 };
 // character: [ (280)
-const unsigned char PROGMEM CHARACTER_091[] = {
+const uint8_t PROGMEM CHARACTER_091[] = {
     0x18, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2019,7 +2019,7 @@ const unsigned char PROGMEM CHARACTER_091[] = {
 
 };
 // character: \ (218)
-const unsigned char PROGMEM CHARACTER_092[] = {
+const uint8_t PROGMEM CHARACTER_092[] = {
     0xda, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2047,7 +2047,7 @@ const unsigned char PROGMEM CHARACTER_092[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x04,
 };
 // character: ] (168)
-const unsigned char PROGMEM CHARACTER_093[] = {
+const uint8_t PROGMEM CHARACTER_093[] = {
     0xa8, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2070,7 +2070,7 @@ const unsigned char PROGMEM CHARACTER_093[] = {
     0x06, 0x6b, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x1c,
 };
 // character: ^ (168)
-const unsigned char PROGMEM CHARACTER_094[] = {
+const uint8_t PROGMEM CHARACTER_094[] = {
     0xa8, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2093,7 +2093,7 @@ const unsigned char PROGMEM CHARACTER_094[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x0c,
 };
 // character: _ (76)
-const unsigned char PROGMEM CHARACTER_095[] = {
+const uint8_t PROGMEM CHARACTER_095[] = {
     0x4c, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2107,7 +2107,7 @@ const unsigned char PROGMEM CHARACTER_095[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x0c,
 };
 // character: ` (102)
-const unsigned char PROGMEM CHARACTER_096[] = {
+const uint8_t PROGMEM CHARACTER_096[] = {
     0x66, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2124,7 +2124,7 @@ const unsigned char PROGMEM CHARACTER_096[] = {
     0xfc, 0xe4,
 };
 // character: a (245)
-const unsigned char PROGMEM CHARACTER_097[] = {
+const uint8_t PROGMEM CHARACTER_097[] = {
     0xf5, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2155,7 +2155,7 @@ const unsigned char PROGMEM CHARACTER_097[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0x58,
 };
 // character: b (304)
-const unsigned char PROGMEM CHARACTER_098[] = {
+const uint8_t PROGMEM CHARACTER_098[] = {
     0x30, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2192,7 +2192,7 @@ const unsigned char PROGMEM CHARACTER_098[] = {
     0xfc, 0xfc, 0xfc, 0x44,
 };
 // character: c (229)
-const unsigned char PROGMEM CHARACTER_099[] = {
+const uint8_t PROGMEM CHARACTER_099[] = {
     0xe5, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2221,7 +2221,7 @@ const unsigned char PROGMEM CHARACTER_099[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x3c,
 };
 // character: d (334)
-const unsigned char PROGMEM CHARACTER_100[] = {
+const uint8_t PROGMEM CHARACTER_100[] = {
     0x4e, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2261,7 +2261,7 @@ const unsigned char PROGMEM CHARACTER_100[] = {
     0xfc, 0xfc, 0xfc, 0x50,
 };
 // character: e (226)
-const unsigned char PROGMEM CHARACTER_101[] = {
+const uint8_t PROGMEM CHARACTER_101[] = {
     0xe2, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2290,7 +2290,7 @@ const unsigned char PROGMEM CHARACTER_101[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x40,
 };
 // character: f (229)
-const unsigned char PROGMEM CHARACTER_102[] = {
+const uint8_t PROGMEM CHARACTER_102[] = {
     0xe5, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2319,7 +2319,7 @@ const unsigned char PROGMEM CHARACTER_102[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x14,
 };
 // character: g (333)
-const unsigned char PROGMEM CHARACTER_103[] = {
+const uint8_t PROGMEM CHARACTER_103[] = {
     0x4d, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2359,7 +2359,7 @@ const unsigned char PROGMEM CHARACTER_103[] = {
     0x0a, 0x05, 0x40,
 };
 // character: h (334)
-const unsigned char PROGMEM CHARACTER_104[] = {
+const uint8_t PROGMEM CHARACTER_104[] = {
     0x4e, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2399,7 +2399,7 @@ const unsigned char PROGMEM CHARACTER_104[] = {
     0xfc, 0xfc, 0xfc, 0xc8,
 };
 // character: i (197)
-const unsigned char PROGMEM CHARACTER_105[] = {
+const uint8_t PROGMEM CHARACTER_105[] = {
     0xc5, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2425,7 +2425,7 @@ const unsigned char PROGMEM CHARACTER_105[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xd4,
 };
 // character: j (285)
-const unsigned char PROGMEM CHARACTER_106[] = {
+const uint8_t PROGMEM CHARACTER_106[] = {
     0x1d, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2460,7 +2460,7 @@ const unsigned char PROGMEM CHARACTER_106[] = {
     0x06, 0x1f, 0x06, 0x05, 0x58,
 };
 // character: k (377)
-const unsigned char PROGMEM CHARACTER_107[] = {
+const uint8_t PROGMEM CHARACTER_107[] = {
     0x79, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2504,7 +2504,7 @@ const unsigned char PROGMEM CHARACTER_107[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x20,
 };
 // character: l (257)
-const unsigned char PROGMEM CHARACTER_108[] = {
+const uint8_t PROGMEM CHARACTER_108[] = {
     0x01, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2536,7 +2536,7 @@ const unsigned char PROGMEM CHARACTER_108[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xcc,
 };
 // character: m (405)
-const unsigned char PROGMEM CHARACTER_109[] = {
+const uint8_t PROGMEM CHARACTER_109[] = {
     0x95, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2583,7 +2583,7 @@ const unsigned char PROGMEM CHARACTER_109[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xbc,
 };
 // character: n (293)
-const unsigned char PROGMEM CHARACTER_110[] = {
+const uint8_t PROGMEM CHARACTER_110[] = {
     0x25, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2619,7 +2619,7 @@ const unsigned char PROGMEM CHARACTER_110[] = {
     0xfc, 0xfc, 0xc8,
 };
 // character: o (278)
-const unsigned char PROGMEM CHARACTER_111[] = {
+const uint8_t PROGMEM CHARACTER_111[] = {
     0x16, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2653,7 +2653,7 @@ const unsigned char PROGMEM CHARACTER_111[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x48,
 };
 // character: p (286)
-const unsigned char PROGMEM CHARACTER_112[] = {
+const uint8_t PROGMEM CHARACTER_112[] = {
     0x1e, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2688,7 +2688,7 @@ const unsigned char PROGMEM CHARACTER_112[] = {
     0x23, 0x94, 0x23, 0x94, 0x23, 0x80,
 };
 // character: q (319)
-const unsigned char PROGMEM CHARACTER_113[] = {
+const uint8_t PROGMEM CHARACTER_113[] = {
     0x3f, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2726,7 +2726,7 @@ const unsigned char PROGMEM CHARACTER_113[] = {
     0x06, 0x1f, 0x94, 0x06, 0x1f, 0x94, 0x06, 0x1f, 0x14,
 };
 // character: r (196)
-const unsigned char PROGMEM CHARACTER_114[] = {
+const uint8_t PROGMEM CHARACTER_114[] = {
     0xc4, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2752,7 +2752,7 @@ const unsigned char PROGMEM CHARACTER_114[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x24,
 };
 // character: s (238)
-const unsigned char PROGMEM CHARACTER_115[] = {
+const uint8_t PROGMEM CHARACTER_115[] = {
     0xee, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2782,7 +2782,7 @@ const unsigned char PROGMEM CHARACTER_115[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0x44,
 };
 // character: t (194)
-const unsigned char PROGMEM CHARACTER_116[] = {
+const uint8_t PROGMEM CHARACTER_116[] = {
     0xc2, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2808,7 +2808,7 @@ const unsigned char PROGMEM CHARACTER_116[] = {
     0xfc, 0xfc, 0xfc, 0x34,
 };
 // character: u (294)
-const unsigned char PROGMEM CHARACTER_117[] = {
+const uint8_t PROGMEM CHARACTER_117[] = {
     0x26, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2844,7 +2844,7 @@ const unsigned char PROGMEM CHARACTER_117[] = {
     0xfc, 0xfc, 0xfc, 0x58,
 };
 // character: v (250)
-const unsigned char PROGMEM CHARACTER_118[] = {
+const uint8_t PROGMEM CHARACTER_118[] = {
     0xfa, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2876,7 +2876,7 @@ const unsigned char PROGMEM CHARACTER_118[] = {
 
 };
 // character: w (406)
-const unsigned char PROGMEM CHARACTER_119[] = {
+const uint8_t PROGMEM CHARACTER_119[] = {
     0x96, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2923,7 +2923,7 @@ const unsigned char PROGMEM CHARACTER_119[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0xfc, 0xd4,
 };
 // character: x (250)
-const unsigned char PROGMEM CHARACTER_120[] = {
+const uint8_t PROGMEM CHARACTER_120[] = {
     0xfa, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2955,7 +2955,7 @@ const unsigned char PROGMEM CHARACTER_120[] = {
 
 };
 // character: y (300)
-const unsigned char PROGMEM CHARACTER_121[] = {
+const uint8_t PROGMEM CHARACTER_121[] = {
     0x2c, 0x01,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -2992,7 +2992,7 @@ const unsigned char PROGMEM CHARACTER_121[] = {
 
 };
 // character: z (163)
-const unsigned char PROGMEM CHARACTER_122[] = {
+const uint8_t PROGMEM CHARACTER_122[] = {
     0xa3, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -3015,7 +3015,7 @@ const unsigned char PROGMEM CHARACTER_122[] = {
     0xfc, 0xfc, 0xc4,
 };
 // character: { (235)
-const unsigned char PROGMEM CHARACTER_123[] = {
+const uint8_t PROGMEM CHARACTER_123[] = {
     0xeb, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -3045,7 +3045,7 @@ const unsigned char PROGMEM CHARACTER_123[] = {
     0xfc, 0xfc, 0xfc, 0xfc, 0x20,
 };
 // character: | (158)
-const unsigned char PROGMEM CHARACTER_124[] = {
+const uint8_t PROGMEM CHARACTER_124[] = {
     0x9e, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -3067,7 +3067,7 @@ const unsigned char PROGMEM CHARACTER_124[] = {
     0x98, 0x1f, 0x98, 0x1f, 0x98, 0x1f, 0xfc, 0x04,
 };
 // character: } (242)
-const unsigned char PROGMEM CHARACTER_125[] = {
+const uint8_t PROGMEM CHARACTER_125[] = {
     0xf2, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,
@@ -3098,7 +3098,7 @@ const unsigned char PROGMEM CHARACTER_125[] = {
     0xfc, 0x70,
 };
 // character: ~ (133)
-const unsigned char PROGMEM CHARACTER_126[] = {
+const uint8_t PROGMEM CHARACTER_126[] = {
     0x85, 0x00,
     0x2d, 0x00,
     0x5d, 0x00,

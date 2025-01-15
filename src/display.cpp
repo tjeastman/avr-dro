@@ -1,6 +1,7 @@
 #include "display.h"
 
 #include <avr/io.h>
+#include <stdint.h>
 #include <util/delay.h>
 
 void Display::initialize(Orientation orientation)
@@ -446,13 +447,13 @@ void Display::initialize(Orientation orientation)
     command(0x2c00);
 }
 
-void Display::data(unsigned int d) const
+void Display::data(uint16_t d) const
 {
     PORTD |= _BV(PD7); // RS=HIGH
     transmit(d);
 }
 
-void Display::address(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2) const
+void Display::address(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2) const
 {
     // CASET: Column Address Set
     command(0x2a00);
@@ -476,7 +477,7 @@ void Display::address(unsigned int x1, unsigned int y1, unsigned int x2, unsigne
     command(0x2c00);
 }
 
-void Display::transmit(unsigned int v) const
+void Display::transmit(uint16_t v) const
 {
     PORTA = v >> 8;
     PORTC = v;
@@ -484,13 +485,13 @@ void Display::transmit(unsigned int v) const
     PORTG |= _BV(PG2); // WR=HIGH
 }
 
-void Display::command(unsigned int id) const
+void Display::command(uint16_t id) const
 {
     PORTD &= ~_BV(PD7); // RS=LOW
     transmit(id);
 }
 
-void Display::command(unsigned int id, unsigned int d) const
+void Display::command(uint16_t id, uint16_t d) const
 {
     command(id);
     data(d);

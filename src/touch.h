@@ -1,6 +1,8 @@
 #ifndef TOUCH_H_
 #define TOUCH_H_
 
+#include <stdint.h>
+
 #include "calibration.h"
 #include "ui/common.h"
 #include "ui/control.h"
@@ -16,11 +18,11 @@ public:
 private:
     Event event_;
     ui::Position position_;
-    int readings_;
+    int16_t readings_;
 
 public:
     TouchState();
-    void press(int, int, int);
+    void press(int16_t, int16_t, int16_t);
     void release();
     void dispatch(const Calibration&, ui::Control&);
 };
@@ -35,8 +37,8 @@ public:
     void dispatch(ui::Control&);
 
 private:
-    unsigned char transmit8(unsigned char);
-    unsigned int transmit16(unsigned int);
+    uint8_t transmit8(uint8_t);
+    uint16_t transmit16(uint16_t);
     void update();
     void clear();
     bool interrupt();

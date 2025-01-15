@@ -1,6 +1,8 @@
 #ifndef COORDINATE_H_
 #define COORDINATE_H_
 
+#include <stdint.h>
+
 #include "pendant.h"
 #include "touch.h"
 #include "ui/button.h"
@@ -25,7 +27,7 @@ private:
 
 class CoordinateDecimal : public ui::Decimal {
 private:
-    int origin_;
+    int16_t origin_;
 
 public:
     CoordinateDecimal(unsigned char, unsigned char);
@@ -75,7 +77,7 @@ private:
 
 public:
     CoordinateGrid();
-    void update(char, int, int);
+    void update(char, int16_t, int16_t);
 };
 
 class CoordinatePanel : public PendantAxisSpace {
@@ -83,7 +85,7 @@ private:
     CoordinateGrid grid_;
 
 public:
-    void project(char, int, int) override;
+    void project(char, int16_t, int16_t) override;
     void dispatch(Touch&);
     void draw(ui::Canvas&);
 };

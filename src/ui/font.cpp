@@ -1,6 +1,7 @@
 #include "font.h"
 
 #include <avr/pgmspace.h>
+#include <stdint.h>
 
 #include "canvas.h"
 #include "common.h"
@@ -8,7 +9,7 @@
 
 namespace ui {
 
-Character::Character(const unsigned char* data)
+Character::Character(const uint8_t* data)
 {
     data_ = data + 6;
     length_ = pgm_read_word(&data[0]);
@@ -19,13 +20,13 @@ Character::Character(const unsigned char* data)
 void Character::draw(const Canvas& canvas, const Color& color) const
 {
     canvas.dimension(shape_);
-    for (int i = 0; i < length_; ++i) {
-        unsigned char b = pgm_read_byte(&data_[i]);
+    for (int16_t i = 0; i < length_; ++i) {
+        uint8_t b = pgm_read_byte(&data_[i]);
         canvas.dot(color, b & 0x03, b >> 2);
     }
 }
 
-Font::Font(Character* characters, Character* character_invalid, signed char offset, signed char length)
+Font::Font(Character* characters, Character* character_invalid, int8_t offset, int8_t length)
 {
     characters_ = characters;
     character_invalid_ = character_invalid;
@@ -33,7 +34,7 @@ Font::Font(Character* characters, Character* character_invalid, signed char offs
     length_ = length;
 }
 
-const Character* Font::character(signed char code) const
+const Character* Font::character(int8_t code) const
 {
     code -= offset_;
     if (code < 0) {
@@ -44,7 +45,7 @@ const Character* Font::character(signed char code) const
     return &characters_[code];
 }
 
-const Character* Font::digit(unsigned int x) const
+const Character* Font::digit(uint16_t x) const
 {
     return character('0' + x % 10);
 }

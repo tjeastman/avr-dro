@@ -1,6 +1,8 @@
 #ifndef UI_INTEGER_H_
 #define UI_INTEGER_H_
 
+#include <stdint.h>
+
 #include "canvas.h"
 #include "control.h"
 
@@ -8,14 +10,14 @@ namespace ui {
 
 class UnsignedInteger : public Control {
 private:
-    static unsigned int divisors_[5];
-    unsigned char digits_;
+    static uint16_t divisors_[5];
+    uint8_t digits_;
     bool changed_;
-    unsigned int magnitude_;
+    uint16_t magnitude_;
 
 public:
-    UnsignedInteger(unsigned char);
-    void update(unsigned int);
+    UnsignedInteger(uint8_t);
+    void update(uint16_t);
     void draw(Canvas) override;
 };
 

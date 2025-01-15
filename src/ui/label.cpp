@@ -1,5 +1,7 @@
 #include "label.h"
 
+#include <stdint.h>
+
 #include "canvas.h"
 #include "common.h"
 #include "font.h"
@@ -10,7 +12,7 @@ Label::Label(const char* text)
     : text_ { text }
     , changed_ { true }
 {
-    for (signed char i = 0; i < 32 && text_[i] != '\0'; ++i) {
+    for (int8_t i = 0; i < 32 && text_[i] != '\0'; ++i) {
         shape_.expand(Direction::RIGHT, properties_.font.character(text_[i])->shape(), 1);
     }
 }
@@ -21,7 +23,7 @@ void Label::draw(Canvas canvas)
         return;
     }
 
-    for (signed char i = 0; i < 32 && text_[i] != '\0'; ++i) {
+    for (int8_t i = 0; i < 32 && text_[i] != '\0'; ++i) {
         const Character* character = properties_.font.character(text_[i]);
         character->draw(canvas, properties_.color);
         canvas.adjust(Direction::RIGHT, character->shape(), 1);

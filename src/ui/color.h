@@ -1,26 +1,28 @@
 #ifndef UI_COLOR_H_
 #define UI_COLOR_H_
 
+#include <stdint.h>
+
 namespace ui {
 
 class Color {
 private:
-    static unsigned char scale_[2][32];
-    unsigned int value_;
+    static uint8_t scale_[2][32];
+    uint16_t value_;
 
 public:
     Color()
         : value_ { 0 }
     {
     }
-    Color(unsigned char, unsigned char, unsigned char);
-    unsigned int value() const { return value_; }
-    Color blend(Color, unsigned char) const;
+    Color(uint8_t, uint8_t, uint8_t);
+    uint16_t value() const { return value_; }
+    Color blend(Color, uint8_t) const;
 
 private:
-    unsigned char R() const;
-    unsigned char G() const;
-    unsigned char B() const;
+    uint8_t R() const;
+    uint8_t G() const;
+    uint8_t B() const;
 };
 
 } // namespace ui

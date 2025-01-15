@@ -1,6 +1,8 @@
 #ifndef UI_DECIMAL_H_
 #define UI_DECIMAL_H_
 
+#include <stdint.h>
+
 #include "canvas.h"
 #include "control.h"
 #include "integer.h"
@@ -9,17 +11,17 @@ namespace ui {
 
 class Decimal : public Control {
 protected:
-    int value_;
+    int16_t value_;
 
 private:
-    unsigned int divisor_;
+    uint16_t divisor_;
     bool changed_;
     UnsignedInteger integer_;
     UnsignedInteger fractional_;
 
 public:
-    Decimal(unsigned char, unsigned char);
-    void update(int);
+    Decimal(uint8_t, uint8_t);
+    void update(int16_t);
     void draw(Canvas) override;
 
 private:

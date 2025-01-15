@@ -1,24 +1,26 @@
 #include "grid.h"
 
+#include <stdint.h>
+
 #include "canvas.h"
 #include "common.h"
 #include "control.h"
 
 namespace ui {
 
-Grid::Grid(Direction direction, char padding)
+Grid::Grid(Direction direction, int8_t padding)
     : count_ { 0 }
     , direction_ { direction }
     , padding_ { padding }
 {
-    for (signed char i = 0; i < 8; ++i) {
+    for (int8_t i = 0; i < 8; ++i) {
         controls_[i] = nullptr;
     }
 }
 
 void Grid::draw(Canvas canvas)
 {
-    for (signed char i = 0; i < count_; ++i) {
+    for (int8_t i = 0; i < count_; ++i) {
         Control* control = controls_[i];
         control->draw(canvas);
         canvas.adjust(direction_, control->shape(), padding_);
@@ -60,7 +62,7 @@ Control* Grid::control(Position* position)
         return nullptr;
     }
 
-    for (signed char i = 0; i < count_; ++i) {
+    for (int8_t i = 0; i < count_; ++i) {
         if (controls_[i]->contains(*position)) {
             return controls_[i];
         }

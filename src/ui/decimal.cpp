@@ -7,7 +7,7 @@
 
 namespace ui {
 
-Decimal::Decimal(unsigned char n, unsigned char m)
+Decimal::Decimal(uint8_t n, uint8_t m)
     : value_ { 0 }
     , divisor_ { 1 }
     , changed_ { true }
@@ -19,19 +19,19 @@ Decimal::Decimal(unsigned char n, unsigned char m)
     shape_.expand(Direction::RIGHT, properties_.font.character('.')->shape(), 1);
     shape_.expand(Direction::RIGHT, fractional_.shape(), 0);
 
-    for (unsigned char i = 0; i < m; ++i) {
+    for (uint8_t i = 0; i < m; ++i) {
         divisor_ *= 10;
     }
 }
 
-void Decimal::update(int value)
+void Decimal::update(int16_t value)
 {
     if (value_ == value) {
         return;
     }
 
     // safely calculate absolute value
-    unsigned int magnitude;
+    uint16_t magnitude;
     if (value >= 0) {
         magnitude = value;
     } else if (value > INT16_MIN) {
