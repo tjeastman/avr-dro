@@ -7,12 +7,12 @@
 
 namespace ui {
 
-Decimal::Decimal(unsigned char n, unsigned char m):
-    value_{0},
-    divisor_{1},
-    changed_{true},
-    integer_{n},
-    fractional_{m}
+Decimal::Decimal(unsigned char n, unsigned char m)
+    : value_ { 0 }
+    , divisor_ { 1 }
+    , changed_ { true }
+    , integer_ { n }
+    , fractional_ { m }
 {
     shape_.expand(Direction::RIGHT, properties_.font.character('-')->shape(), 1);
     shape_.expand(Direction::RIGHT, integer_.shape(), 0);
@@ -62,9 +62,9 @@ void Decimal::draw(Canvas canvas)
     changed_ = false;
 }
 
-void Decimal::draw_sign(Canvas &canvas)
+void Decimal::draw_sign(Canvas& canvas)
 {
-    const Character *character = properties_.font.character('-');
+    const Character* character = properties_.font.character('-');
     if (value_ < 0) {
         character->draw(canvas, properties_.color);
     } else {
@@ -74,17 +74,17 @@ void Decimal::draw_sign(Canvas &canvas)
     canvas.adjust(Direction::RIGHT, character->shape(), 1);
 }
 
-void Decimal::draw_integer(Canvas &canvas)
+void Decimal::draw_integer(Canvas& canvas)
 {
     integer_.draw(canvas);
     canvas.adjust(Direction::RIGHT, integer_.shape(), 0);
 }
 
-void Decimal::draw_dot(Canvas &canvas)
+void Decimal::draw_dot(Canvas& canvas)
 {
-    const Character *character = properties_.font.character('.');
+    const Character* character = properties_.font.character('.');
     character->draw(canvas, properties_.color);
     canvas.adjust(Direction::RIGHT, character->shape(), 1);
 }
 
-}  // namespace ui
+} // namespace ui

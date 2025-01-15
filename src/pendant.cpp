@@ -3,12 +3,12 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
 
-PendantAxis::PendantAxis(char identifier, int minimum, int maximum):
-    identifier_{identifier},
-    minimum_{minimum},
-    maximum_{maximum},
-    position_{0},
-    rate_{0}
+PendantAxis::PendantAxis(char identifier, int minimum, int maximum)
+    : identifier_ { identifier }
+    , minimum_ { minimum }
+    , maximum_ { maximum }
+    , position_ { 0 }
+    , rate_ { 0 }
 {
 }
 
@@ -39,16 +39,16 @@ void PendantAxis::pace(int rate) volatile
     rate_ = rate;
 }
 
-void PendantAxis::project(PendantAxisSpace &space) const
+void PendantAxis::project(PendantAxisSpace& space) const
 {
     space.project(identifier_, position_, rate_);
 }
 
-Pendant::Pendant():
-    axes_{{0, 0, 0}, {'X', -14750, 14750}, {'Y', -12000, 12000}, {'Z', -25000, 0}},
-    index_{0},
-    delta_{0},
-    state_{0}
+Pendant::Pendant()
+    : axes_ { { 0, 0, 0 }, { 'X', -14750, 14750 }, { 'Y', -12000, 12000 }, { 'Z', -25000, 0 } }
+    , index_ { 0 }
+    , delta_ { 0 }
+    , state_ { 0 }
 {
 }
 
@@ -101,14 +101,14 @@ void Pendant::pace(unsigned int input) volatile
     axes_[index_].pace(input & 0x3f8);
 }
 
-void Pendant::project(PendantAxisSpace &space) const
+void Pendant::project(PendantAxisSpace& space) const
 {
     axes_[index_].project(space);
 }
 
-Pendant *Pendant::instance = nullptr;
+Pendant* Pendant::instance = nullptr;
 
-void Pendant::initialize(Pendant *pendant)
+void Pendant::initialize(Pendant* pendant)
 {
     instance = pendant;
 

@@ -13,10 +13,12 @@
 class CoordinateLabel : public ui::Label {
 private:
     bool selected_;
+
 public:
-    CoordinateLabel(const char *);
+    CoordinateLabel(const char*);
     void draw(ui::Canvas) override;
     void select(bool);
+
 private:
     void draw_selector(ui::Canvas);
 };
@@ -24,6 +26,7 @@ private:
 class CoordinateDecimal : public ui::Decimal {
 private:
     int origin_;
+
 public:
     CoordinateDecimal(unsigned char, unsigned char);
     void update(int);
@@ -32,9 +35,10 @@ public:
 
 class CoordinateResetButton : public ui::Button {
 private:
-    CoordinateDecimal &decimal_;
+    CoordinateDecimal& decimal_;
+
 public:
-    CoordinateResetButton(const char *, CoordinateDecimal &);
+    CoordinateResetButton(const char*, CoordinateDecimal&);
     void release(ui::Position) override;
 };
 
@@ -46,6 +50,7 @@ private:
     ui::Label label_unit_;
     const char button_text_[3];
     CoordinateResetButton button_;
+
 public:
     CoordinateAxisGrid(char);
     void update(int);
@@ -57,6 +62,7 @@ private:
     CoordinateLabel label_;
     ui::Decimal decimal_;
     ui::Label label_unit_;
+
 public:
     CoordinateFeedGrid();
     void update(int);
@@ -66,6 +72,7 @@ class CoordinateGrid : public ui::Grid {
 private:
     CoordinateAxisGrid axes_[3];
     CoordinateFeedGrid feed_;
+
 public:
     CoordinateGrid();
     void update(char, int, int);
@@ -74,10 +81,11 @@ public:
 class CoordinatePanel : public PendantAxisSpace {
 private:
     CoordinateGrid grid_;
+
 public:
     void project(char, int, int) override;
-    void dispatch(Touch &);
-    void draw(ui::Canvas &);
+    void dispatch(Touch&);
+    void draw(ui::Canvas&);
 };
 
-#endif  // COORDINATE_H_
+#endif // COORDINATE_H_

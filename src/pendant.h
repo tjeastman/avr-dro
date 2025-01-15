@@ -13,12 +13,13 @@ private:
     int maximum_;
     int position_;
     int rate_;
+
 public:
     PendantAxis(char, int, int);
     void increment(int) volatile;
     void decrement(int) volatile;
     void pace(int) volatile;
-    void project(PendantAxisSpace &) const;
+    void project(PendantAxisSpace&) const;
 };
 
 class Pendant {
@@ -27,14 +28,15 @@ private:
     int index_;
     int delta_;
     unsigned char state_;
+
 public:
     Pendant();
     void turn(unsigned char) volatile;
     void press(unsigned char) volatile;
     void pace(unsigned int) volatile;
-    void project(PendantAxisSpace &) const;
-    static Pendant *instance;
-    static void initialize(Pendant *);
+    void project(PendantAxisSpace&) const;
+    static Pendant* instance;
+    static void initialize(Pendant*);
 };
 
-#endif  // PENDANT_H_
+#endif // PENDANT_H_

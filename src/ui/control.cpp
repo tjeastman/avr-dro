@@ -5,11 +5,11 @@
 
 namespace ui {
 
-const ControlProperties& Control::properties_{Font::medium, Color(2, 28, 4)};
+const ControlProperties& Control::properties_ { Font::medium, Color(2, 28, 4) };
 
-bool Control::contains(const Position &position) const
+bool Control::contains(const Position& position) const
 {
     return shape_.contains(position.x, position.y);
 }
 
-}  // namespace ui
+} // namespace ui

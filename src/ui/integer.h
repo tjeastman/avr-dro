@@ -12,12 +12,13 @@ private:
     unsigned char digits_;
     bool changed_;
     unsigned int magnitude_;
+
 public:
     UnsignedInteger(unsigned char);
     void update(unsigned int);
     void draw(Canvas) override;
 };
 
-}  // namespace ui
+} // namespace ui
 
-#endif  // UI_INTEGER_H_
+#endif // UI_INTEGER_H_

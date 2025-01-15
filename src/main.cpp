@@ -5,8 +5,8 @@
 #include "calibration.h"
 #include "coordinate.h"
 #include "display.h"
-#include "touch.h"
 #include "pendant.h"
+#include "touch.h"
 #include "ui/canvas.h"
 #include "ui/color.h"
 #include "ui/common.h"
@@ -55,10 +55,10 @@ int main(void)
     Display display = Display();
     display.initialize(Display::Orientation::LANDSCAPE);
 
-    const ui::Shape &shape = display.shape();
+    const ui::Shape& shape = display.shape();
     ui::Canvas canvas = ui::Canvas(display);
     canvas.select(ui::Color(0, 0, 0));
-    canvas.move(ui::Position{0, 0});
+    canvas.move(ui::Position { 0, 0 });
     canvas.dimension(shape);
     canvas.fill(shape);
 

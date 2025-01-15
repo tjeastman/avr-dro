@@ -9,10 +9,10 @@ namespace ui {
 
 class Button : public Label {
 public:
-    Button(const char *);
+    Button(const char*);
     void draw(Canvas) override;
 };
 
-}  // namespace ui
+} // namespace ui
 
-#endif  // UI_BUTTON_H_
+#endif // UI_BUTTON_H_

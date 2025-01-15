@@ -10,21 +10,24 @@ namespace ui {
 class Decimal : public Control {
 protected:
     int value_;
+
 private:
     unsigned int divisor_;
     bool changed_;
     UnsignedInteger integer_;
     UnsignedInteger fractional_;
+
 public:
     Decimal(unsigned char, unsigned char);
     void update(int);
     void draw(Canvas) override;
+
 private:
-    void draw_sign(Canvas &);
-    void draw_integer(Canvas &);
-    void draw_dot(Canvas &);
+    void draw_sign(Canvas&);
+    void draw_integer(Canvas&);
+    void draw_dot(Canvas&);
 };
 
-}  // namespace ui
+} // namespace ui
 
-#endif  // UI_DECIMAL_H_
+#endif // UI_DECIMAL_H_

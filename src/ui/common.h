@@ -4,7 +4,11 @@
 namespace ui {
 
 enum class Direction {
-    NONE, LEFT, UP, RIGHT, DOWN
+    NONE,
+    LEFT,
+    UP,
+    RIGHT,
+    DOWN
 };
 
 struct Shape {
@@ -20,6 +24,6 @@ struct Position {
     void adjust(Direction, Shape, signed char);
 };
 
-}  // namespace ui
+} // namespace ui
 
-#endif  // UI_COMMON_H_
+#endif // UI_COMMON_H_

@@ -9,23 +9,27 @@
 namespace ui {
 
 struct ControlProperties {
-    const Font &font;
-    const Color &color;
+    const Font& font;
+    const Color& color;
 };
 
 class Control {
 protected:
-    static const ControlProperties &properties_;
+    static const ControlProperties& properties_;
     Shape shape_;
+
 public:
-    Control(): shape_{0, 0} {}
-    const Shape &shape() const { return shape_; }
+    Control()
+        : shape_ { 0, 0 }
+    {
+    }
+    const Shape& shape() const { return shape_; }
     virtual void draw(Canvas) = 0;
-    virtual void press(Position) {}
-    virtual void release(Position) {}
-    bool contains(const Position &) const;
+    virtual void press(Position) { }
+    virtual void release(Position) { }
+    bool contains(const Position&) const;
 };
 
-}  // namespace ui
+} // namespace ui
 
-#endif  // UI_CONTROL_H_
+#endif // UI_CONTROL_H_

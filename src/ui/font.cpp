@@ -2,13 +2,13 @@
 
 #include <avr/pgmspace.h>
 
-#include "common.h"
 #include "canvas.h"
+#include "common.h"
 #include "font.inc"
 
 namespace ui {
 
-Character::Character(const unsigned char *data)
+Character::Character(const unsigned char* data)
 {
     data_ = data + 6;
     length_ = pgm_read_word(&data[0]);
@@ -16,7 +16,7 @@ Character::Character(const unsigned char *data)
     shape_.height = pgm_read_word(&data[4]);
 }
 
-void Character::draw(const Canvas &canvas, const Color &color) const
+void Character::draw(const Canvas& canvas, const Color& color) const
 {
     canvas.dimension(shape_);
     for (int i = 0; i < length_; ++i) {
@@ -25,7 +25,7 @@ void Character::draw(const Canvas &canvas, const Color &color) const
     }
 }
 
-Font::Font(Character *characters, Character *character_invalid, signed char offset, signed char length)
+Font::Font(Character* characters, Character* character_invalid, signed char offset, signed char length)
 {
     characters_ = characters;
     character_invalid_ = character_invalid;
@@ -33,7 +33,7 @@ Font::Font(Character *characters, Character *character_invalid, signed char offs
     length_ = length;
 }
 
-const Character *Font::character(signed char code) const
+const Character* Font::character(signed char code) const
 {
     code -= offset_;
     if (code < 0) {
@@ -44,7 +44,7 @@ const Character *Font::character(signed char code) const
     return &characters_[code];
 }
 
-const Character *Font::digit(unsigned int x) const
+const Character* Font::digit(unsigned int x) const
 {
     return character('0' + x % 10);
 }
@@ -149,6 +149,6 @@ static Character characters[] = {
 
 static Character character_invalid = Character(CHARACTER_INVALID);
 
-Font Font::medium = Font{characters, &character_invalid, 32, 95};
+Font Font::medium = Font { characters, &character_invalid, 32, 95 };
 
-}  // namespace ui
+} // namespace ui

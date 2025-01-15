@@ -6,10 +6,10 @@
 
 namespace ui {
 
-Grid::Grid(Direction direction, char padding):
-    count_{0},
-    direction_{direction},
-    padding_{padding}
+Grid::Grid(Direction direction, char padding)
+    : count_ { 0 }
+    , direction_ { direction }
+    , padding_ { padding }
 {
     for (signed char i = 0; i < 8; ++i) {
         controls_[i] = nullptr;
@@ -19,13 +19,13 @@ Grid::Grid(Direction direction, char padding):
 void Grid::draw(Canvas canvas)
 {
     for (signed char i = 0; i < count_; ++i) {
-        Control *control = controls_[i];
+        Control* control = controls_[i];
         control->draw(canvas);
         canvas.adjust(direction_, control->shape(), padding_);
     }
 }
 
-void Grid::add(Control *control)
+void Grid::add(Control* control)
 {
     if (count_ < 8) {
         controls_[count_++] = control;
@@ -35,7 +35,7 @@ void Grid::add(Control *control)
 
 void Grid::press(Position position)
 {
-    Control *c = control(&position);
+    Control* c = control(&position);
     if (c != nullptr) {
         c->press(position);
     }
@@ -43,13 +43,13 @@ void Grid::press(Position position)
 
 void Grid::release(Position position)
 {
-    Control *c = control(&position);
+    Control* c = control(&position);
     if (c != nullptr) {
         c->release(position);
     }
 }
 
-Control *Grid::control(Position *position)
+Control* Grid::control(Position* position)
 {
     Direction direction;
     if (direction_ == Direction::RIGHT) {
@@ -70,4 +70,4 @@ Control *Grid::control(Position *position)
     return nullptr;
 }
 
-}  // namespace ui
+} // namespace ui

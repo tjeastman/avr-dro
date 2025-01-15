@@ -456,24 +456,24 @@ void Display::address(unsigned int x1, unsigned int y1, unsigned int x2, unsigne
 {
     // CASET: Column Address Set
     command(0x2a00);
-	data(x1 >> 8);
+    data(x1 >> 8);
     command(0x2a01);
-	data(x1);
+    data(x1);
     command(0x2a02);
-	data(x2 >> 8);
+    data(x2 >> 8);
     command(0x2a03);
-	data(x2);
+    data(x2);
     // RASET: Row Address Set
     command(0x2b00);
-	data(y1 >> 8);
+    data(y1 >> 8);
     command(0x2b01);
-	data(y1);
+    data(y1);
     command(0x2b02);
-	data(y2 >> 8);
+    data(y2 >> 8);
     command(0x2b03);
-	data(y2);
+    data(y2);
     // RAMWR: Memory Write
-	command(0x2c00);
+    command(0x2c00);
 }
 
 void Display::transmit(unsigned int v) const

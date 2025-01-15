@@ -6,10 +6,10 @@
 #include "ui/common.h"
 #include "ui/control.h"
 
-TouchState::TouchState():
-    event_{Event::NONE},
-    position_{0, 0},
-    readings_{0}
+TouchState::TouchState()
+    : event_ { Event::NONE }
+    , position_ { 0, 0 }
+    , readings_ { 0 }
 {
 }
 
@@ -46,7 +46,7 @@ void TouchState::release()
     }
 }
 
-void TouchState::dispatch(const Calibration &calibration, ui::Control &control)
+void TouchState::dispatch(const Calibration& calibration, ui::Control& control)
 {
     if (event_ == TouchState::Event::NONE) {
         return;
@@ -62,13 +62,13 @@ void TouchState::dispatch(const Calibration &calibration, ui::Control &control)
     }
 }
 
-Touch::Touch(const Calibration &calibration):
-    calibration_{calibration},
-    state_{}
+Touch::Touch(const Calibration& calibration)
+    : calibration_ { calibration }
+    , state_ {}
 {
 }
 
-void Touch::dispatch(ui::Control &control)
+void Touch::dispatch(ui::Control& control)
 {
     transition();
     state_.dispatch(calibration_, control);

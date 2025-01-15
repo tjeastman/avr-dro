@@ -40,4 +40,4 @@ void Position::adjust(Direction direction, Shape shape, signed char buffer)
     }
 }
 
-}  // namespace ui
+} // namespace ui

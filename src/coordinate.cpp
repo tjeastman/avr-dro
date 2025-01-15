@@ -7,9 +7,11 @@
 #include "ui/decimal.h"
 #include "ui/grid.h"
 
-CoordinateLabel::CoordinateLabel(const char *text): Label(text), selected_{false}
+CoordinateLabel::CoordinateLabel(const char* text)
+    : Label(text)
+    , selected_ { false }
 {
-    ui::Shape shape{30, 0};
+    ui::Shape shape { 30, 0 };
     shape_.expand(ui::Direction::RIGHT, shape, 0);
 }
 
@@ -21,14 +23,14 @@ void CoordinateLabel::draw(ui::Canvas canvas)
 
     draw_selector(canvas);
 
-    ui::Shape shape{30, 0};
+    ui::Shape shape { 30, 0 };
     canvas.adjust(ui::Direction::RIGHT, shape, 0);
     Label::draw(canvas);
 }
 
 void CoordinateLabel::draw_selector(ui::Canvas canvas)
 {
-    ui::Shape shape{0, 0};
+    ui::Shape shape { 0, 0 };
 
     canvas.adjust(ui::Direction::RIGHT, shape, 12);
     canvas.adjust(ui::Direction::DOWN, shape, 8);
@@ -49,9 +51,9 @@ void CoordinateLabel::select(bool selected)
     changed_ = true;
 }
 
-CoordinateDecimal::CoordinateDecimal(unsigned char n, unsigned char m):
-    Decimal(n, m),
-    origin_{0}
+CoordinateDecimal::CoordinateDecimal(unsigned char n, unsigned char m)
+    : Decimal(n, m)
+    , origin_ { 0 }
 {
 }
 
@@ -66,9 +68,9 @@ void CoordinateDecimal::reset()
     Decimal::update(0);
 }
 
-CoordinateResetButton::CoordinateResetButton(const char *text, CoordinateDecimal &decimal):
-    Button(text),
-    decimal_{decimal}
+CoordinateResetButton::CoordinateResetButton(const char* text, CoordinateDecimal& decimal)
+    : Button(text)
+    , decimal_ { decimal }
 {
 }
 
@@ -78,14 +80,14 @@ void CoordinateResetButton::release(ui::Position position)
     Button::release(position);
 }
 
-CoordinateAxisGrid::CoordinateAxisGrid(char axis):
-    Grid(ui::Direction::RIGHT, 20),
-    label_text_{axis, ':', '\0'},
-    label_{label_text_},
-    decimal_{3, 2},
-    label_unit_{"mm"},
-    button_text_{axis, '0', '\0'},
-    button_{button_text_, decimal_}
+CoordinateAxisGrid::CoordinateAxisGrid(char axis)
+    : Grid(ui::Direction::RIGHT, 20)
+    , label_text_ { axis, ':', '\0' }
+    , label_ { label_text_ }
+    , decimal_ { 3, 2 }
+    , label_unit_ { "mm" }
+    , button_text_ { axis, '0', '\0' }
+    , button_ { button_text_, decimal_ }
 {
     add(&label_);
     add(&decimal_);
@@ -104,11 +106,11 @@ void CoordinateAxisGrid::select(bool selected)
     label_.select(selected);
 }
 
-CoordinateFeedGrid::CoordinateFeedGrid():
-    Grid(ui::Direction::RIGHT, 20),
-    label_{"F:"},
-    decimal_{3, 1},
-    label_unit_{"mm/min"}
+CoordinateFeedGrid::CoordinateFeedGrid()
+    : Grid(ui::Direction::RIGHT, 20)
+    , label_ { "F:" }
+    , decimal_ { 3, 1 }
+    , label_unit_ { "mm/min" }
 {
     add(&label_);
     add(&decimal_);
@@ -120,10 +122,10 @@ void CoordinateFeedGrid::update(int rate)
     decimal_.update(rate);
 }
 
-CoordinateGrid::CoordinateGrid():
-    Grid{ui::Direction::DOWN, 20},
-    axes_{{'X'}, {'Y'}, {'Z'}},
-    feed_{}
+CoordinateGrid::CoordinateGrid()
+    : Grid { ui::Direction::DOWN, 20 }
+    , axes_ { { 'X' }, { 'Y' }, { 'Z' } }
+    , feed_ {}
 {
     add(&axes_[0]);
     add(&axes_[1]);
@@ -157,12 +159,12 @@ void CoordinatePanel::project(char axis, int position, int rate)
     grid_.update(axis, position, rate);
 }
 
-void CoordinatePanel::dispatch(Touch &touch)
+void CoordinatePanel::dispatch(Touch& touch)
 {
     touch.dispatch(grid_);
 }
 
-void CoordinatePanel::draw(ui::Canvas &canvas)
+void CoordinatePanel::draw(ui::Canvas& canvas)
 {
     grid_.draw(canvas);
 }

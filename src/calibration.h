@@ -6,9 +6,10 @@
 class Calibration {
 private:
     float theta_[2][3];
+
 public:
     Calibration();
     ui::Position translate(ui::Position) const;
 };
 
-#endif  // CALIBRATION_H_
+#endif // CALIBRATION_H_

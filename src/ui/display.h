@@ -9,6 +9,6 @@ public:
     virtual void address(unsigned int, unsigned int, unsigned int, unsigned int) const = 0;
 };
 
-}  // namespace ui
+} // namespace ui
 
-#endif  // UI_DISPLAY_H_
+#endif // UI_DISPLAY_H_

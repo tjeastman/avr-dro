@@ -6,7 +6,8 @@
 
 namespace ui {
 
-Button::Button(const char *text): Label(text)
+Button::Button(const char* text)
+    : Label(text)
 {
     shape_.width += 16;
     shape_.height += 8;
@@ -18,7 +19,7 @@ void Button::draw(Canvas canvas)
         return;
     }
 
-    Shape shape{0, 0};
+    Shape shape { 0, 0 };
 
     canvas.adjust(Direction::RIGHT, shape, 8);
     Label::draw(canvas);
@@ -62,4 +63,4 @@ void Button::draw(Canvas canvas)
     changed_ = false;
 }
 
-}  // namespace ui
+} // namespace ui

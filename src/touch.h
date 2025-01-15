@@ -8,26 +8,32 @@
 class TouchState {
 public:
     enum class Event {
-        NONE, PRESS, RELEASE
+        NONE,
+        PRESS,
+        RELEASE
     };
+
 private:
     Event event_;
     ui::Position position_;
     int readings_;
+
 public:
     TouchState();
     void press(int, int, int);
     void release();
-    void dispatch(const Calibration &, ui::Control &);
+    void dispatch(const Calibration&, ui::Control&);
 };
 
 class Touch {
 private:
-    const Calibration &calibration_;
+    const Calibration& calibration_;
     TouchState state_;
+
 public:
-    Touch(const Calibration &);
-    void dispatch(ui::Control &);
+    Touch(const Calibration&);
+    void dispatch(ui::Control&);
+
 private:
     unsigned char transmit8(unsigned char);
     unsigned int transmit16(unsigned int);
@@ -37,4 +43,4 @@ private:
     void transition();
 };
 
-#endif  // TOUCH_H_
+#endif // TOUCH_H_

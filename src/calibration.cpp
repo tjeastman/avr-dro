@@ -6,7 +6,7 @@
 
 Calibration::Calibration()
 {
-    eeprom_read_block((void *)theta_, 0, 2 * 3 * sizeof(float));
+    eeprom_read_block((void*)theta_, 0, 2 * 3 * sizeof(float));
 }
 
 ui::Position Calibration::translate(ui::Position position) const
