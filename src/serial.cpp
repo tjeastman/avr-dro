@@ -16,7 +16,7 @@ void Serial::operator<<(const char *s) const
 
 void Serial::write(char c) const
 {
-    while (!(UCSR0A & (1 << UDRE0))) {}
+    loop_until_bit_is_set(UCSR0A, UDRE0);
     UDR0 = c;
 }
 
