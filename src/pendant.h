@@ -31,6 +31,7 @@ private:
     int16_t delta_;
     uint8_t state_;
     PendantAxisSpace &commands_;
+    bool changed_;
 
 public:
     Pendant(PendantAxisSpace &);

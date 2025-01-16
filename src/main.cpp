@@ -76,16 +76,6 @@ int main(void)
     canvas.fill(shape);
 
     Serial serial = Serial();
-    serial << 'H';
-    serial << 'e';
-    serial << 'l';
-    serial << 'l';
-    serial << 'o';
-    serial << '!';
-    serial << '\r';
-    serial << '\n';
-    _delay_ms(1000);
-
     serial << "Hello, world!\r\n";
     _delay_ms(1000);
 
@@ -98,6 +88,8 @@ int main(void)
     serial << Command('Y', -592, 99);
     serial << Command('Z', -3, -10);
     _delay_ms(1000);
+
+    serial << "Real commands:\r\n";
 
     Calibration calibration = Calibration();
     Touch touch = Touch(calibration);

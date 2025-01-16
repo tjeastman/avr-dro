@@ -51,6 +51,7 @@ Pendant::Pendant(PendantAxisSpace& commands)
     , delta_ { 0 }
     , state_ { 0 }
     , commands_{commands}
+    , changed_{false}
 {
 }
 
@@ -62,10 +63,13 @@ void Pendant::turn(uint8_t input) volatile
     state_ |= input;
     state_ &= 0x0f;
 
+    // FIX: what if axis is at a limit?
     if (state_ == 0x06) {
         axes_[index_].increment(delta_);
+        changed_ = true;
     } else if (state_ == 0x0c) {
         axes_[index_].decrement(delta_);
+        changed_ = true;
     }
 }
 
@@ -77,9 +81,11 @@ void Pendant::press(uint8_t input) volatile
         return;
     }
 
-    if (index_ > 0) {
+    if (changed_ && index_ > 0) {
         axes_[index_].project(commands_);
     }
+
+    changed_ = false;
 
     if (input & _BV(0)) {
         index_ = 1;
