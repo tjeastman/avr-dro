@@ -57,6 +57,7 @@ Pendant::Pendant(CommandQueue& commands)
     , state_ { 0 }
     , commands_ { commands }
     , changed_ { false }
+    , ticks_{0}
 {
 }
 
@@ -90,6 +91,7 @@ void Pendant::press(uint8_t input) volatile
         axes_[index_].project(commands_);
     }
 
+    ticks_ = 0;
     changed_ = false;
 
     if (input & _BV(0)) {
@@ -116,6 +118,23 @@ void Pendant::press(uint8_t input) volatile
 void Pendant::pace(uint16_t input) volatile
 {
     axes_[index_].pace(input & 0x3f8);
+}
+
+void Pendant::clock() volatile
+{
+    ticks_++;
+
+    if (ticks_ < 10) {
+        return;
+    } else if (!changed_) {
+        return;
+    } else if (index_ == 0) {
+        return;
+    }
+
+    axes_[index_].project(commands_);
+    ticks_ = 0;
+    changed_ = false;
 }
 
 void Pendant::project(PendantAxisSpace& space) const
@@ -154,6 +173,16 @@ void Pendant::initialize(Pendant* pendant)
     ADCSRA |= _BV(ADPS1);
     ADCSRA |= _BV(ADPS0);
     ADCSRB |= _BV(MUX5);
+
+    // set up timer for fast PWM, prescaler=256, frequency=5Hz
+    TIMSK1 |= _BV(TOIE1);
+    TCCR1A |= _BV(WGM10);
+    TCCR1A |= _BV(WGM11);
+    TCCR1B |= _BV(WGM12);
+    TCCR1B |= _BV(WGM13);
+    TCCR1B |= _BV(CS12);
+    OCR1AH = (12500 >> 8) & 0xff;
+    OCR1AL = 12500 & 0xff;
 }
 
 ISR(INT0_vect)
@@ -169,4 +198,9 @@ ISR(PCINT2_vect)
 ISR(ADC_vect)
 {
     Pendant::instance->pace(ADCL + (ADCH << 8));
+}
+
+ISR(TIMER1_OVF_vect)
+{
+    Pendant::instance->clock();
 }

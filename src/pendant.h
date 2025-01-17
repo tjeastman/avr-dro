@@ -35,12 +35,14 @@ private:
     uint8_t state_;
     CommandQueue& commands_;
     bool changed_;
+    int ticks_;
 
 public:
     Pendant(CommandQueue&);
     void turn(uint8_t) volatile;
     void press(uint8_t) volatile;
     void pace(uint16_t) volatile;
+    void clock() volatile;
     void project(PendantAxisSpace&) const;
     static Pendant* instance;
     static void initialize(Pendant*);
