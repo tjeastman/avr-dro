@@ -40,18 +40,23 @@ void PendantAxis::pace(int16_t rate) volatile
     rate_ = rate;
 }
 
-void PendantAxis::project(PendantAxisSpace &space) volatile const
+void PendantAxis::project(PendantAxisSpace& space) volatile const
 {
     space.project(identifier_, position_, rate_);
 }
 
-Pendant::Pendant(PendantAxisSpace& commands)
+void PendantAxis::project(CommandQueue& commands) volatile const
+{
+    commands.project(identifier_, position_, rate_);
+}
+
+Pendant::Pendant(CommandQueue& commands)
     : axes_ { { 0, 0, 0 }, { 'X', -14750, 14750 }, { 'Y', -12000, 12000 }, { 'Z', -25000, 0 } }
     , index_ { 0 }
     , delta_ { 0 }
     , state_ { 0 }
-    , commands_{commands}
-    , changed_{false}
+    , commands_ { commands }
+    , changed_ { false }
 {
 }
 

@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+#include "command.h"
+
 class PendantAxisSpace {
 public:
     virtual void project(char, int16_t, int16_t) = 0;
@@ -22,6 +24,7 @@ public:
     void decrement(int16_t) volatile;
     void pace(int16_t) volatile;
     void project(PendantAxisSpace&) volatile const;
+    void project(CommandQueue&) volatile const;
 };
 
 class Pendant {
@@ -30,11 +33,11 @@ private:
     int16_t index_;
     int16_t delta_;
     uint8_t state_;
-    PendantAxisSpace &commands_;
+    CommandQueue& commands_;
     bool changed_;
 
 public:
-    Pendant(PendantAxisSpace &);
+    Pendant(CommandQueue&);
     void turn(uint8_t) volatile;
     void press(uint8_t) volatile;
     void pace(uint16_t) volatile;

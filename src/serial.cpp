@@ -7,7 +7,7 @@ void Serial::operator<<(char c) const
     write(c);
 }
 
-void Serial::operator<<(const char *s) const
+void Serial::operator<<(const char* s) const
 {
     for (; *s; ++s) {
         write(*s);
