@@ -7,6 +7,7 @@ add_executable(
   coordinate.cpp
   display.cpp
   pendant.cpp
+  serial.cpp
   touch.cpp
   ui/button.cpp
   ui/canvas.cpp

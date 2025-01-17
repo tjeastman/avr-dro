@@ -6,6 +6,7 @@
 #include "coordinate.h"
 #include "display.h"
 #include "pendant.h"
+#include "serial.h"
 #include "touch.h"
 #include "ui/canvas.h"
 #include "ui/color.h"
@@ -66,6 +67,10 @@ int main(void)
     Touch touch = Touch(calibration);
 
     CoordinatePanel panel = CoordinatePanel();
+
+    Serial serial = Serial();
+    serial.initialize();
+    serial << "Hello, world!\r\n";
 
     Pendant pendant = Pendant();
     Pendant::initialize(&pendant);
