@@ -16,18 +16,6 @@ public:
         , rate_ { 0 }
     {
     }
-    Command(char axis)
-        : axis_ { axis }
-        , position_ { 0 }
-        , rate_ { 0 }
-    {
-    }
-    Command(char axis, int position, int rate)
-        : axis_ { axis }
-        , position_ { position }
-        , rate_ { rate }
-    {
-    }
     friend const Serial& operator<<(const Serial&, const Command&);
     friend class CommandQueue;
 };

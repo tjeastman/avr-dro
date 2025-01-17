@@ -79,17 +79,7 @@ int main(void)
     serial << "Hello, world!\r\n";
     _delay_ms(1000);
 
-    serial << "Example commands:\r\n";
-    serial << Command();
-    serial << Command('X');
-    serial << Command('Y');
-    serial << Command('Z');
-    serial << Command('X', 225, 102);
-    serial << Command('Y', -592, 99);
-    serial << Command('Z', -3, -10);
-    _delay_ms(1000);
-
-    serial << "Real commands:\r\n";
+    serial << "Commands:\r\n";
 
     Calibration calibration = Calibration();
     Touch touch = Touch(calibration);
