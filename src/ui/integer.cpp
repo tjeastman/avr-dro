@@ -8,7 +8,7 @@
 
 namespace ui {
 
-unsigned int UnsignedInteger::divisors_[5] = { 10000, 1000, 100, 10, 1 };
+uint16_t UnsignedInteger::divisors_[5] = { 10000, 1000, 100, 10, 1 };
 
 UnsignedInteger::UnsignedInteger(uint8_t digits)
     : digits_ { digits }
