@@ -12,7 +12,7 @@ set(CMAKE_CXX_COMPILER ${AVR_CXX})
 project(pendant LANGUAGES CXX)
 
 add_compile_definitions(F_CPU=16000000L)
-add_compile_options(-mmcu=atmega2560 -Os)
+add_compile_options(-mmcu=atmega2560 -Os -Werror -Wall -Wextra)
 add_link_options(-mmcu=atmega2560)
 
 add_subdirectory(src)

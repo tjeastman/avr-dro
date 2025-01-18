@@ -22,7 +22,7 @@ private:
 
 public:
     TouchState();
-    void press(int16_t, int16_t, int16_t);
+    void press(int16_t, int16_t);
     void release();
     void dispatch(const Calibration&, ui::Control&);
 };

@@ -14,7 +14,7 @@ TouchState::TouchState()
 {
 }
 
-void TouchState::press(int16_t x, int16_t y, int16_t z)
+void TouchState::press(int16_t x, int16_t y)
 {
     if (readings_ == 0) {
         position_.x = x;
@@ -93,11 +93,11 @@ uint16_t Touch::transmit16(uint16_t value)
 void Touch::update()
 {
     transmit8(0xb1);
-    int16_t z0 = transmit16(0xc1) >> 3;
-    int16_t z1 = transmit16(0x91) >> 3;
+    transmit16(0xc1);
+    transmit16(0x91);
     int16_t y = transmit16(0xd0) >> 3;
     int16_t x = transmit16(0x00) >> 3;
-    state_.press(x, y, z1 - z0);
+    state_.press(x, y);
 }
 
 void Touch::clear()
