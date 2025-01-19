@@ -53,6 +53,9 @@ int main(void)
 
     PORTB |= _BV(PB0); // deselect
 
+    DDRJ |= _BV(PJ0);
+    PORTJ &= ~_BV(PJ0);
+
     Display display = Display();
     display.initialize(Display::Orientation::LANDSCAPE);
 
@@ -78,9 +81,11 @@ int main(void)
     sei();
 
     while (true) {
+        PORTJ |= _BV(PJ0);
         panel.dispatch(touch);
         pendant.project(panel);
         panel.draw(canvas);
+        PORTJ &= ~_BV(PJ0);
     }
 
     return 0;
