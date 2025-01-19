@@ -51,7 +51,7 @@ void Canvas::fill(const Shape& shape) const
 
 void Canvas::fill(const Shape& shape, const Color& color, uint8_t alpha) const
 {
-    unsigned int value = color_.blend(color, alpha).value();
+    uint16_t value = color_.blend(color, alpha).value();
     for (int16_t i = 0; i < shape.height; ++i) {
         for (int16_t j = 0; j < shape.width; ++j) {
             display_.data(value);
@@ -61,7 +61,7 @@ void Canvas::fill(const Shape& shape, const Color& color, uint8_t alpha) const
 
 void Canvas::dot(const Color& color, uint8_t alpha, int16_t n) const
 {
-    unsigned int value = color_.blend(color, alpha).value();
+    uint16_t value = color_.blend(color, alpha).value();
     for (int16_t i = 0; i < n; ++i) {
         display_.data(value);
     }

@@ -30,8 +30,8 @@ private:
     int16_t origin_;
 
 public:
-    CoordinateDecimal(unsigned char, unsigned char);
-    void update(int);
+    CoordinateDecimal(uint8_t, uint8_t);
+    void update(int16_t);
     void reset();
 };
 
